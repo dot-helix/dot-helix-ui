@@ -24,8 +24,9 @@
     "isolatedModules": true,
     "noUncheckedIndexedAccess": true,
     "noEmit": true,
-    "jsx": "preserve"
+    "jsx": "preserve",
+    "plugins": [{ "name": "next" }]
   },
-  "include": ["lib", "scripts"],
+  "include": ["lib", "scripts", "app", "next-env.d.ts", ".next/types/**/*.ts"],
   "exclude": ["node_modules", "dist"]
 }
