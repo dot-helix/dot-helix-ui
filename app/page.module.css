@@ -1,0 +1,13 @@
+.root {
+  position: relative;
+}
+
+.title {
+  font-size: var(--typography-h4-size);
+  font-weight: var(--typography-h4-weight);
+  line-height: var(--typography-h4-leading);
+  text-align: center;
+  border-bottom: 1px solid var(--color-neutral-border-normal);
+  padding-bottom: var(--space-md);
+  margin: 0;
+}
