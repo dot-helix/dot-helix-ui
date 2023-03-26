@@ -48,6 +48,6 @@
   "dependencies": {
     "@styleless-ui/react": "1.0.0-canary.0",
     "classnames": "^2.3.2",
-    "react-design-tokens": "^1.0.0"
+    "react-design-tokens": "^1.2.0"
   }
 }
