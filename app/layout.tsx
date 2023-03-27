@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { Button } from "../lib";
 import { getVariablesAsInlineStyle, Initializer } from "../lib/configuration";
 import classes from "./layout.module.css";
 
@@ -19,13 +20,15 @@ const RootLayout = (props: { children: React.ReactNode }) => {
         <Initializer primitives={primitives}>
           <div className={classes.root}>
             <div className={classes.toolbar}>
-              <button
+              <Button
+                as="button"
+                variant="outlined"
+                text="Toggle color scheme"
                 onClick={() =>
                   void setScheme(s => (s === "light" ? "dark" : "light"))
                 }
-              >
-                Toggle color scheme
-              </button>
+              />
+              Scheme: {scheme}
             </div>
             {props.children}
           </div>
