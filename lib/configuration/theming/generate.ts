@@ -1,10 +1,11 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import {
+  adjustAlpha,
   generateColorSet,
   getForegroundColor,
   isValidHexColor
 } from "../../utils";
-import { amber, green, rose, sky } from "./palette";
+import { green, rose, sky, orange, zinc } from "./palette";
 import { type PrimitiveTokens, type Theme } from "./themingClient";
 
 type DeepPartial<T> = {
@@ -58,7 +59,7 @@ const typeScaling = {
 
 const successColor = green;
 const errorColor = rose;
-const warningColor = amber;
+const warningColor = orange;
 const infoColor = sky;
 
 export const neutralColors: Record<
@@ -66,6 +67,10 @@ export const neutralColors: Record<
   Theme["colors"]["neutral"]
 > = {
   dark: {
+    origin: zinc[400],
+    hover: zinc[300],
+    active: zinc[100],
+    disabled: zinc[800],
     background: {
       base: "#000000",
       elevated: "#1f1f1f",
@@ -79,6 +84,7 @@ export const neutralColors: Record<
     },
     text: {
       normal: "#ffffff",
+      inverted: "#000000",
       secondary: "#e0e0e0",
       tertiary: "#a6a6a6",
       quaternary: "#737373",
@@ -92,6 +98,10 @@ export const neutralColors: Record<
     }
   },
   light: {
+    origin: zinc[500],
+    hover: zinc[600],
+    active: zinc[700],
+    disabled: zinc[200],
     background: {
       base: "#ffffff",
       elevated: "#ffffff",
@@ -105,6 +115,7 @@ export const neutralColors: Record<
     },
     text: {
       normal: "#000000",
+      inverted: "#ffffff",
       secondary: "#1f1f1f",
       tertiary: "#595959",
       quaternary: "#8c8c8c",
@@ -135,28 +146,52 @@ export const semanticColorVariants: Record<
 > = {
   dark: {
     success: {
-      origin: successColor[500],
-      hover: successColor[400],
-      active: successColor[300],
-      disabled: successColor[200]
+      origin: successColor[600],
+      hover: successColor[500],
+      active: successColor[400],
+      disabled: adjustAlpha(successColor[600], 0.32),
+      surface: {
+        base: adjustAlpha(successColor[600], 0.24),
+        secondary: adjustAlpha(successColor[600], 0.16),
+        tertiary: adjustAlpha(successColor[600], 0.08),
+        quaternary: adjustAlpha(successColor[600], 0.04)
+      }
     },
     error: {
-      origin: errorColor[500],
-      hover: errorColor[400],
-      active: errorColor[300],
-      disabled: errorColor[200]
+      origin: errorColor[600],
+      hover: errorColor[500],
+      active: errorColor[400],
+      disabled: adjustAlpha(errorColor[600], 0.32),
+      surface: {
+        base: adjustAlpha(errorColor[600], 0.24),
+        secondary: adjustAlpha(errorColor[600], 0.16),
+        tertiary: adjustAlpha(errorColor[600], 0.08),
+        quaternary: adjustAlpha(errorColor[600], 0.04)
+      }
     },
     warning: {
-      origin: warningColor[500],
-      hover: warningColor[400],
-      active: warningColor[300],
-      disabled: warningColor[200]
+      origin: warningColor[600],
+      hover: warningColor[500],
+      active: warningColor[400],
+      disabled: adjustAlpha(warningColor[600], 0.32),
+      surface: {
+        base: adjustAlpha(warningColor[600], 0.24),
+        secondary: adjustAlpha(warningColor[600], 0.16),
+        tertiary: adjustAlpha(warningColor[600], 0.08),
+        quaternary: adjustAlpha(warningColor[600], 0.04)
+      }
     },
     info: {
-      origin: infoColor[500],
-      hover: infoColor[400],
-      active: infoColor[300],
-      disabled: infoColor[200]
+      origin: infoColor[600],
+      hover: infoColor[500],
+      active: infoColor[400],
+      disabled: adjustAlpha(infoColor[600], 0.32),
+      surface: {
+        base: adjustAlpha(infoColor[600], 0.24),
+        secondary: adjustAlpha(infoColor[600], 0.16),
+        tertiary: adjustAlpha(infoColor[600], 0.08),
+        quaternary: adjustAlpha(infoColor[600], 0.04)
+      }
     }
   },
   light: {
@@ -164,25 +199,49 @@ export const semanticColorVariants: Record<
       origin: successColor[500],
       hover: successColor[600],
       active: successColor[700],
-      disabled: successColor[200]
+      disabled: adjustAlpha(successColor[500], 0.32),
+      surface: {
+        base: adjustAlpha(successColor[500], 0.24),
+        secondary: adjustAlpha(successColor[500], 0.16),
+        tertiary: adjustAlpha(successColor[500], 0.08),
+        quaternary: adjustAlpha(successColor[500], 0.04)
+      }
     },
     error: {
       origin: errorColor[500],
       hover: errorColor[600],
       active: errorColor[700],
-      disabled: errorColor[200]
+      disabled: adjustAlpha(errorColor[500], 0.32),
+      surface: {
+        base: adjustAlpha(errorColor[500], 0.24),
+        secondary: adjustAlpha(errorColor[500], 0.16),
+        tertiary: adjustAlpha(errorColor[500], 0.08),
+        quaternary: adjustAlpha(errorColor[500], 0.04)
+      }
     },
     warning: {
-      origin: warningColor[500],
-      hover: warningColor[600],
-      active: warningColor[700],
-      disabled: warningColor[200]
+      origin: warningColor[400],
+      hover: warningColor[500],
+      active: warningColor[600],
+      disabled: adjustAlpha(warningColor[500], 0.32),
+      surface: {
+        base: adjustAlpha(warningColor[500], 0.24),
+        secondary: adjustAlpha(warningColor[500], 0.16),
+        tertiary: adjustAlpha(warningColor[500], 0.08),
+        quaternary: adjustAlpha(warningColor[500], 0.04)
+      }
     },
     info: {
       origin: infoColor[500],
       hover: infoColor[600],
       active: infoColor[700],
-      disabled: infoColor[200]
+      disabled: adjustAlpha(infoColor[500], 0.32),
+      surface: {
+        base: adjustAlpha(infoColor[500], 0.24),
+        secondary: adjustAlpha(infoColor[500], 0.16),
+        tertiary: adjustAlpha(infoColor[500], 0.08),
+        quaternary: adjustAlpha(infoColor[500], 0.04)
+      }
     }
   }
 };
@@ -193,11 +252,22 @@ export const createBrandingColorVariants = (
 ): Theme["colors"]["primary"] => {
   const colorSet = typeof color === "object" ? color : generateColorSet(color);
 
+  const origin = colorSet[scheme === "dark" ? 600 : 500];
+  const hover = colorSet[scheme === "dark" ? 500 : 600];
+  const active = colorSet[scheme === "dark" ? 400 : 700];
+  const disabled = adjustAlpha(origin, 0.32);
+
   return {
-    origin: colorSet[500],
-    hover: colorSet[scheme === "dark" ? 400 : 600],
-    active: colorSet[scheme === "dark" ? 300 : 700],
-    disabled: colorSet[200]
+    origin,
+    hover,
+    active,
+    disabled,
+    surface: {
+      base: adjustAlpha(origin, 0.24),
+      secondary: adjustAlpha(origin, 0.16),
+      tertiary: adjustAlpha(origin, 0.08),
+      quaternary: adjustAlpha(origin, 0.04)
+    }
   };
 };
 

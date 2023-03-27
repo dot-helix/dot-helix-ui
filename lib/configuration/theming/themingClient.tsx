@@ -21,11 +21,22 @@ interface Theme {
       hover: string;
       active: string;
       disabled: string;
+      surface: {
+        base: string;
+        secondary: string;
+        tertiary: string;
+        quaternary: string;
+      };
     }
   > & {
     neutral: {
+      origin: string;
+      hover: string;
+      active: string;
+      disabled: string;
       text: {
         normal: string;
+        inverted: string;
         secondary: string;
         tertiary: string;
         quaternary: string;
@@ -58,6 +69,7 @@ interface Theme {
     scheme: "dark" | "light";
     palette: Record<
       | "gray"
+      | "zinc"
       | "red"
       | "orange"
       | "amber"
@@ -206,9 +218,9 @@ const { ThemeProvider, useTheme, getVariablesAsStyles } = createThemingClient(
   defaultTheme,
   {
     initializeVariablesOnHTMLRoot: true,
-    cssVariableGenerator: (tokenFamilyKey, tokenPath, tokenValue) => {
+    cssVariableGenerator: (tokenFamilyKey: string, tokenPath, tokenValue) => {
       let value: unknown = tokenValue;
-      let rootKey = String(tokenFamilyKey as string);
+      let rootKey = String(tokenFamilyKey);
       let path: string = tokenPath;
 
       switch (tokenFamilyKey) {
