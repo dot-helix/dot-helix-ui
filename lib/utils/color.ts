@@ -32,6 +32,16 @@ export const hexToRgb = (hex: string): RGB | null => {
   } as RGB;
 };
 
+export const adjustAlpha = (hex: string, alpha: number) => {
+  const rgb = hexToRgb(hex);
+
+  if (!rgb) return hex;
+
+  const { r, g, b } = rgb;
+
+  return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+};
+
 export const rgbToHex = ({ r, g, b }: RGB): string => {
   const toHex = (n: number) => `0${n.toString(16)}`.slice(-2);
   return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
