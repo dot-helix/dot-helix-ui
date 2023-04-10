@@ -1,0 +1,110 @@
+.root {
+  direction: var(--direction);
+
+  position: relative;
+  overflow: hidden;
+
+  height: var(--brdcrmb-height);
+
+  display: flex;
+  align-items: center;
+}
+
+.root.root--large {
+  --brdcrmb-height: 1.75rem;
+  --brdcrmb-font-size: var(--typography-body-size);
+  --brdcrmb-font-leading: var(--typography-body-leading);
+  --brdcrmb-separator-size: var(--typography-body-size);
+}
+
+.root.root--medium {
+  --brdcrmb-height: 1.5rem;
+  --brdcrmb-font-size: var(--typography-body2-size);
+  --brdcrmb-font-leading: var(--typography-body2-leading);
+  --brdcrmb-separator-size: var(--typography-body2-size);
+}
+
+.root.root--small {
+  --brdcrmb-height: 1.5rem;
+  --brdcrmb-font-size: var(--typography-caption-size);
+  --brdcrmb-font-leading: var(--typography-caption-leading);
+  --brdcrmb-separator-size: var(--typography-caption-size);
+}
+
+.list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+
+  color: var(--color-neutral-text-tertiary);
+
+  width: 100%;
+  padding-bottom: 1.5rem;
+
+  position: absolute;
+  top: 0;
+  overflow: auto;
+
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+.item {
+  color: currentColor;
+
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+
+  font-weight: 400;
+  font-size: var(--brdcrmb-font-size);
+  line-height: var(--brdcrmb-font-leading);
+
+  transition: color 240ms ease;
+}
+
+.item:last-child {
+  color: var(--color-neutral-text-normal);
+  font-weight: 500;
+}
+
+.item:is(:hover, :focus-within) {
+  color: var(--color-neutral-text-secondary);
+}
+
+.item > a {
+  color: currentColor;
+  text-decoration: none;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.item > a:focus-visible {
+  outline: none;
+  box-shadow: 0 2px 0 0 var(--color-palette-cyan-600);
+}
+
+.separator {
+  color: currentColor;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  margin-right: var(--space-xs);
+  margin-left: var(--space-xs);
+
+  width: var(--brdcrmb-separator-size);
+  height: var(--brdcrmb-separator-size);
+  max-width: var(--brdcrmb-separator-size);
+  max-height: var(--brdcrmb-separator-size);
+  font-size: var(--brdcrmb-separator-size);
+  line-height: 100%;
+}
