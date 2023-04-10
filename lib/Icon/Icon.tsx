@@ -47,7 +47,7 @@ interface OwnProps {
     | "info";
 }
 
-type Props = Omit<React.ComponentPropsWithRef<"svg">, keyof OwnProps> &
+export type Props = Omit<React.ComponentPropsWithRef<"svg">, keyof OwnProps> &
   OwnProps;
 
 const IconBase = (props: Props, ref: React.Ref<SVGSVGElement>) => {
