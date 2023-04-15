@@ -2,8 +2,8 @@ lockfileVersion: '6.0'
 
 dependencies:
   '@styleless-ui/react':
-    specifier: 1.0.0-canary.2
-    version: 1.0.0-canary.2(react-dom@18.2.0)(react@18.2.0)
+    specifier: 1.0.0-canary.5
+    version: 1.0.0-canary.5(react-dom@18.2.0)(react@18.2.0)
   classnames:
     specifier: ^2.3.2
     version: 2.3.2
@@ -328,8 +328,8 @@ packages:
       fastq: 1.15.0
     dev: true
 
-  /@styleless-ui/react@1.0.0-canary.2(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-+RMG+05O9aQl8kq+VW+inxMyJmafzbMGH7xgKqJRm7M3N/SvWRWE5wwAxkZoTYotzGCLh2A5YwEUu5M0cvCw+A==}
+  /@styleless-ui/react@1.0.0-canary.5(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-fMHA6Hois2NaxwDnTgVg09ialpFuPOzjFOs39U4GuuyvjgxFf0sK8G2i6YJjyDQVyWUQ0ZkuTHgKlT3pX4ZVRw==}
     peerDependencies:
       react: '>=17'
       react-dom: '>=17'
