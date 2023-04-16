@@ -4,6 +4,8 @@ export * from "./Button";
 export { default as Button } from "./Button";
 export * from "./Checkbox";
 export { default as Checkbox } from "./Checkbox";
+export * from "./CheckGroup";
+export { default as CheckGroup } from "./CheckGroup";
 export * from "./IconButton";
 export { default as IconButton } from "./IconButton";
 export * from "./LoadingIndicator";
