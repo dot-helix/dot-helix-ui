@@ -75,6 +75,11 @@ button.input.input--disabled {
   box-shadow: 0 0 0 1px var(--color-neutral-border-secondary);
 }
 
+button.input.input--disabled + .label {
+  color: var(--color-neutral-disabled);
+  pointer-events: none;
+}
+
 button.input:is(.input--checked, .input--indeterminated).input--disabled {
   background-color: var(--color-primary-disabled);
   box-shadow: none;
