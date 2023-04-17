@@ -65,7 +65,7 @@ interface OwnProps {
   /**
    * The icon element.
    */
-  icon?: React.ReactNode;
+  icon: React.ReactNode;
 }
 
 export type Props<E extends React.ElementType> = PolymorphicProps<E, OwnProps>;
