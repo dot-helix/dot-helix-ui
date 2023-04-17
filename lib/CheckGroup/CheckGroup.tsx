@@ -28,6 +28,10 @@ type OwnProps = Pick<
   "value" | "defaultValue" | "onChange" | "label" | "orientation"
 > & {
   /**
+   * The className applied to the component.
+   */
+  className?: string;
+  /**
    * The group items.
    */
   items: CheckItem[];

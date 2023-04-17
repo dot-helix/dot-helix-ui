@@ -6,6 +6,8 @@ export * from "./Checkbox";
 export { default as Checkbox } from "./Checkbox";
 export * from "./CheckGroup";
 export { default as CheckGroup } from "./CheckGroup";
+export * from "./Dialog";
+export { default as Dialog } from "./Dialog";
 export * from "./IconButton";
 export { default as IconButton } from "./IconButton";
 export * from "./LoadingIndicator";

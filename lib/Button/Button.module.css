@@ -32,8 +32,8 @@
   --btn-min-width: 6rem;
   --btn-height: 2.5rem;
   --btn-icon-size: 1.25rem;
-  --btn-text-size: var(--typography-body-size);
-  --btn-text-leading: var(--typography-body-leading);
+  --btn-text-size: var(--typography-body1-size);
+  --btn-text-leading: var(--typography-body1-leading);
   --btn-leading-icon-gap-before: calc(
     var(--space-lg) - var(--btn-padding-right)
   );
