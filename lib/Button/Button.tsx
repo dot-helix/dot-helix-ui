@@ -49,11 +49,11 @@ interface OwnProps {
    */
   text: string;
   /**
-   * The leading icon element placed before the label.
+   * The leading icon element placed before the text.
    */
   leadingIcon?: React.ReactNode;
   /**
-   * The trailing icon element placed before the label.
+   * The trailing icon element placed after the text.
    */
   trailingIcon?: React.ReactNode;
 }
