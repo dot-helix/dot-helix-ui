@@ -17,8 +17,8 @@
   --checkbox-gap: var(--space-md);
   --checkbox-input-size: 1.25rem;
   --checkbox-check-size: 0.875rem;
-  --checkbox-label-size: var(--typography-body-size);
-  --checkbox-label-leading: var(--typography-body-leading);
+  --checkbox-label-size: var(--typography-body1-size);
+  --checkbox-label-leading: var(--typography-body1-leading);
 }
 
 .root.root--medium {

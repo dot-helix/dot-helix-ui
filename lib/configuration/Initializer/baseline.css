@@ -22,9 +22,9 @@ body {
   background-color: var(--color-neutral-background-base);
   direction: var(--direction);
   font-family: var(--typeface-ltr);
-  font-size: var(--typography-body-size);
-  font-weight: var(--typography-body-weight);
-  line-height: var(--typography-body-leading);
+  font-size: var(--typography-body1-size);
+  font-weight: var(--typography-body1-weight);
+  line-height: var(--typography-body1-leading);
 }
 
 main {

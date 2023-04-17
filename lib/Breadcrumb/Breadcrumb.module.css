@@ -12,9 +12,9 @@
 
 .root.root--large {
   --brdcrmb-height: 1.75rem;
-  --brdcrmb-font-size: var(--typography-body-size);
-  --brdcrmb-font-leading: var(--typography-body-leading);
-  --brdcrmb-separator-size: var(--typography-body-size);
+  --brdcrmb-font-size: var(--typography-body1-size);
+  --brdcrmb-font-leading: var(--typography-body1-leading);
+  --brdcrmb-separator-size: var(--typography-body1-size);
 }
 
 .root.root--medium {

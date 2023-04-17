@@ -146,7 +146,7 @@ interface Theme {
     | "h6"
     | "subheading1"
     | "subheading2"
-    | "body"
+    | "body1"
     | "body2"
     | "caption",
     {
@@ -229,6 +229,7 @@ const { ThemeProvider, useTheme, getVariablesAsStyles } = createThemingClient(
           break;
         case "borderRadius":
           rootKey = "rounded";
+
           if (typeof value === "number") {
             const pathSegments = tokenPath.split(".");
 
@@ -240,6 +241,7 @@ const { ThemeProvider, useTheme, getVariablesAsStyles } = createThemingClient(
                 break;
             }
           }
+
           break;
         case "colors":
           rootKey = "color";
@@ -249,15 +251,25 @@ const { ThemeProvider, useTheme, getVariablesAsStyles } = createThemingClient(
           break;
         case "spacing":
           rootKey = "space";
-          path = path.replace(".steps", "");
+          path = path.replace("steps.", "");
+
           if (typeof value === "number") value = `${value / 16}rem`;
+          if (["0.5", "1.5", "2.5", "3.5"].includes(path)) {
+            return {
+              variable: `space-${path.replace(".", "p")}`,
+              value: value as string
+            };
+          }
+
           break;
         case "typefaces":
           rootKey = "typeface";
           break;
         case "zIndexes":
           rootKey = "z";
+
           if (typeof value === "number") value = String(value);
+
           break;
         case "direction":
           break;
@@ -275,6 +287,7 @@ const { ThemeProvider, useTheme, getVariablesAsStyles } = createThemingClient(
                 break;
             }
           }
+
           break;
         }
         default:

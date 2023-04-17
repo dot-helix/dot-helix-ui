@@ -326,7 +326,7 @@ export const generateTypography = (params: {
         leading: scaling.subheading2[1]!,
         weight: 500
       },
-      body: {
+      body1: {
         size: scaling.body1[0]!,
         leading: scaling.body1[1]!,
         weight: 400

@@ -34,8 +34,8 @@
   display: block;
 
   font-weight: 500;
-  font-size: var(--typography-body-size);
-  line-height: var(--typography-body-leading);
+  font-size: var(--typography-body1-size);
+  line-height: var(--typography-body1-leading);
 
   margin-bottom: var(--space-md);
 }
