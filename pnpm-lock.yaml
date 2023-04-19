@@ -8,8 +8,8 @@ dependencies:
     specifier: ^2.3.2
     version: 2.3.2
   react-design-tokens:
-    specifier: ^1.2.0
-    version: 1.2.0(react-dom@18.2.0)(react@18.2.0)
+    specifier: ^1.2.1
+    version: 1.2.1(react-dom@18.2.0)(react@18.2.0)
 
 devDependencies:
   '@types/node':
@@ -2140,8 +2140,8 @@ packages:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
     dev: true
 
-  /react-design-tokens@1.2.0(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-tKfGDM3LlHCkHgDxMnRRuNMNOjnGVww+QXda2BbpMIlkxzFue4UGOnqese9frQwz+WefE81E29Iad983UMUXZQ==}
+  /react-design-tokens@1.2.1(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-gsv/7VQOzYhZdikdjppzMpkykt4VtTKyt+GhJ3ePi3BLj35qUlbgYrnL7Zlmhynyb1CzYDV8qsk7dRTLVOFbSQ==}
     peerDependencies:
       react: '>=17'
       react-dom: '>=17'
