@@ -169,7 +169,7 @@ interface PrimitiveTokens {
     | string
     | Record<50 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900, string>;
   density: "normal" | "compact" | "loose";
-  typographySize: "normal" | "slightly-smaller" | "slightly-larger";
+  typographySize: "normal" | "small" | "large";
   rtlFontFamily: string;
   ltrFontFamily: string;
   monospaceFontFamily: string;
@@ -195,16 +195,15 @@ const createPartialTheme = (
     inheritedColorScheme
   } = primitives;
 
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
   return {
-    ...(direction ? { direction } : {}),
+    direction: direction ?? undefined,
+    ...generateSpacing({ density }),
+    ...generateTypography({ typographySize }),
     ...generateTypefaces({
       ltr: ltrFontFamily,
       rtl: rtlFontFamily,
       monospace: monospaceFontFamily
     }),
-    ...generateTypography({ typographySize }),
-    ...generateSpacing({ density }),
     ...generateColors({
       primaryColor,
       secondaryColor,

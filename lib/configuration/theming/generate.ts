@@ -293,19 +293,9 @@ export const generateTypography = (params: {
 
   if (typographySize == null) return {};
 
+  const scaling = typeScaling[typographySize];
   const baseFontSize =
-    typographySize === "slightly-smaller"
-      ? 14
-      : typographySize === "slightly-larger"
-      ? 18
-      : 16;
-
-  const scaling =
-    typographySize === "slightly-smaller"
-      ? typeScaling.small
-      : typographySize === "slightly-larger"
-      ? typeScaling.large
-      : typeScaling.normal;
+    typographySize === "small" ? 14 : typographySize === "large" ? 18 : 16;
 
   return {
     typography: {
