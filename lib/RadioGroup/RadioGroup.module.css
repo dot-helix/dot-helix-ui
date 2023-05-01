@@ -1,0 +1,41 @@
+.root {
+  direction: var(--direction);
+}
+
+.group {
+  display: flex;
+  align-items: flex-start;
+}
+
+.group.group--large.group--vertical {
+  gap: var(--space-md);
+}
+
+.group.group--medium.group--vertical {
+  gap: var(--space-xs);
+}
+
+.group.group--small.group--vertical {
+  gap: var(--space-xs);
+}
+
+.group.group--vertical {
+  flex-direction: column;
+}
+
+.group.group--horizontal {
+  flex-direction: row;
+  gap: var(--space-xlg);
+}
+
+.label {
+  color: currentColor;
+
+  display: block;
+
+  font-weight: 500;
+  font-size: var(--typography-body1-size);
+  line-height: var(--typography-body1-leading);
+
+  margin-bottom: var(--space-md);
+}
