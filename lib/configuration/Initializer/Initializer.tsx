@@ -2,12 +2,12 @@ import * as React from "react";
 import {
   defaultPrimitives,
   ThemingConfig,
-  type PrimitiveTokens
+  type PrimitiveTokens,
 } from "../theming";
 import {
   RootContextProvider,
   useRootContext,
-  type RootContextValue
+  type RootContextValue,
 } from "./Contexts";
 
 import "./baseline.css";
@@ -20,7 +20,7 @@ interface Props {
 const Initializer = (props: Props) => {
   if (useRootContext().__init) {
     throw new Error(
-      "You must not use `<Initializer>` in a tree that is already wrapped by it."
+      "You must not use `<Initializer>` in a tree that is already wrapped by it.",
     );
   }
 
@@ -31,7 +31,7 @@ const Initializer = (props: Props) => {
       primitivesProp === defaultPrimitives
         ? defaultPrimitives
         : { ...defaultPrimitives, ...primitivesProp },
-    [primitivesProp]
+    [primitivesProp],
   );
 
   const context = React.useMemo<RootContextValue>(() => ({ __init: true }), []);

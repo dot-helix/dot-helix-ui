@@ -1,7 +1,7 @@
 import * as React from "react";
 import {
   createTheming as createThemingClient,
-  defaultCssVariableGenerator
+  defaultCssVariableGenerator,
 } from "react-design-tokens";
 import { deepMerge } from "react-design-tokens/helpers";
 import { useRootContext } from "../Initializer/Contexts";
@@ -10,7 +10,7 @@ import {
   generateColors,
   generateSpacing,
   generateTypefaces,
-  generateTypography
+  generateTypography,
 } from "./generate";
 
 interface Theme {
@@ -180,7 +180,7 @@ interface PrimitiveTokens {
 const createPartialTheme = (
   primitives: Partial<PrimitiveTokens> & {
     inheritedColorScheme: PrimitiveTokens["colorScheme"];
-  }
+  },
 ) => {
   const {
     density,
@@ -192,7 +192,7 @@ const createPartialTheme = (
     monospaceFontFamily,
     primaryColor,
     secondaryColor,
-    inheritedColorScheme
+    inheritedColorScheme,
   } = primitives;
 
   return {
@@ -202,14 +202,14 @@ const createPartialTheme = (
     ...generateTypefaces({
       ltr: ltrFontFamily,
       rtl: rtlFontFamily,
-      monospace: monospaceFontFamily
+      monospace: monospaceFontFamily,
     }),
     ...generateColors({
       primaryColor,
       secondaryColor,
       colorScheme,
-      inheritedColorScheme
-    })
+      inheritedColorScheme,
+    }),
   };
 };
 
@@ -256,7 +256,7 @@ const { ThemeProvider, useTheme, getVariablesAsStyles } = createThemingClient(
           if (["0.5", "1.5", "2.5", "3.5"].includes(path)) {
             return {
               variable: `space-${path.replace(".", "p")}`,
-              value: value as string
+              value: value as string,
             };
           }
 
@@ -294,8 +294,8 @@ const { ThemeProvider, useTheme, getVariablesAsStyles } = createThemingClient(
       }
 
       return defaultCssVariableGenerator(rootKey, path, value);
-    }
-  }
+    },
+  },
 );
 
 const ThemingConfig = (props: {
@@ -304,7 +304,7 @@ const ThemingConfig = (props: {
 }) => {
   if (!useRootContext().__init) {
     throw new Error(
-      "You must not use `<ThemingConfig>` outside of a tree that is not wrapped by `<Initializer>`."
+      "You must not use `<ThemingConfig>` outside of a tree that is not wrapped by `<Initializer>`.",
     );
   }
 
@@ -321,7 +321,7 @@ const ThemingConfig = (props: {
 
     const partialTheme = createPartialTheme({
       ...primitives,
-      inheritedColorScheme
+      inheritedColorScheme,
     }) as Theme;
 
     return isInitialProvider
@@ -345,7 +345,7 @@ const getVariablesAsInlineStyle = (primitives?: Partial<PrimitiveTokens>) => {
 
     const partialTheme = createPartialTheme({
       ...tokens,
-      inheritedColorScheme: defaultPrimitives.colorScheme
+      inheritedColorScheme: defaultPrimitives.colorScheme,
     }) as Theme;
 
     return deepMerge(defaultTheme, partialTheme);
@@ -359,5 +359,5 @@ export {
   ThemingConfig,
   getVariablesAsInlineStyle,
   type Theme,
-  type PrimitiveTokens
+  type PrimitiveTokens,
 };

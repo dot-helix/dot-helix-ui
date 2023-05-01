@@ -1,14 +1,11 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import {
-  Checkbox as StylelessCheckbox,
-  type CheckboxProps,
-} from "@styleless-ui/react";
+import { Radio as StylelessRadio, type RadioProps } from "@styleless-ui/react";
 import cls from "classnames";
 import * as React from "react";
-import classes from "./Checkbox.module.css";
+import classes from "./Radio.module.css";
 
 type OwnProps = Pick<
-  CheckboxProps,
+  RadioProps,
   | "label"
   | "value"
   | "onChange"
@@ -16,19 +13,18 @@ type OwnProps = Pick<
   | "defaultChecked"
   | "disabled"
   | "autoFocus"
-  | "indeterminated"
 > & {
   /**
    * The className applied to the component.
    */
   className?: string;
   /**
-   * The size of the checkbox.
+   * The size of the radio.
    * @default "medium"
    */
   size?: "large" | "medium" | "small";
   /**
-   * If `true`, the checkbox will fill the parent's width.
+   * If `true`, the radio will fill the parent's width.
    * @default false
    */
   fluid?: boolean;
@@ -40,7 +36,7 @@ export type Props = Omit<
 > &
   OwnProps;
 
-const CheckboxBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
+const RadioBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
   const {
     className,
     label,
@@ -49,7 +45,6 @@ const CheckboxBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
     defaultChecked,
     disabled,
     onChange,
-    indeterminated = false,
     fluid = false,
     autoFocus = false,
     size = "medium",
@@ -64,21 +59,19 @@ const CheckboxBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
       })}
       ref={ref}
     >
-      <StylelessCheckbox
+      <StylelessRadio
         label={label}
-        indeterminated={indeterminated}
         disabled={disabled}
         onChange={onChange}
         checked={checked}
         autoFocus={autoFocus}
         defaultChecked={defaultChecked}
         value={value}
-        classes={({ checked, disabled, indeterminated, focusedVisible }) => ({
+        classes={({ checked, disabled, focusedVisible }) => ({
           root: cls(classes.input, {
             [classes["input--disabled"]!]: disabled,
             [classes["input--checked"]!]: checked,
             [classes["input--focus-visible"]!]: focusedVisible,
-            [classes["input--indeterminated"]!]: indeterminated,
           }),
           check: classes.check,
           label: classes.label,
@@ -88,6 +81,6 @@ const CheckboxBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
   );
 };
 
-const Checkbox = React.forwardRef(CheckboxBase) as typeof CheckboxBase;
+const Radio = React.forwardRef(RadioBase) as typeof RadioBase;
 
-export default Checkbox;
+export default Radio;

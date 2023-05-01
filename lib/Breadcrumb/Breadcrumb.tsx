@@ -77,7 +77,7 @@ export type Props = Omit<
 const joinWithSeparator = (
   items: Props["items"],
   separator: Exclude<Props["separator"], undefined>,
-  ariaCurrentValue: Props["ariaCurrentValue"]
+  ariaCurrentValue: Props["ariaCurrentValue"],
 ): JSX.Element[] =>
   items
     .map((item, itemIdx) => {
@@ -135,7 +135,7 @@ const BreadcrumbBase = (props: Props, ref: React.Ref<HTMLElement>) => {
       label={label}
       classes={{
         root: cls(className, classes.root, classes[`root--${size}`]),
-        list: classes.list
+        list: classes.list,
       }}
     >
       {items}

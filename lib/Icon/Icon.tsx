@@ -72,13 +72,14 @@ const IconBase = (props: Props, ref: React.Ref<SVGSVGElement>) => {
           width: `${size / 16}rem`,
           height: `${size / 16}rem`,
           minWidth: `${size / 16}rem`,
-          minHeight: `${size / 16}rem`
+          minHeight: `${size / 16}rem`,
         };
 
   const style: React.CSSProperties = { ...styleProp, ...sizeStyle };
 
   return (
     <svg
+      {...otherProps}
       xmlns="http://www.w3.org/2000/svg"
       className={cls(className, classes.root, classes[`root--${color}`])}
       viewBox={viewBox}
@@ -87,7 +88,7 @@ const IconBase = (props: Props, ref: React.Ref<SVGSVGElement>) => {
       focusable="false"
       style={style}
       ref={ref}
-      {...otherProps}
+      data-slot="Icon:Root"
     >
       {title && <title>{title}</title>}
       <path d={pathData} />

@@ -1,30 +1,30 @@
 import * as React from "react";
 import {
-  CheckGroup as StylelessCheckGroup,
-  type CheckGroupProps,
+  RadioGroup as StylelessRadioGroup,
+  type RadioGroupProps,
 } from "@styleless-ui/react";
-import Checkbox from "../Checkbox";
-import classes from "./CheckGroup.module.css";
+import Radio from "../Radio";
+import classes from "./RadioGroup.module.css";
 import cls from "classnames";
 
-type CheckItem = {
+type RadioItem = {
   /**
-   * The label of the checkbox.
+   * The label of the radio.
    */
   label: string;
   /**
-   * The value of the checkbox.
+   * The value of the radio.
    */
   value: string;
   /**
-   * If `true`, the checkbox will be disabled.
+   * If `true`, the radio will be disabled.
    * @default false
    */
   disabled?: boolean;
 };
 
 type OwnProps = Pick<
-  CheckGroupProps,
+  RadioGroupProps,
   "value" | "defaultValue" | "onChange" | "label" | "orientation"
 > & {
   /**
@@ -34,7 +34,7 @@ type OwnProps = Pick<
   /**
    * The group items.
    */
-  items: CheckItem[];
+  items: RadioItem[];
   /**
    * The size of the items.
    * @default "medium"
@@ -48,7 +48,7 @@ export type Props = Omit<
 > &
   OwnProps;
 
-const CheckGroupBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
+const RadioGroupBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
   const {
     className,
     items: itemsProp,
@@ -62,7 +62,7 @@ const CheckGroupBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
   } = props;
 
   const items = itemsProp.map(({ label, value, disabled = false }) => (
-    <Checkbox
+    <Radio
       key={label + value}
       label={label}
       value={value}
@@ -72,7 +72,7 @@ const CheckGroupBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
   ));
 
   return (
-    <StylelessCheckGroup
+    <StylelessRadioGroup
       {...otherProps}
       orientation={orientation}
       label={label}
@@ -91,10 +91,10 @@ const CheckGroupBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
       }}
     >
       {items}
-    </StylelessCheckGroup>
+    </StylelessRadioGroup>
   );
 };
 
-const CheckGroup = React.forwardRef(CheckGroupBase) as typeof CheckGroupBase;
+const RadioGroup = React.forwardRef(RadioGroupBase) as typeof RadioGroupBase;
 
-export default CheckGroup;
+export default RadioGroup;
