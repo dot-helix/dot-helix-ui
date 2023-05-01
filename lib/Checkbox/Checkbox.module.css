@@ -59,7 +59,7 @@ button.input {
 
   color: var(--color-foregrounds-onprimary);
   background-color: transparent;
-  box-shadow: 0 0 0 1px var(--color-neutral-border-normal);
+  box-shadow: inset 0 0 0 1px var(--color-neutral-border-normal);
 
   transition: background-color 240ms ease, box-shadow 240ms ease;
 }
@@ -72,7 +72,7 @@ button.input:is(.input--checked, .input--indeterminated) {
 button.input.input--disabled {
   pointer-events: none;
   color: var(--color-neutral-disabled);
-  box-shadow: 0 0 0 1px var(--color-neutral-border-secondary);
+  box-shadow: inset 0 0 0 1px var(--color-neutral-border-secondary);
 }
 
 button.input.input--disabled + .label {
@@ -91,11 +91,11 @@ button.input:is(.input--focus-visible, :focus-visible) {
 }
 
 button.input:not(.input--checked, .input--indeterminated):hover {
-  box-shadow: 0 0 0 1px var(--color-primary-origin);
+  box-shadow: inset 0 0 0 1px var(--color-primary-origin);
 }
 
 button.input:not(.input--checked, .input--indeterminated):active {
-  box-shadow: 0 0 0 1px var(--color-primary-hover);
+  box-shadow: inset 0 0 0 1px var(--color-primary-hover);
 }
 
 button.input:is(.input--checked, .input--indeterminated):hover {
