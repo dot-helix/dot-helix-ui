@@ -72,7 +72,7 @@ export type Props<E extends React.ElementType> = PolymorphicProps<E, OwnProps>;
 
 const ButtonBase = <E extends React.ElementType, R extends HTMLElement>(
   props: Props<E>,
-  ref: React.Ref<R>
+  ref: React.Ref<R>,
 ) => {
   const {
     as,
@@ -108,8 +108,8 @@ const ButtonBase = <E extends React.ElementType, R extends HTMLElement>(
           {
             [classes["root--disabled"]!]: disabled,
             [classes["root--loading"]!]: loading,
-            [classes["root--focus-visible"]!]: focusedVisible
-          }
+            [classes["root--focus-visible"]!]: focusedVisible,
+          },
         )
       }
       aria-labelledby={"labelledBy" in label ? label.labelledBy : undefined}
@@ -118,9 +118,14 @@ const ButtonBase = <E extends React.ElementType, R extends HTMLElement>(
       }
     >
       {loading ? (
-        <LoadingIndicator className={classes["loading-indicator"]} />
+        <LoadingIndicator
+          className={classes["loading-indicator"]}
+          data-slot="IconButton:LoadingIndicator"
+        />
       ) : (
-        <div className={classes.icon}>{icon}</div>
+        <div className={classes.icon} data-slot="IconButton:Icon">
+          {icon}
+        </div>
       )}
     </StylelessButton>
   );

@@ -1,7 +1,7 @@
 import * as React from "react";
 import {
   CheckGroup as StylelessCheckGroup,
-  type CheckGroupProps
+  type CheckGroupProps,
 } from "@styleless-ui/react";
 import Checkbox from "../Checkbox";
 import classes from "./CheckGroup.module.css";
@@ -85,9 +85,9 @@ const CheckGroupBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
         group: cls(
           classes.group,
           classes[`group--${orientation}`],
-          classes[`group--${size}`]
+          classes[`group--${size}`],
         ),
-        label: classes.label
+        label: classes.label,
       }}
     >
       {items}

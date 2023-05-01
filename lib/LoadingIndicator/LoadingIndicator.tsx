@@ -18,14 +18,14 @@ const LoadingIndicator = (props: Props) => {
     className,
     color = theme.colors.neutral.background.overlay,
     secondaryColor = theme.colors.neutral.surface.base,
-    size = 16
+    size = 16,
   } = props;
 
   const sizing = {
     width: `${size / 16}rem`,
     height: `${size / 16}rem`,
     maxWidth: `${size / 16}rem`,
-    maxHeight: `${size / 16}rem`
+    maxHeight: `${size / 16}rem`,
   };
 
   return (

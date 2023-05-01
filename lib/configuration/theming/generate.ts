@@ -3,7 +3,7 @@ import {
   adjustAlpha,
   generateColorSet,
   getForegroundColor,
-  isValidHexColor
+  isValidHexColor,
 } from "../../utils";
 import { green, rose, sky, orange, zinc } from "./palette";
 import { type PrimitiveTokens, type Theme } from "./themingClient";
@@ -27,7 +27,7 @@ const typeScaling = {
     subheading2: [14, 22 / 14],
     body1: [16, 24 / 16],
     body2: [14, 20 / 14],
-    caption: [12, 20 / 12]
+    caption: [12, 20 / 12],
   },
   small: {
     h1: [64, 72 / 64],
@@ -40,7 +40,7 @@ const typeScaling = {
     subheading2: [12, 18 / 12],
     body1: [14, 20 / 14],
     body2: [12, 16 / 12],
-    caption: [10, 18 / 10]
+    caption: [10, 18 / 10],
   },
   large: {
     h1: [86, 104 / 86],
@@ -53,8 +53,8 @@ const typeScaling = {
     subheading2: [16, 26 / 16],
     body1: [18, 26 / 18],
     body2: [16, 22 / 16],
-    caption: [14, 22 / 14]
-  }
+    caption: [14, 22 / 14],
+  },
 };
 
 const successColor = green;
@@ -76,11 +76,11 @@ export const neutralColors: Record<
       elevated: "#1f1f1f",
       layout: "#141414",
       overlay: "rgba(0, 0, 0, 0.45)",
-      spotlight: "#424242"
+      spotlight: "#424242",
     },
     border: {
       normal: "#424242",
-      secondary: "#303030"
+      secondary: "#303030",
     },
     text: {
       normal: "#ffffff",
@@ -88,14 +88,14 @@ export const neutralColors: Record<
       secondary: "#e0e0e0",
       tertiary: "#a6a6a6",
       quaternary: "#737373",
-      disabled: "#404040"
+      disabled: "#404040",
     },
     surface: {
       base: "rgba(255, 255, 255, 0.24)",
       secondary: "rgba(255, 255, 255, 0.16)",
       tertiary: "rgba(255, 255, 255, 0.08)",
-      quaternary: "rgba(255, 255, 255, 0.04)"
-    }
+      quaternary: "rgba(255, 255, 255, 0.04)",
+    },
   },
   light: {
     origin: zinc[500],
@@ -107,11 +107,11 @@ export const neutralColors: Record<
       elevated: "#ffffff",
       layout: "#f5f5f5",
       overlay: "rgba(0, 0, 0, 0.45)",
-      spotlight: "#252525"
+      spotlight: "#252525",
     },
     border: {
       normal: "#d9d9d9",
-      secondary: "#f0f0f0"
+      secondary: "#f0f0f0",
     },
     text: {
       normal: "#000000",
@@ -119,15 +119,15 @@ export const neutralColors: Record<
       secondary: "#1f1f1f",
       tertiary: "#595959",
       quaternary: "#8c8c8c",
-      disabled: "#bfbfbf"
+      disabled: "#bfbfbf",
     },
     surface: {
       base: "rgba(0, 0, 0, 0.16)",
       secondary: "rgba(0, 0, 0, 0.08)",
       tertiary: "rgba(0, 0, 0, 0.04)",
-      quaternary: "rgba(0, 0, 0, 0.02)"
-    }
-  }
+      quaternary: "rgba(0, 0, 0, 0.02)",
+    },
+  },
 };
 
 export const semanticForegrounds: Pick<
@@ -137,7 +137,7 @@ export const semanticForegrounds: Pick<
   onSuccess: getForegroundColor(successColor[500]),
   onError: getForegroundColor(errorColor[500]),
   onWarning: getForegroundColor(warningColor[500]),
-  onInfo: getForegroundColor(infoColor[500])
+  onInfo: getForegroundColor(infoColor[500]),
 };
 
 export const semanticColorVariants: Record<
@@ -154,8 +154,8 @@ export const semanticColorVariants: Record<
         base: adjustAlpha(successColor[600], 0.24),
         secondary: adjustAlpha(successColor[600], 0.16),
         tertiary: adjustAlpha(successColor[600], 0.08),
-        quaternary: adjustAlpha(successColor[600], 0.04)
-      }
+        quaternary: adjustAlpha(successColor[600], 0.04),
+      },
     },
     error: {
       origin: errorColor[600],
@@ -166,8 +166,8 @@ export const semanticColorVariants: Record<
         base: adjustAlpha(errorColor[600], 0.24),
         secondary: adjustAlpha(errorColor[600], 0.16),
         tertiary: adjustAlpha(errorColor[600], 0.08),
-        quaternary: adjustAlpha(errorColor[600], 0.04)
-      }
+        quaternary: adjustAlpha(errorColor[600], 0.04),
+      },
     },
     warning: {
       origin: warningColor[600],
@@ -178,8 +178,8 @@ export const semanticColorVariants: Record<
         base: adjustAlpha(warningColor[600], 0.24),
         secondary: adjustAlpha(warningColor[600], 0.16),
         tertiary: adjustAlpha(warningColor[600], 0.08),
-        quaternary: adjustAlpha(warningColor[600], 0.04)
-      }
+        quaternary: adjustAlpha(warningColor[600], 0.04),
+      },
     },
     info: {
       origin: infoColor[600],
@@ -190,9 +190,9 @@ export const semanticColorVariants: Record<
         base: adjustAlpha(infoColor[600], 0.24),
         secondary: adjustAlpha(infoColor[600], 0.16),
         tertiary: adjustAlpha(infoColor[600], 0.08),
-        quaternary: adjustAlpha(infoColor[600], 0.04)
-      }
-    }
+        quaternary: adjustAlpha(infoColor[600], 0.04),
+      },
+    },
   },
   light: {
     success: {
@@ -204,8 +204,8 @@ export const semanticColorVariants: Record<
         base: adjustAlpha(successColor[500], 0.24),
         secondary: adjustAlpha(successColor[500], 0.16),
         tertiary: adjustAlpha(successColor[500], 0.08),
-        quaternary: adjustAlpha(successColor[500], 0.04)
-      }
+        quaternary: adjustAlpha(successColor[500], 0.04),
+      },
     },
     error: {
       origin: errorColor[500],
@@ -216,8 +216,8 @@ export const semanticColorVariants: Record<
         base: adjustAlpha(errorColor[500], 0.24),
         secondary: adjustAlpha(errorColor[500], 0.16),
         tertiary: adjustAlpha(errorColor[500], 0.08),
-        quaternary: adjustAlpha(errorColor[500], 0.04)
-      }
+        quaternary: adjustAlpha(errorColor[500], 0.04),
+      },
     },
     warning: {
       origin: warningColor[400],
@@ -228,8 +228,8 @@ export const semanticColorVariants: Record<
         base: adjustAlpha(warningColor[500], 0.24),
         secondary: adjustAlpha(warningColor[500], 0.16),
         tertiary: adjustAlpha(warningColor[500], 0.08),
-        quaternary: adjustAlpha(warningColor[500], 0.04)
-      }
+        quaternary: adjustAlpha(warningColor[500], 0.04),
+      },
     },
     info: {
       origin: infoColor[500],
@@ -240,15 +240,15 @@ export const semanticColorVariants: Record<
         base: adjustAlpha(infoColor[500], 0.24),
         secondary: adjustAlpha(infoColor[500], 0.16),
         tertiary: adjustAlpha(infoColor[500], 0.08),
-        quaternary: adjustAlpha(infoColor[500], 0.04)
-      }
-    }
-  }
+        quaternary: adjustAlpha(infoColor[500], 0.04),
+      },
+    },
+  },
 };
 
 export const createBrandingColorVariants = (
   color: PrimitiveTokens["primaryColor"],
-  scheme: PrimitiveTokens["colorScheme"]
+  scheme: PrimitiveTokens["colorScheme"],
 ): Theme["colors"]["primary"] => {
   const colorSet = typeof color === "object" ? color : generateColorSet(color);
 
@@ -266,13 +266,13 @@ export const createBrandingColorVariants = (
       base: adjustAlpha(origin, 0.24),
       secondary: adjustAlpha(origin, 0.16),
       tertiary: adjustAlpha(origin, 0.08),
-      quaternary: adjustAlpha(origin, 0.04)
-    }
+      quaternary: adjustAlpha(origin, 0.04),
+    },
   };
 };
 
 export const generateTypefaces = (
-  params: Partial<Record<"ltr" | "rtl" | "monospace", string>>
+  params: Partial<Record<"ltr" | "rtl" | "monospace", string>>,
 ): { typefaces?: Partial<Theme["typefaces"]> } => {
   const { ltr, rtl, monospace } = params;
 
@@ -309,29 +309,29 @@ export const generateTypography = (params: {
       subheading1: {
         size: scaling.subheading1[0]!,
         leading: scaling.subheading1[1]!,
-        weight: 400
+        weight: 400,
       },
       subheading2: {
         size: scaling.subheading2[0]!,
         leading: scaling.subheading2[1]!,
-        weight: 500
+        weight: 500,
       },
       body1: {
         size: scaling.body1[0]!,
         leading: scaling.body1[1]!,
-        weight: 400
+        weight: 400,
       },
       body2: {
         size: scaling.body2[0]!,
         leading: scaling.body2[1]!,
-        weight: 400
+        weight: 400,
       },
       caption: {
         size: scaling.caption[0]!,
         leading: scaling.caption[1]!,
-        weight: 400
-      }
-    }
+        weight: 400,
+      },
+    },
   };
 };
 
@@ -390,9 +390,9 @@ export const generateSpacing = (params: {
         "80": baseSpacer * 80,
         "96": baseSpacer * 96,
         "112": baseSpacer * 112,
-        "128": baseSpacer * 128
-      }
-    }
+        "128": baseSpacer * 128,
+      },
+    },
   };
 };
 
@@ -401,7 +401,7 @@ export const generateColors = (
     Pick<PrimitiveTokens, "primaryColor" | "secondaryColor" | "colorScheme">
   > & {
     inheritedColorScheme: PrimitiveTokens["colorScheme"];
-  }
+  },
 ): { colors?: DeepPartial<Theme["colors"]> } => {
   const { primaryColor, secondaryColor, colorScheme, inheritedColorScheme } =
     params;
@@ -422,13 +422,13 @@ export const generateColors = (
   if (primaryColor) {
     if (typeof primaryColor === "string" && !isValidHexColor(primaryColor)) {
       throw new Error(
-        `Invalid hex color provided. (\`{ primaryColor: "${primaryColor}" }\`)`
+        `Invalid hex color provided. (\`{ primaryColor: "${primaryColor}" }\`)`,
       );
     }
 
     const primary = createBrandingColorVariants(
       primaryColor,
-      colorScheme ?? inheritedColorScheme
+      colorScheme ?? inheritedColorScheme,
     );
 
     if (!partialColors.foregrounds) partialColors.foregrounds = {};
@@ -436,7 +436,7 @@ export const generateColors = (
     partialColors.primary = primary;
     partialColors.foregrounds = {
       ...partialColors.foregrounds,
-      onPrimary: getForegroundColor(primary.origin)
+      onPrimary: getForegroundColor(primary.origin),
     };
   }
 
@@ -446,13 +446,13 @@ export const generateColors = (
       !isValidHexColor(secondaryColor)
     ) {
       throw new Error(
-        `Invalid hex color provided. (\`{ secondaryColor: "${secondaryColor}" }\`)`
+        `Invalid hex color provided. (\`{ secondaryColor: "${secondaryColor}" }\`)`,
       );
     }
 
     const secondary = createBrandingColorVariants(
       secondaryColor,
-      colorScheme ?? inheritedColorScheme
+      colorScheme ?? inheritedColorScheme,
     );
 
     if (!partialColors.foregrounds) partialColors.foregrounds = {};
@@ -460,7 +460,7 @@ export const generateColors = (
     partialColors.secondary = secondary;
     partialColors.foregrounds = {
       ...partialColors.foregrounds,
-      onSecondary: getForegroundColor(secondary.origin)
+      onSecondary: getForegroundColor(secondary.origin),
     };
   }
 

@@ -62,7 +62,7 @@ export type Props<E extends React.ElementType> = PolymorphicProps<E, OwnProps>;
 
 const ButtonBase = <E extends React.ElementType, R extends HTMLElement>(
   props: Props<E>,
-  ref: React.Ref<R>
+  ref: React.Ref<R>,
 ) => {
   const {
     as,
@@ -99,23 +99,34 @@ const ButtonBase = <E extends React.ElementType, R extends HTMLElement>(
           {
             [classes["root--disabled"]!]: disabled,
             [classes["root--loading"]!]: loading,
-            [classes["root--focus-visible"]!]: focusedVisible
-          }
+            [classes["root--focus-visible"]!]: focusedVisible,
+          },
         )
       }
     >
       {loading ? (
-        <LoadingIndicator className={classes["loading-indicator"]} />
+        <LoadingIndicator
+          className={classes["loading-indicator"]}
+          data-slot="Button:LoadingIndicator"
+        />
       ) : (
         <>
           {leadingIcon && (
-            <div className={cls(classes.icon, classes["icon--leading"])}>
+            <div
+              className={cls(classes.icon, classes["icon--leading"])}
+              data-slot="Button:LeadingIcon"
+            >
               {leadingIcon}
             </div>
           )}
-          <span className={classes.text}>{text}</span>
+          <span className={classes.text} data-slot="Button:Text">
+            {text}
+          </span>
           {trailingIcon && (
-            <div className={cls(classes.icon, classes["icon--trailing"])}>
+            <div
+              className={cls(classes.icon, classes["icon--trailing"])}
+              data-slot="Button:TrailingIcon"
+            >
               {trailingIcon}
             </div>
           )}

@@ -87,7 +87,7 @@ const DialogBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
       onBackdropClick={onBackdropClick}
       classes={{
         root: cls(className, classes.root),
-        backdrop: classes.backdrop
+        backdrop: classes.backdrop,
       }}
     >
       <StylelessDialog.Content className={classes.content}>
@@ -108,7 +108,7 @@ const DialogBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
           {body}
         </StylelessDialog.Description>
         {typeof actions !== "undefined" && actions.length > 0 && (
-          <div className={classes.actions} data-slot="Dialog:Actions">
+          <div className={classes.actions} data-slot="DialogActions:Root">
             {createActions(actions)}
           </div>
         )}

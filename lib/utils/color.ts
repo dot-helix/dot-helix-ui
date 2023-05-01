@@ -14,11 +14,11 @@ export const hexToRgb = (hex: string): RGB | null => {
   sanitizedHex = sanitizedHex.replace(
     shorthandRegex,
     (_, r, g, b) =>
-      String(r) + String(r) + String(g) + String(g) + String(b) + String(b)
+      String(r) + String(r) + String(g) + String(g) + String(b) + String(b),
   );
 
   const colorParts = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(
-    sanitizedHex
+    sanitizedHex,
   );
 
   if (!colorParts) return null;
@@ -28,7 +28,7 @@ export const hexToRgb = (hex: string): RGB | null => {
   return {
     r: parseInt(r, 16),
     g: parseInt(g, 16),
-    b: parseInt(b, 16)
+    b: parseInt(b, 16),
   } as RGB;
 };
 
@@ -48,7 +48,7 @@ export const rgbToHex = ({ r, g, b }: RGB): string => {
 };
 
 export const getForegroundColor = (
-  background: string
+  background: string,
 ): "#ffffff" | "#000000" => {
   const rgb = hexToRgb(background);
 
@@ -70,7 +70,7 @@ export const lighten = (hex: string, intensity: number): string => {
   const newRgb = {
     r: Math.round(r + (255 - r) * intensity),
     g: Math.round(g + (255 - g) * intensity),
-    b: Math.round(b + (255 - b) * intensity)
+    b: Math.round(b + (255 - b) * intensity),
   };
 
   return rgbToHex(newRgb);
@@ -86,7 +86,7 @@ export const darken = (hex: string, intensity: number): string => {
   const newRgb = {
     r: Math.round(r * intensity),
     g: Math.round(g * intensity),
-    b: Math.round(b * intensity)
+    b: Math.round(b * intensity),
   };
 
   return rgbToHex(newRgb);
@@ -102,5 +102,5 @@ export const generateColorSet = (originColor: string) => ({
   600: darken(originColor, 0.9),
   700: darken(originColor, 0.75),
   800: darken(originColor, 0.6),
-  900: darken(originColor, 0.49)
+  900: darken(originColor, 0.49),
 });
