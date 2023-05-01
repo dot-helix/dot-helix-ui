@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import {
   Checkbox as StylelessCheckbox,
-  CheckboxProps
+  type CheckboxProps,
 } from "@styleless-ui/react";
 import cls from "classnames";
 import * as React from "react";
@@ -15,6 +15,7 @@ type OwnProps = Pick<
   | "checked"
   | "defaultChecked"
   | "disabled"
+  | "autoFocus"
   | "indeterminated"
 > & {
   /**
@@ -50,6 +51,7 @@ const CheckboxBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
     onChange,
     indeterminated = false,
     fluid = false,
+    autoFocus = false,
     size = "medium",
     ...otherProps
   } = props;
@@ -58,7 +60,7 @@ const CheckboxBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
     <div
       {...otherProps}
       className={cls(className, classes.root, classes[`root--${size}`], {
-        [classes["root--fluid"]!]: fluid
+        [classes["root--fluid"]!]: fluid,
       })}
       ref={ref}
     >
@@ -68,6 +70,7 @@ const CheckboxBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
         disabled={disabled}
         onChange={onChange}
         checked={checked}
+        autoFocus={autoFocus}
         defaultChecked={defaultChecked}
         value={value}
         classes={({ checked, disabled, indeterminated, focusedVisible }) => ({
@@ -75,10 +78,10 @@ const CheckboxBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
             [classes["input--disabled"]!]: disabled,
             [classes["input--checked"]!]: checked,
             [classes["input--focus-visible"]!]: focusedVisible,
-            [classes["input--indeterminated"]!]: indeterminated
+            [classes["input--indeterminated"]!]: indeterminated,
           }),
           check: classes.check,
-          label: classes.label
+          label: classes.label,
         })}
       />
     </div>
