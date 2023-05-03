@@ -531,7 +531,7 @@
   margin-left: var(--btn-trailing-icon-gap-after);
 }
 
-.root.root--focus-visible {
+.root:is(.root--focus-visible, :focus-visible) {
   outline: 2px solid var(--color-palette-cyan-600);
   outline-offset: 1px;
 }
