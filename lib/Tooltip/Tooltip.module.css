@@ -1,0 +1,57 @@
+.root {
+  direction: var(--direction);
+
+  background-color: var(--color-neutral-origin);
+  backdrop-filter: saturate(180%) blur(2px);
+  color: var(--color-neutral-text-inverted);
+
+  padding: var(--space-sm);
+
+  border-radius: var(--rounded-sm);
+
+  font-size: var(--typography-body2-size);
+  line-height: var(--typography-body2-leading);
+  font-weight: 500;
+
+  z-index: var(--z-5);
+}
+
+.root::after {
+  content: "";
+
+  position: absolute;
+
+  z-index: -1;
+
+  width: 0.5rem;
+  height: 0.5rem;
+
+  background-color: var(--color-neutral-origin);
+}
+
+.root.root--open {
+}
+
+.root.root--top::after {
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 50%) rotate(45deg);
+}
+
+.root.root--left::after {
+  top: 50%;
+  right: 0;
+  transform: translate(50%, -50%) rotate(45deg);
+}
+
+.root.root--right::after {
+  top: 50%;
+  left: 0;
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.root.root--bottom::after {
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
+}
