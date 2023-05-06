@@ -20,3 +20,5 @@ export * from "./RadioGroup";
 export { default as RadioGroup } from "./RadioGroup";
 export * from "./Switch";
 export { default as Switch } from "./Switch";
+export * from "./Tooltip";
+export { default as Tooltip } from "./Tooltip";
