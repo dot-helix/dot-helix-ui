@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Button } from "../lib";
+import { Switch } from "../lib";
 import { getVariablesAsInlineStyle, Initializer } from "../lib/configuration";
 import classes from "./layout.module.css";
 
@@ -20,15 +20,14 @@ const RootLayout = (props: { children: React.ReactNode }) => {
         <Initializer primitives={primitives}>
           <div className={classes.root}>
             <div className={classes.toolbar}>
-              <Button
-                as="button"
-                variant="outlined"
-                text="Toggle color scheme"
-                onClick={() =>
+              <h1 className={classes.title}>Dev Sandbox</h1>
+              <Switch
+                fluid
+                label="Dark Scheme"
+                onChange={() =>
                   void setScheme(s => (s === "light" ? "dark" : "light"))
                 }
               />
-              Scheme: {scheme}
             </div>
             {props.children}
           </div>
