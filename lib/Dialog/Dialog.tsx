@@ -108,7 +108,7 @@ const DialogBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
           {body}
         </StylelessDialog.Description>
         {typeof actions !== "undefined" && actions.length > 0 && (
-          <div className={classes.actions} data-slot="DialogActions:Root">
+          <div className={classes.actions} data-slot="Dialog:Actions">
             {createActions(actions)}
           </div>
         )}
