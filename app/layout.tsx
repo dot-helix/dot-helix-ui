@@ -5,6 +5,8 @@ import { Switch } from "../lib";
 import { getVariablesAsInlineStyle, Initializer } from "../lib/configuration";
 import classes from "./layout.module.css";
 
+import "./global.css";
+
 const ssrCssVariables = getVariablesAsInlineStyle();
 
 const RootLayout = (props: { children: React.ReactNode }) => {
