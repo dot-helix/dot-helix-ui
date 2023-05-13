@@ -20,6 +20,8 @@ export * from "./RadioGroup";
 export { default as RadioGroup } from "./RadioGroup";
 export * from "./Switch";
 export { default as Switch } from "./Switch";
+export * from "./Tag";
+export { default as Tag } from "./Tag";
 export * from "./Toast";
 export { default as Toast } from "./Toast";
 export * from "./Tooltip";
