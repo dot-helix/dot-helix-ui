@@ -22,8 +22,10 @@ pre.root.root--block {
   display: block;
   overflow: auto;
 
-  text-align: left;
   direction: ltr;
+  font-size: var(--typography-body2-size);
+  line-height: var(--typography-body2-leading);
+  text-align: left;
 
   padding: var(--space-lg);
 
