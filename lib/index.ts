@@ -1,11 +1,13 @@
+export * from "./Badge";
+export { default as Badge } from "./Badge";
 export * from "./Breadcrumb";
 export { default as Breadcrumb } from "./Breadcrumb";
 export * from "./Button";
 export { default as Button } from "./Button";
-export * from "./Checkbox";
-export { default as Checkbox } from "./Checkbox";
 export * from "./CheckGroup";
 export { default as CheckGroup } from "./CheckGroup";
+export * from "./Checkbox";
+export { default as Checkbox } from "./Checkbox";
 export * from "./Dialog";
 export { default as Dialog } from "./Dialog";
 export * from "./Expandable";
