@@ -1,0 +1,115 @@
+.relative-root {
+  display: inline-flex;
+
+  position: relative;
+  vertical-align: middle;
+
+  flex-shrink: 0;
+}
+
+.relative-root > .root {
+  position: absolute;
+
+  transform-origin: 100% 0;
+  transform: scale(1) translate(50%, -50%);
+}
+
+.relative-root > .root.root.root--hidden {
+  transform: scale(0) translate(50%, -50%);
+}
+
+.root {
+  -moz-backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+
+  direction: var(--direction);
+
+  z-index: 2;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  vertical-align: middle;
+
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
+
+  background-color: var(--badge-bg-color);
+  color: var(--badge-color);
+
+  transition: transform 240ms ease, visibility 240ms ease, opacity 240ms ease;
+}
+
+.root.root--hidden {
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(0);
+}
+
+.root.root--dot {
+  width: 0.75rem;
+  height: 0.75rem;
+
+  border-radius: var(--rounded-full);
+}
+
+.root.root--standard {
+  font-size: var(--typography-caption-size);
+  line-height: var(--typography-caption-leading);
+  font-weight: 500;
+
+  min-width: 1rem;
+  height: 1.125rem;
+
+  border-radius: var(--rounded-sm);
+
+  padding: 0 var(--space-xs);
+}
+
+.root.root--rectangular-child {
+  top: 0;
+  right: 0;
+}
+
+.root.root--circular-child {
+  top: 15%;
+  right: 15%;
+}
+
+.root.root--neutral {
+  --badge-color: var(--color-neutral-text-inverted);
+  --badge-bg-color: var(--color-neutral-origin);
+}
+
+.root.root--primary {
+  --badge-color: var(--color-foregrounds-onprimary);
+  --badge-bg-color: var(--color-primary-origin);
+}
+
+.root.root--secondary {
+  --badge-color: var(--color-foregrounds-onsecondary);
+  --badge-bg-color: var(--color-secondary-origin);
+}
+
+.root.root--success {
+  --badge-color: var(--color-foregrounds-onsuccess);
+  --badge-bg-color: var(--color-success-origin);
+}
+
+.root.root--error {
+  --badge-color: var(--color-foregrounds-onerror);
+  --badge-bg-color: var(--color-error-origin);
+}
+
+.root.root--warning {
+  --badge-color: var(--color-foregrounds-onwarning);
+  --badge-bg-color: var(--color-warning-origin);
+}
+
+.root.root--info {
+  --badge-color: var(--color-foregrounds-oninfo);
+  --badge-bg-color: var(--color-info-origin);
+}
