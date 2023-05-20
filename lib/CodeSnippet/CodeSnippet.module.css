@@ -1,0 +1,34 @@
+code.root,
+pre.root {
+  direction: var(--direction);
+
+  font-family: var(--typeface-monospace);
+  font-size: 0.875em;
+  line-height: var(--typography-body2-leading);
+  font-weight: bold;
+
+  color: var(--color-secondary-origin);
+  box-shadow: inset 0 0 0 1px var(--color-secondary-disabled);
+  background-color: var(--color-secondary-surface-tertiary);
+
+  display: inline-block;
+
+  border-radius: var(--rounded-sm);
+  padding: 0 var(--space-sm);
+}
+
+code.root.root--block,
+pre.root.root--block {
+  display: block;
+  overflow: auto;
+
+  direction: ltr;
+  font-size: var(--typography-body2-size);
+  line-height: var(--typography-body2-leading);
+  text-align: left;
+
+  padding: var(--space-lg);
+
+  color: currentColor;
+  background-color: var(--color-secondary-surface-tertiary);
+}
