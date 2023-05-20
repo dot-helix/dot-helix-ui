@@ -1,0 +1,228 @@
+.root {
+  direction: var(--direction);
+}
+
+a:where(.root) {
+  text-decoration: none;
+}
+
+p:where(.root),
+h1:where(.root),
+h2:where(.root),
+h3:where(.root),
+h4:where(.root),
+h5:where(.root),
+h6:where(.root) {
+  margin: unset;
+}
+
+.root.root--h1 {
+  font-size: var(--typography-h1-size);
+  line-height: var(--typography-h1-leading);
+  font-weight: var(--typography-h1-weight);
+}
+
+.root.root--h2 {
+  font-size: var(--typography-h2-size);
+  line-height: var(--typography-h2-leading);
+  font-weight: var(--typography-h2-weight);
+}
+
+.root.root--h3 {
+  font-size: var(--typography-h3-size);
+  line-height: var(--typography-h3-leading);
+  font-weight: var(--typography-h3-weight);
+}
+
+.root.root--h4 {
+  font-size: var(--typography-h4-size);
+  line-height: var(--typography-h4-leading);
+  font-weight: var(--typography-h4-weight);
+}
+
+.root.root--h5 {
+  font-size: var(--typography-h5-size);
+  line-height: var(--typography-h5-leading);
+  font-weight: var(--typography-h5-weight);
+}
+
+.root.root--h6 {
+  font-size: var(--typography-h6-size);
+  line-height: var(--typography-h6-leading);
+  font-weight: var(--typography-h6-weight);
+}
+
+.root.root--subheading1 {
+  font-size: var(--typography-subheading1-size);
+  line-height: var(--typography-subheading1-leading);
+  font-weight: var(--typography-subheading1-weight);
+}
+
+.root.root--subheading2 {
+  font-size: var(--typography-subheading2-size);
+  line-height: var(--typography-subheading2-leading);
+  font-weight: var(--typography-subheading2-weight);
+}
+
+.root.root--body1 {
+  font-size: var(--typography-body1-size);
+  line-height: var(--typography-body1-leading);
+  font-weight: var(--typography-body1-weight);
+}
+
+.root.root--body2 {
+  font-size: var(--typography-body2-size);
+  line-height: var(--typography-body2-leading);
+  font-weight: var(--typography-body2-weight);
+}
+
+.root.root--caption {
+  font-size: var(--typography-caption-size);
+  line-height: var(--typography-caption-leading);
+  font-weight: var(--typography-caption-weight);
+}
+
+.root.root--current {
+  color: currentColor;
+}
+
+.root.root--neutral-normal {
+  color: var(--color-neutral-text-normal);
+}
+
+.root.root--neutral-inverted {
+  color: var(--color-neutral-text-inverted);
+}
+
+.root.root--neutral-secondary {
+  color: var(--color-neutral-text-secondary);
+}
+
+.root.root--neutral-tertiary {
+  color: var(--color-neutral-text-tertiary);
+}
+
+.root.root--neutral-quaternary {
+  color: var(--color-neutral-text-quaternary);
+}
+
+.root.root--neutral-disabled {
+  color: var(--color-neutral-text-disabled);
+}
+
+.root.root--primary {
+  color: var(--color-primary-origin);
+}
+
+.root.root--secondary {
+  color: var(--color-secondary-origin);
+}
+
+.root.root--success {
+  color: var(--color-success-origin);
+}
+
+.root.root--error {
+  color: var(--color-error-origin);
+}
+
+.root.root--warning {
+  color: var(--color-warning-origin);
+}
+
+.root.root--info {
+  color: var(--color-info-origin);
+}
+
+.root.root--clip {
+  text-overflow: clip;
+}
+
+.root.root--ellipsis {
+  text-overflow: ellipsis;
+}
+
+.root.root--no-wrap {
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.root.root--align-left {
+  text-align: left;
+}
+
+.root.root--align-right {
+  text-align: right;
+}
+
+.root.root--align-center {
+  text-align: center;
+}
+
+.root.root--align-justify {
+  text-align: justify;
+}
+
+.root.root--align-start {
+  text-align: start;
+}
+
+.root.root--align-end {
+  text-align: end;
+}
+
+.root.root--weight-100 {
+  font-weight: 100;
+}
+
+.root.root--weight-200 {
+  font-weight: 200;
+}
+
+.root.root--weight-300 {
+  font-weight: 300;
+}
+
+.root.root--weight-400 {
+  font-weight: 400;
+}
+
+.root.root--weight-500 {
+  font-weight: 500;
+}
+
+.root.root--weight-600 {
+  font-weight: 600;
+}
+
+.root.root--weight-700 {
+  font-weight: 700;
+}
+
+.root.root--weight-800 {
+  font-weight: 800;
+}
+
+.root.root--weight-900 {
+  font-weight: 900;
+}
+
+.root.root--display-inline {
+  display: inline;
+}
+
+.root.root--display-block {
+  display: block;
+}
+
+.root.root--display-inline-block {
+  display: inline-block;
+}
+
+.root.root--display-flex {
+  display: flex;
+}
+
+.root.root--display-inline-flex {
+  display: inline-flex;
+}
