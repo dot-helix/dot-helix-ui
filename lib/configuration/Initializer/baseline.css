@@ -22,23 +22,10 @@ body {
   background-color: var(--color-neutral-background-base);
   direction: var(--direction);
   font-family: var(--typeface-ltr);
-  font-size: var(--typography-body1-size);
-  font-weight: var(--typography-body1-weight);
-  line-height: var(--typography-body1-leading);
 }
 
 main {
   display: block;
-}
-
-/**
- * Correct the font size and margin on `h1` elements within `section` and
- * `article` contexts in Chrome, Firefox, and Safari.
- */
-
-h1 {
-  font-size: 2em;
-  margin: 0.67em 0;
 }
 
 /**
@@ -58,16 +45,8 @@ hr {
  */
 
 pre {
-  font-family: monospace, monospace; /* 1 */
+  font-family: var(--typeface-monospace); /* 1 */
   font-size: 1em; /* 2 */
-}
-
-/**
- * Remove the gray background on active links in IE 10.
- */
-
-a {
-  background-color: transparent;
 }
 
 /**
@@ -98,7 +77,7 @@ strong {
 code,
 kbd,
 samp {
-  font-family: monospace, monospace; /* 1 */
+  font-family: var(--typeface-monospace); /* 1 */
   font-size: 1em; /* 2 */
 }
 
