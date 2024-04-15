@@ -1,5 +1,4 @@
 {
   "extends": "./tsconfig.json",
-  "include": ["lib"],
-  "exclude": ["next-env.d.ts", "app/**/*.ts", "app/**/*.tsx"]
+  "compilerOptions": { "noEmit": true, "jsx": "react-jsx" }
 }
