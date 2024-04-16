@@ -1,19 +1,24 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
+import type { MergeElementProps } from "@styleless-ui/react";
 import cls from "classnames";
 import * as React from "react";
+import { componentWithForwardedRef } from "../utils";
 import classes from "./Badge.module.css";
+import * as Slots from "./slots";
+import { getValidChild } from "./utils";
 
-interface OwnProps {
+type OwnProps = {
   /**
    * The className applied to the parent of the relative badge.
    */
-  relativeParentClassName?: string;
+  wrapperClassName?: string;
   /**
    * The className applied to the badge itself.
    */
   className?: string;
   /**
    * The color of the badge.
+   *
    * @default "neutral"
    */
   color?:
@@ -26,52 +31,40 @@ interface OwnProps {
     | "info";
   /**
    * The badge will be added relative to this node.
+   * If omitted, the badge renders as a standalone component.
    */
   children?: JSX.Element;
   /**
    * The shape of the child the badge will be wrapped around.
-   *
    * Set this for better positioning.
+   *
    * * @default "rectangular"
    */
   childShape?: "rectangular" | "circular";
   /**
    * If `true`, the badge will be visible.
+   *
    * @default true
    */
   visible?: boolean;
   /**
-   * The text content of the badge, when `variant="standard"`.
+   * The text content of the badge.
+   * If it's omitted or empty, the badge appears as a dot.
    */
-  text?: string;
-}
+  content?: string;
+};
 
 export type Props = Omit<
-  React.ComponentPropsWithRef<"span">,
-  keyof OwnProps | "defaultValue" | "defaultChecked"
-> &
-  OwnProps;
-
-const getValidChild = (children: JSX.Element) => {
-  try {
-    if (!React.isValidElement(children)) throw 0;
-    return React.Children.only(children) as React.FunctionComponentElement<
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      Record<keyof any, unknown>
-    >;
-  } catch {
-    throw new Error(
-      "[Badge]: The `children` prop has to be a single valid element.",
-    );
-  }
-};
+  MergeElementProps<"span", OwnProps>,
+  "defaultChecked" | "checked" | "value" | "defaultValue"
+>;
 
 const BadgeBase = (props: Props, ref: React.Ref<HTMLSpanElement>) => {
   const {
-    relativeParentClassName,
+    wrapperClassName,
     className,
     children,
-    text,
+    content,
     visible = true,
     childShape = "rectangular",
     color = "neutral",
@@ -82,24 +75,14 @@ const BadgeBase = (props: Props, ref: React.Ref<HTMLSpanElement>) => {
 
   const isStandalone = child == null;
   const variant: "dot" | "standard" =
-    text == null || text.length === 0 ? "dot" : "standard";
-
-  const createRelativeBadge = () => (
-    <div
-      data-slot="Badge:RelativeRoot"
-      className={cls(relativeParentClassName, classes["relative-root"])}
-    >
-      {createStandaloneBadge()}
-      {child}
-    </div>
-  );
+    content == null || content.length === 0 ? "dot" : "standard";
 
   const createStandaloneBadge = () => (
     <span
       {...otherProps}
       // @ts-expect-error React hasn't added `inert` yet
       inert={!visible ? "" : undefined}
-      data-slot="Badge:Root"
+      data-slot={Slots.Root}
       ref={ref}
       className={cls(
         className,
@@ -110,13 +93,23 @@ const BadgeBase = (props: Props, ref: React.Ref<HTMLSpanElement>) => {
         { [classes[`root--hidden`]!]: !visible },
       )}
     >
-      {text}
+      {content}
     </span>
   );
 
-  return isStandalone ? createStandaloneBadge() : createRelativeBadge();
+  if (isStandalone) return createStandaloneBadge();
+
+  return (
+    <div
+      data-slot={Slots.Wrapper}
+      className={cls(wrapperClassName, classes["wrapper"])}
+    >
+      {createStandaloneBadge()}
+      {child}
+    </div>
+  );
 };
 
-const Badge = React.forwardRef(BadgeBase) as typeof BadgeBase;
+const Badge = componentWithForwardedRef(BadgeBase, "Badge");
 
 export default Badge;
