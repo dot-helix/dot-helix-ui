@@ -11,19 +11,21 @@ import {
   type PrimitiveTokens,
   type Variants,
 } from "../theming";
+import { HELIX_CLIENT_ROOT_PREFIX } from "./constants";
 import {
   TokensClientContext,
   TokensClientProvider,
 } from "./TokensClientContext";
-import { HELIX_CLIENT_ROOT_PREFIX } from "./constants";
 
 import "./baseline.css";
+import UtilityClasses from "./UtilityClasses";
 
 export type Props = {
   children?: React.ReactNode;
   primitives?: Partial<PrimitiveTokens>;
   colorScheme?: Variants;
   direction?: "ltr" | "rtl";
+  disableUtilityClassesGeneration?: boolean;
 };
 
 const HelixClient = (props: Props) => {
@@ -32,6 +34,7 @@ const HelixClient = (props: Props) => {
     primitives,
     colorScheme = "dark",
     direction = "ltr",
+    disableUtilityClassesGeneration = false,
   } = props;
 
   const helixClientRootId = useDeterministicId(
@@ -82,6 +85,7 @@ const HelixClient = (props: Props) => {
               data-name="HelixClientRoot"
               style={rootStyles as React.CSSProperties}
             >
+              <UtilityClasses enable={!disableUtilityClassesGeneration} />
               {children}
             </div>
           </client.ColorVariantSelector>
