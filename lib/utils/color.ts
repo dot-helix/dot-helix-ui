@@ -44,6 +44,7 @@ export const adjustAlpha = (hex: string, alpha: number) => {
 
 export const rgbToHex = ({ r, g, b }: RGB): string => {
   const toHex = (n: number) => `0${n.toString(16)}`.slice(-2);
+
   return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
 };
 
