@@ -12,8 +12,8 @@ dependencies:
     specifier: ^2.5.1
     version: 2.5.1
   react-design-tokens:
-    specifier: 2.0.0-rc.2
-    version: 2.0.0-rc.2(react-dom@18.2.0)(react@18.2.0)
+    specifier: 2.0.0-rc.3
+    version: 2.0.0-rc.3(react-dom@18.2.0)(react@18.2.0)
 
 devDependencies:
   '@types/node':
@@ -2623,8 +2623,8 @@ packages:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
     dev: true
 
-  /react-design-tokens@2.0.0-rc.2(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-z0V99MhknBNMPS2x6p2drQsogGw1aYYNsFeRKpogq+E0p5Zy0zkRh5ZunT4UndzifehFY69Rs4/c+cCiNgByag==}
+  /react-design-tokens@2.0.0-rc.3(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-tL+fQI0mFn71fDs1NuKep/SNM9dfR5OXhQq0owyUOsViSAP7ik4p3hmSVz6OJHjQxl0PjHsSDWI/ZNt1B+qM7Q==}
     engines: {node: '>=20'}
     peerDependencies:
       react: '>=17'
