@@ -1,3 +1,5 @@
+"use client";
+
 import {
   PortalConfigProvider,
   type PortalConfigProviderProps,
@@ -22,7 +24,7 @@ import UtilityClasses from "./UtilityClasses";
 
 export type Props = {
   children?: React.ReactNode;
-  primitives?: Partial<PrimitiveTokens>;
+  tokensConfiguration?: Partial<PrimitiveTokens>;
   colorScheme?: Variants;
   direction?: "ltr" | "rtl";
   disableUtilityClassesGeneration?: boolean;
@@ -31,7 +33,7 @@ export type Props = {
 const HelixClient = (props: Props) => {
   const {
     children,
-    primitives,
+    tokensConfiguration: primitives,
     colorScheme = "dark",
     direction = "ltr",
     disableUtilityClassesGeneration = false,
@@ -71,8 +73,8 @@ const HelixClient = (props: Props) => {
   const rootStyles = {
     direction: "var(--direction)",
     color: "var(--color-neutral-text-normal)",
-    "background-color": "var(--color-neutral-background-base)",
-    "font-family": `var(--typography-typeface-${direction})`,
+    backgroundColor: "var(--color-neutral-background-base)",
+    fontFamily: `var(--typography-typeface-${direction})`,
   };
 
   return (

@@ -9,20 +9,27 @@ export type Props = {
   enable: boolean;
 };
 
+const classes = [
+  spacingUtilityClasses,
+  zIndexUtilityClasses,
+  overflowUtilityClasses,
+  overscrollUtilityClasses,
+  sizeUtilityClasses,
+  userSelectUtilityClasses,
+]
+  .join("\n")
+  .replaceAll("\n", "");
+
 const UtilityClasses = (props: Props) => {
   const { enable } = props;
 
   if (!enable) return null;
 
   return (
-    <style data-name="HelixUtilityClasses">
-      {spacingUtilityClasses}
-      {zIndexUtilityClasses}
-      {overflowUtilityClasses}
-      {overscrollUtilityClasses}
-      {sizeUtilityClasses}
-      {userSelectUtilityClasses}
-    </style>
+    <style
+      data-name="HelixUtilityClasses"
+      dangerouslySetInnerHTML={{ __html: classes }}
+    />
   );
 };
 
