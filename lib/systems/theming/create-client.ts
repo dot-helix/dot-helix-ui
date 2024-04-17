@@ -39,12 +39,14 @@ const createClient = (primitiveTokens: PrimitiveTokens): Client => {
     { cssVariableGenerator },
   );
 
+  const useDirection = () => useDirectionToken().direction as "ltr" | "rtl";
+
   return {
     generateCSSVariablesAsInlineStyle,
     ColorVariantSelector,
     DirectionVariantSelector,
     useTokens,
-    useDirectionToken: useDirectionToken as Client["useDirectionToken"],
+    useDirection,
   } satisfies Client;
 };
 

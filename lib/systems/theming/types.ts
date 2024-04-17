@@ -187,7 +187,7 @@ export type Client = {
     variant: "ltr" | "rtl";
   }) => ReactElement | null;
   useTokens: () => ThemeTokens;
-  useDirectionToken: () => { direction: "ltr" | "rtl" };
+  useDirection: () => "ltr" | "rtl";
   generateCSSVariablesAsInlineStyle: (
     variant: Variants,
     options?: { disableCommonTokensGeneration?: boolean },
