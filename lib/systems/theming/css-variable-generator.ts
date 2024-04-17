@@ -98,24 +98,28 @@ const cssVariableGenerator: CSSVariableGenerator = ctx => {
     }
 
     case "typography": {
+      const path = ctx.tokenPath.replace("typefaces", "typeface");
+
       if (typeof ctx.tokenValue === "number") {
-        const pathSegments = ctx.tokenPath.split(".");
+        const pathSegments = path.split(".");
         const lastSegment = pathSegments[pathSegments.length - 1] ?? "";
 
         if (["weight", "leading"].includes(lastSegment)) {
           return defaultCSSVariableGenerator({
             ...ctx,
+            tokenPath: path,
             tokenValue: String(ctx.tokenValue),
           });
         }
 
         return defaultCSSVariableGenerator({
           ...ctx,
+          tokenPath: path,
           tokenValue: `${ctx.tokenValue / 16}rem`,
         });
       }
 
-      return defaultCSSVariableGenerator(ctx);
+      return defaultCSSVariableGenerator({ ...ctx, tokenPath: path });
     }
 
     default:
