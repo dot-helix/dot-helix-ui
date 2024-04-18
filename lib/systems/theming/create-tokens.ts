@@ -9,6 +9,7 @@ import {
   neutralColorVariantsMap,
   semanticColorVariantsMap,
 } from "./constants";
+import palette from "./palette";
 import type {
   CommonTokens,
   PrimitiveTokens,
@@ -81,6 +82,7 @@ export const createCommonTokens = (
   const scaling = typeScaling[typographySize];
 
   const commonTokens: CommonTokens = {
+    palette,
     borderRadius: {
       full: 9999,
       xs: 2,

@@ -12,13 +12,6 @@ const cssVariableGenerator: CSSVariableGenerator = ctx => {
       });
     }
 
-    case "direction": {
-      return defaultCSSVariableGenerator({
-        ...ctx,
-        tokenFamilyKey: "direction",
-      });
-    }
-
     case "borderRadius": {
       if (typeof ctx.tokenValue === "number") {
         const pathSegments = ctx.tokenPath.split(".");
@@ -123,7 +116,7 @@ const cssVariableGenerator: CSSVariableGenerator = ctx => {
     }
 
     default:
-      return null;
+      return defaultCSSVariableGenerator(ctx);
   }
 };
 

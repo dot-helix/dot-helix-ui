@@ -1,5 +1,5 @@
-import { fuschsia, indigo } from "../palette";
 import createTokens from "./create-tokens";
+import { fuschsia, indigo } from "./palette";
 import type { PrimitiveTokens } from "./types";
 
 export const defaultPrimitives: PrimitiveTokens = {

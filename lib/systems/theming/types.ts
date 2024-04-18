@@ -1,4 +1,5 @@
 import type { ReactElement } from "react";
+import type { Palette } from "./palette";
 
 export type Variants = "dark" | "light";
 
@@ -148,6 +149,7 @@ export type ShadowTokens = Record<"xs" | "sm" | "md" | "lg" | "xlg", string>;
 
 export type ThemeTokens = {
   colors: ColorTokens;
+  palette: Palette;
   spacing: SpacingTokens;
   breakpoints: BreakpointTokens;
   typography: TypographyTokens;

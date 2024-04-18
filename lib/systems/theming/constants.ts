@@ -1,5 +1,5 @@
 import { adjustAlpha, getForegroundColor } from "../../utils";
-import { green, orange, rose, sky, zinc } from "../palette";
+import { green, orange, rose, sky, zinc } from "./palette";
 import type {
   ColorTokens,
   ForegroundColorTokens,

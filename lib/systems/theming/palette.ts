@@ -244,3 +244,29 @@ export const rose = {
   "800": "#9f1239",
   "900": "#881337",
 } as const;
+
+const palette = {
+  gray,
+  amber,
+  blue,
+  cyan,
+  emerald,
+  fuschsia,
+  green,
+  indigo,
+  lime,
+  orange,
+  pink,
+  purple,
+  red,
+  rose,
+  sky,
+  teal,
+  violet,
+  yellow,
+  zinc,
+} as const;
+
+export type Palette = typeof palette;
+
+export default palette;

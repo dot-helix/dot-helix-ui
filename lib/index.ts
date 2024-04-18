@@ -33,4 +33,3 @@ export { default as Toast } from "./Toast";
 export * from "./Tooltip";
 export { default as Tooltip } from "./Tooltip";
 export { HelixClient } from "./systems";
-export * as palette from "./systems/palette";
