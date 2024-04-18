@@ -70,11 +70,21 @@ const HelixClient = (props: Props) => {
 
   const client = useConstantValue(() => createClient(primitiveTokens));
 
-  const rootStyles = {
-    direction: "var(--direction)",
+  const rootStyles: React.CSSProperties = {
+    direction: "var(--direction)" as "ltr" | "rtl",
     color: "var(--color-neutral-text-normal)",
     backgroundColor: "var(--color-neutral-background-base)",
     fontFamily: `var(--typography-typeface-${direction})`,
+  };
+
+  const bgStyles: React.CSSProperties = {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: "var(--color-neutral-background-base)",
+    zIndex: "-1",
   };
 
   return (
@@ -84,9 +94,14 @@ const HelixClient = (props: Props) => {
           <client.ColorVariantSelector variant={colorScheme}>
             <div
               id={helixClientRootId}
-              data-name="HelixClientRoot"
-              style={rootStyles as React.CSSProperties}
+              data-name="HelixClient:Root"
+              style={rootStyles}
             >
+              <div
+                aria-hidden="true"
+                data-name="HelixClient:Background"
+                style={bgStyles}
+              ></div>
               <UtilityClasses enable={!disableUtilityClassesGeneration} />
               {children}
             </div>
