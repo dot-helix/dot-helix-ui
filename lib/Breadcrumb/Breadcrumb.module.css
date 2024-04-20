@@ -70,6 +70,8 @@
 .item:last-child {
   color: var(--color-neutral-text-normal);
   font-weight: 500;
+  pointer-events: none;
+  cursor: default;
 }
 
 .item:is(:hover, :focus-within) {

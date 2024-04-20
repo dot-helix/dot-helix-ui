@@ -79,6 +79,12 @@ const BreadcrumbBase = (props: Props, ref: React.Ref<HTMLElement>) => {
 
       const isLastItem = itemIdx === items.length - 1;
 
+      const handleClick: React.MouseEventHandler<HTMLAnchorElement> = event => {
+        onClick?.(event);
+
+        if (isLastItem) event.preventDefault();
+      };
+
       const itemElement = (
         <StylelessBreadcrumb.Item
           key={key}
@@ -88,7 +94,7 @@ const BreadcrumbBase = (props: Props, ref: React.Ref<HTMLElement>) => {
             title={title}
             href={href}
             aria-current={isLastItem ? currentValue : undefined}
-            onClick={onClick}
+            onClick={handleClick}
           >
             {title}
           </a>
