@@ -9,8 +9,13 @@ import * as React from "react";
 import Label from "../Label";
 import { Logger } from "../internals";
 import type { CommonProps } from "../types";
-import { componentWithForwardedRef, useDeterministicId } from "../utils";
+import {
+  componentWithForwardedRef,
+  useDeterministicId,
+  useHandleInstanceRef,
+} from "../utils";
 import classes from "./Checkbox.module.css";
+import type { Instance } from "./instance";
 import * as Slots from "./slots";
 
 type OwnProps = Pick<CommonProps, "className"> &
@@ -25,6 +30,7 @@ type OwnProps = Pick<CommonProps, "className"> &
     | "autoFocus"
     | "readOnly"
   > & {
+    instanceRef?: React.RefObject<Instance>;
     /**
      * The size of the checkbox.
      *
@@ -51,6 +57,7 @@ export type Props = Omit<
 const CheckboxBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
   const {
     id: idProp,
+    instanceRef,
     className,
     label,
     name,
@@ -70,6 +77,8 @@ const CheckboxBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
   const boxId = `${scopeId}__box`;
   const labelId = `${scopeId}__label`;
 
+  const checkboxRef = React.useRef<HTMLButtonElement>(null);
+
   if (disabled && readOnly) {
     Logger.devOnly.log(
       "You can't have both `disabled` and `readOnly` props set to `true`.",
@@ -77,6 +86,21 @@ const CheckboxBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
       "Checkbox",
     );
   }
+
+  const getCheckboxNode = React.useCallback(() => checkboxRef.current, []);
+
+  const isChecked = React.useCallback(() => {
+    const node = checkboxRef.current;
+
+    if (!node) return false;
+
+    return node.getAttribute("data-checked") != null;
+  }, []);
+
+  useHandleInstanceRef(instanceRef, () => ({
+    getCheckboxNode,
+    isChecked,
+  }));
 
   return (
     <div
@@ -89,6 +113,7 @@ const CheckboxBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
       data-slot={Slots.Wrapper}
     >
       <StylelessCheckbox
+        ref={checkboxRef}
         id={boxId}
         label={{ labelledBy: labelId }}
         disabled={!readOnly && disabled}
