@@ -1,31 +1,36 @@
 /* eslint-disable no-console */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-const withDevOnlyPrefix = <F extends (...args: any) => any>(logFn: F) => {
-  return (...args: Parameters<F>) => {
+type LogType = "info" | "error" | "warn";
+
+type LogFn = (message: string, type: LogType, scope?: string) => void;
+
+const log: LogFn = (message, type, scope) => {
+  const scopeSegment = scope ? `[${scope}]` : "";
+  const prefix = `[@dot-helix/ui]${scopeSegment}:`;
+
+  const prefixedMessage = `${prefix}${message}`;
+
+  const logFn = {
+    info: console.log,
+    error: console.error,
+    warn: console.warn,
+  }[type];
+
+  logFn(prefixedMessage);
+};
+
+const withDevOnlyPrefix = (logFn: LogFn): LogFn => {
+  return (...args: Parameters<LogFn>) => {
     if (process.env.NODE_ENV === "production") return;
 
-    logFn.apply("[@dot-helix/ui]<DEVONLY_MESSAGE>:", args);
+    logFn.apply(logFn, args);
   };
 };
 
-const withPrefix = <F extends (...args: any) => any>(logFn: F) => {
-  return (...args: Parameters<F>) => {
-    if (process.env.NODE_ENV === "production") return;
-
-    logFn.apply("[@dot-helix/ui]:", args);
-  };
-};
-
-const Logger = {
-  devOnly: {
-    info: withDevOnlyPrefix(console.log),
-    error: withDevOnlyPrefix(console.error),
-    warn: withDevOnlyPrefix(console.warn),
-  },
-  info: withPrefix(console.log),
-  error: withPrefix(console.error),
-  warn: withPrefix(console.warn),
-};
+const Logger = Object.seal({
+  devOnly: { log: withDevOnlyPrefix(log) },
+  log,
+});
 
 export default Logger;
