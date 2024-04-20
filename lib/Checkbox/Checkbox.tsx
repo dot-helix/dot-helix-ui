@@ -7,7 +7,6 @@ import {
 import cls from "classnames";
 import * as React from "react";
 import Label from "../Label";
-import ValidityReason from "../ValidityReason";
 import { Logger } from "../internals";
 import type { CommonProps } from "../types";
 import {
@@ -18,6 +17,7 @@ import {
 import classes from "./Checkbox.module.css";
 import * as Slots from "./slots";
 import type { CheckboxInstance, CheckboxValidityState } from "./types";
+import { validate } from "./utils";
 
 type OwnProps = Pick<
   CommonProps,
@@ -119,19 +119,6 @@ const CheckboxBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
     );
   };
 
-  const validate = React.useCallback(
-    (checkedState: boolean): CheckboxValidityState => {
-      if (!required) return { valid: true };
-      if (checkedState) return { valid: true };
-
-      return {
-        valid: false,
-        reason: ValidityReason.VALUE_MISSING,
-      };
-    },
-    [required],
-  );
-
   const emitValidityChange = (validity: CheckboxValidityState) => {
     onValidityStateChange?.(validity);
 
@@ -142,7 +129,7 @@ const CheckboxBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
     onCheckedChange?.(checkedState);
 
     const prevValidity = validityStateRef.current;
-    const validity = validate(checkedState);
+    const validity = validate(checkedState, { required });
 
     if (prevValidity && !hasValidityChanged(prevValidity, validity)) return;
 
@@ -165,10 +152,10 @@ const CheckboxBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
       return {
         isChecked,
         getCheckboxNode,
-        checkValidity: () => validate(isChecked()),
+        checkValidity: () => validate(isChecked(), { required }),
       };
     },
-    [validate],
+    [required],
   );
 
   return (
