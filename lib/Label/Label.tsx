@@ -55,7 +55,7 @@ const LabelBase = (props: Props, ref: React.Ref<HTMLLabelElement>) => {
   );
 
   const renderRequiredIndicator = () => {
-    if (requiredIndication) return null;
+    if (!requiredIndication) return null;
 
     return (
       <span
