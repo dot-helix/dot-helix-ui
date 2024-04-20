@@ -91,7 +91,7 @@ button.input.input--checked .thumb-wrapper {
 }
 
 button.input:is(.input--focus-visible, :focus-visible) {
-  outline: 2px solid var(--color-palette-cyan-600);
+  outline: 2px solid var(--palette-cyan-600);
   outline-offset: 1px;
   border-radius: var(--rounded-full);
 }
@@ -174,5 +174,8 @@ button.input.input--checked:active .thumb {
 
   background-color: #fff;
 
-  transition: background-color 240ms ease, left 240ms ease, right 240ms ease;
+  transition:
+    background-color 240ms ease,
+    left 240ms ease,
+    right 240ms ease;
 }

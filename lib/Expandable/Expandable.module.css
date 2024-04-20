@@ -66,7 +66,7 @@
 }
 
 .trigger:is(.trigger--focus-visible, :focus-visible) {
-  outline: 2px solid var(--color-palette-cyan-600);
+  outline: 2px solid var(--palette-cyan-600);
   outline-offset: 1px;
 }
 
