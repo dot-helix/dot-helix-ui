@@ -1,23 +1,56 @@
 import cls from "classnames";
-import { useTheme } from "../configuration";
+import { useTokensClient } from "../systems";
+import type { CommonProps } from "../types";
 import classes from "./LoadingIndicator.module.css";
 
-export interface Props {
-  className?: string;
+export type Props = Pick<CommonProps, "className"> & {
+  /**
+   * The main color used for the component.
+   *
+   * @default `colors.neutral.background.overlay`
+   */
   color?: string;
+  /**
+   * The secondary color used for the component.
+   *
+   * @default `colors.neutral.surface.base`
+   */
   secondaryColor?: string;
+  /**
+   * The size of the component in pixels.
+   *
+   * @default 16
+   */
   size?: number;
-  label?: string;
-}
+  /**
+   * The label of the component.
+   */
+  label:
+    | {
+        /**
+         * The label to use as `aria-label` property.
+         */
+        screenReaderLabel: string;
+      }
+    | {
+        /**
+         * Identifies the element (or elements) that labels the component.
+         *
+         * @see {@link https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-labelledby MDN Web Docs} for more information.
+         */
+        labelledBy: string;
+      };
+};
 
 const LoadingIndicator = (props: Props) => {
-  const theme = useTheme();
+  const { useTokens } = useTokensClient();
+  const { colors } = useTokens();
 
   const {
     label,
     className,
-    color = theme.colors.neutral.background.overlay,
-    secondaryColor = theme.colors.neutral.surface.base,
+    color = colors.neutral.background.overlay,
+    secondaryColor = colors.neutral.surface.base,
     size = 16,
   } = props;
 
@@ -32,11 +65,16 @@ const LoadingIndicator = (props: Props) => {
     <div
       aria-busy={true}
       role="status"
-      aria-label={label}
+      aria-label={
+        "screenReaderLabel" in label ? label.screenReaderLabel : undefined
+      }
+      aria-labelledby={"labelledBy" in label ? label.labelledBy : undefined}
       className={cls(classes.root, className)}
       style={sizing}
     >
       <svg
+        aria-hidden="true"
+        focusable="false"
         className={classes.svg}
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 16 16"
