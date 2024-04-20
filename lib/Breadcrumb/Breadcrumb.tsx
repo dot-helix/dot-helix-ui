@@ -1,6 +1,7 @@
 import { Breadcrumb as StylelessBreadcrumb } from "@styleless-ui/react";
 import cls from "classnames";
 import * as React from "react";
+import type { CommonProps } from "../types";
 import { componentWithForwardedRef } from "../utils";
 import classes from "./Breadcrumb.module.css";
 
@@ -19,38 +20,39 @@ export type Item = {
   onClick?: React.MouseEventHandler<HTMLAnchorElement>;
 };
 
-type OwnProps = Pick<StylelessBreadcrumb.RootProps, "label"> & {
-  /**
-   * The breadcrumb items.
-   */
-  items: Item[];
-  /**
-   * The custom separator of the items.
-   *
-   * @default "/"
-   */
-  separator?: string | JSX.Element;
-  /**
-   * The size of the breadcrumb.
-   *
-   * @default "medium"
-   */
-  size?: "large" | "medium" | "small";
-  /**
-   * This value indicates that the last breadcrumb item represents the current item within a container or set of related elements.
-   *
-   * `page`: Represents the current page within a set of pages such as the link to the current document in a breadcrumb.\
-   * `step`: Represents the current step within a process such as the current step in an enumerated multi step checkout flow.\
-   * `location`: Represents the current location within an environment or context such as the image that is visually highlighted as the current component of a flow chart.\
-   * `date`: Represents the current date within a collection of dates such as the current date within a calendar.\
-   * `time`: Represents the current time within a set of times such as the current time within a timetable.\
-   * `true`: Represents the current item within a set.\
-   * `false`: Does not represent the current item within a set.
-   *
-   * @see {@link https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-current MDN Web Docs} for more information.
-   */
-  currentValue: Exclude<React.AriaAttributes["aria-current"], undefined>;
-};
+type OwnProps = Pick<CommonProps, "className"> &
+  Pick<StylelessBreadcrumb.RootProps, "label"> & {
+    /**
+     * The breadcrumb items.
+     */
+    items: Item[];
+    /**
+     * The custom separator of the items.
+     *
+     * @default "/"
+     */
+    separator?: string | JSX.Element;
+    /**
+     * The size of the breadcrumb.
+     *
+     * @default "medium"
+     */
+    size?: "large" | "medium" | "small";
+    /**
+     * This value indicates that the last breadcrumb item represents the current item within a container or set of related elements.
+     *
+     * `page`: Represents the current page within a set of pages such as the link to the current document in a breadcrumb.\
+     * `step`: Represents the current step within a process such as the current step in an enumerated multi step checkout flow.\
+     * `location`: Represents the current location within an environment or context such as the image that is visually highlighted as the current component of a flow chart.\
+     * `date`: Represents the current date within a collection of dates such as the current date within a calendar.\
+     * `time`: Represents the current time within a set of times such as the current time within a timetable.\
+     * `true`: Represents the current item within a set.\
+     * `false`: Does not represent the current item within a set.
+     *
+     * @see {@link https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-current MDN Web Docs} for more information.
+     */
+    currentValue: Exclude<React.AriaAttributes["aria-current"], undefined>;
+  };
 
 export type Props = Omit<
   React.ComponentPropsWithRef<"nav">,
@@ -117,6 +119,7 @@ const BreadcrumbBase = (props: Props, ref: React.Ref<HTMLElement>) => {
       {...otherProps}
       ref={ref}
       label={label}
+      data-size={size}
       className={cls(className, classes.root, classes[`root--${size}`])}
     >
       <StylelessBreadcrumb.List className={classes.list}>

@@ -7,15 +7,12 @@ import cls from "classnames";
 import * as React from "react";
 import LoadingIndicator from "../LoadingIndicator";
 import { useTokensClient } from "../systems";
+import type { CommonProps } from "../types";
 import { componentWithForwardedRef } from "../utils";
 import classes from "./Button.module.css";
 import * as Slots from "./slots";
 
-type OwnProps = {
-  /**
-   * The className applied to the component.
-   */
-  className?: string;
+type OwnProps = Pick<CommonProps, "className"> & {
   /**
    * If `true`, the component will be disabled.
    *
@@ -67,9 +64,9 @@ type OwnProps = {
   endIcon?: React.ReactNode;
 };
 
-export type Props<E extends React.ElementType = "button"> = PolymorphicProps<
-  E,
-  OwnProps
+export type Props<E extends React.ElementType = "button"> = Omit<
+  PolymorphicProps<E, OwnProps>,
+  "children" | "value" | "defaultValue" | "checked" | "defaultChecked"
 >;
 
 const ButtonBase = <
@@ -103,6 +100,7 @@ const ButtonBase = <
     if (loading) {
       return (
         <LoadingIndicator
+          label={{ screenReaderLabel: "Waiting for the button" }}
           className={classes["loading-indicator"]}
           data-slot={Slots.LoadingIndicator}
         />
@@ -114,6 +112,7 @@ const ButtonBase = <
 
       return (
         <div
+          aria-hidden="true"
           className={cls(classes.icon, classes["icon--start"])}
           data-slot={Slots.StartIcon}
         >
@@ -127,6 +126,7 @@ const ButtonBase = <
 
       return (
         <div
+          aria-hidden="true"
           className={cls(classes.icon, classes["icon--end"])}
           data-slot={Slots.EndIcon}
         >
@@ -157,6 +157,9 @@ const ButtonBase = <
       ref={ref as React.Ref<HTMLButtonElement>}
       aria-label={loading ? text : undefined}
       data-loading={loading ? "" : undefined}
+      data-variant={variant}
+      data-size={size}
+      data-color={color}
       className={({ disabled, focusedVisible }) =>
         cls(
           className,

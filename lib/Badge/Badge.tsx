@@ -82,8 +82,13 @@ const BadgeBase = (props: Props, ref: React.Ref<HTMLSpanElement>) => {
       {...otherProps}
       // @ts-expect-error React hasn't added `inert` yet
       inert={!visible ? "" : undefined}
-      data-slot={Slots.Root}
       ref={ref}
+      aria-hidden={!visible}
+      data-slot={Slots.Root}
+      data-variant={variant}
+      data-color={color}
+      data-hidden={visible ? undefined : ""}
+      data-child-shape={childShape}
       className={cls(
         className,
         classes.root,
