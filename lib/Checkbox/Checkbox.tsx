@@ -18,7 +18,10 @@ import classes from "./Checkbox.module.css";
 import type { Instance } from "./instance";
 import * as Slots from "./slots";
 
-type OwnProps = Pick<CommonProps, "className" | "required" | "label" | "size"> &
+type OwnProps = Pick<
+  CommonProps,
+  "className" | "required" | "label" | "size" | "hasError" | "feedbackMessage"
+> &
   Pick<
     CheckboxProps,
     | "name"
@@ -35,22 +38,11 @@ type OwnProps = Pick<CommonProps, "className" | "required" | "label" | "size"> &
      */
     instanceRef?: React.RefObject<Instance>;
     /**
-     * The feedback message of the component.
-     * Opt-in this prop when you want to provide feedback on user input.
-     */
-    feedbackMessage?: string;
-    /**
      * If `true`, the checkbox will fill the parent's width.
      *
      * @default false
      */
     fluid?: boolean;
-    /**
-     * If `true`, the component will indicate an error state.
-     *
-     * @default false
-     */
-    hasError?: boolean;
   };
 
 export type Props = Omit<
