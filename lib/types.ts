@@ -3,6 +3,7 @@
 
 export type AnyObject = Record<keyof any, unknown>;
 export type AnyFunction = (...args: any) => any;
+export type AnyVoidFunction = (...args: any) => void;
 
 export type EmptyObjectNotation = {};
 
