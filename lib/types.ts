@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/ban-types */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+import type { ValidityReason } from "./ValidityReason";
+
 export type AnyObject = Record<keyof any, unknown>;
 export type AnyFunction = (...args: any) => any;
 export type AnyVoidFunction = (...args: any) => void;
@@ -16,15 +18,6 @@ export type CommonProps = {
    * The content of the component.
    */
   children?: React.ReactNode;
-  /**
-   * If `true`, the component will visually indicate a required state.
-   *
-   * Please note that this is only a visual feedback
-   * and doesn't actually display any error message.
-   *
-   * @default false
-   */
-  required?: boolean;
   /**
    * If `true`, the component will indicate an error state.
    *
@@ -64,3 +57,7 @@ export type CommonProps = {
     | "warning"
     | "info";
 };
+
+export type ValidityState =
+  | { valid: true }
+  | { valid: false; reason: ValidityReason };
