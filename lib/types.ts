@@ -26,9 +26,24 @@ export type CommonProps = {
    */
   required?: boolean;
   /**
-   * The visible label text of the component.
+   * If `true`, the component will indicate an error state.
+   *
+   * @default false
+   */
+  hasError?: boolean;
+  /**
+   * The visible text label of the component.
    */
   label: string;
+  /**
+   * The visible description of the component.
+   */
+  description?: string;
+  /**
+   * The feedback message of the component.
+   * Opt-in this prop when you want to provide feedback on user input.
+   */
+  feedbackMessage?: string;
   /**
    * The size of the component.
    *
