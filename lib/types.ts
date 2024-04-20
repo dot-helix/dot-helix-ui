@@ -16,4 +16,36 @@ export type CommonProps = {
    * The content of the component.
    */
   children?: React.ReactNode;
+  /**
+   * If `true`, the component will visually indicate a required state.
+   *
+   * Please note that this is only a visual feedback
+   * and doesn't actually display any error message.
+   *
+   * @default false
+   */
+  required?: boolean;
+  /**
+   * The visible label text of the component.
+   */
+  label: string;
+  /**
+   * The size of the component.
+   *
+   * @default "medium"
+   */
+  size?: "large" | "medium" | "small";
+  /**
+   * The color of the component.
+   *
+   * @default "neutral"
+   */
+  color?:
+    | "neutral"
+    | "primary"
+    | "secondary"
+    | "success"
+    | "error"
+    | "warning"
+    | "info";
 };
