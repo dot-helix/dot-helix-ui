@@ -1,8 +1,10 @@
 import type { AnyVoidFunction } from "../types";
 
-const forkCallbacks = <F extends AnyVoidFunction>(...callbacks: F[]): F => {
+const forkCallbacks = <F extends AnyVoidFunction>(
+  ...callbacks: (F | undefined)[]
+): F => {
   const forked = (...args: Parameters<F>) => {
-    callbacks.forEach(callback => callback.apply(callback, args));
+    callbacks.forEach(callback => callback?.apply(callback, args));
   };
 
   return forked as F;
