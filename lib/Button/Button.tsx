@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import {
   Button as StylelessButton,
+  type ButtonProps,
   type PolymorphicProps,
 } from "@styleless-ui/react";
 import cls from "classnames";
@@ -12,57 +13,33 @@ import { componentWithForwardedRef } from "../utils";
 import classes from "./Button.module.css";
 import * as Slots from "./slots";
 
-type OwnProps = Pick<CommonProps, "className"> & {
-  /**
-   * If `true`, the component will be disabled.
-   *
-   * @default false
-   */
-  disabled?: boolean;
-  /**
-   * If `true`, the button will have a loading indicator.
-   *
-   * @default false
-   */
-  loading?: boolean;
-  /**
-   * The size of the button.
-   *
-   * @default "medium"
-   */
-  size?: "large" | "medium" | "small";
-  /**
-   * The color of the button.
-   *
-   * @default "neutral"
-   */
-  color?:
-    | "neutral"
-    | "primary"
-    | "secondary"
-    | "success"
-    | "error"
-    | "warning"
-    | "info";
-  /**
-   * The variant of the button.
-   *
-   * @default "filled"
-   */
-  variant?: "filled" | "outlined" | "inlined";
-  /**
-   * The content of the button.
-   */
-  text: string;
-  /**
-   * The start icon element placed before the text.
-   */
-  startIcon?: React.ReactNode;
-  /**
-   * The end icon element placed after the text.
-   */
-  endIcon?: React.ReactNode;
-};
+type OwnProps = Pick<ButtonProps, "disabled"> &
+  Pick<CommonProps, "className" | "size" | "color"> & {
+    /**
+     * If `true`, the button will have a loading indicator.
+     *
+     * @default false
+     */
+    loading?: boolean;
+    /**
+     * The variant of the button.
+     *
+     * @default "filled"
+     */
+    variant?: "filled" | "outlined" | "inlined";
+    /**
+     * The content of the button.
+     */
+    text: string;
+    /**
+     * The start icon element placed before the text.
+     */
+    startIcon?: React.ReactNode;
+    /**
+     * The end icon element placed after the text.
+     */
+    endIcon?: React.ReactNode;
+  };
 
 export type Props<E extends React.ElementType = "button"> = Omit<
   PolymorphicProps<E, OwnProps>,

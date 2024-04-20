@@ -2,12 +2,13 @@
 import type { MergeElementProps } from "@styleless-ui/react";
 import cls from "classnames";
 import * as React from "react";
+import type { CommonProps } from "../types";
 import { componentWithForwardedRef } from "../utils";
 import classes from "./Badge.module.css";
 import * as Slots from "./slots";
 import { getValidChild } from "./utils";
 
-type OwnProps = {
+type OwnProps = Pick<CommonProps, "color"> & {
   /**
    * The className applied to the parent of the relative badge.
    */
@@ -16,19 +17,6 @@ type OwnProps = {
    * The className applied to the badge itself.
    */
   className?: string;
-  /**
-   * The color of the badge.
-   *
-   * @default "neutral"
-   */
-  color?:
-    | "neutral"
-    | "primary"
-    | "secondary"
-    | "success"
-    | "error"
-    | "warning"
-    | "info";
   /**
    * The badge will be added relative to this node.
    * If omitted, the badge renders as a standalone component.
@@ -51,7 +39,7 @@ type OwnProps = {
    * The text content of the badge.
    * If it's omitted or empty, the badge appears as a dot.
    */
-  content?: string;
+  text?: string;
 };
 
 export type Props = Omit<
@@ -64,7 +52,7 @@ const BadgeBase = (props: Props, ref: React.Ref<HTMLSpanElement>) => {
     wrapperClassName,
     className,
     children,
-    content,
+    text,
     visible = true,
     childShape = "rectangular",
     color = "neutral",
@@ -75,7 +63,7 @@ const BadgeBase = (props: Props, ref: React.Ref<HTMLSpanElement>) => {
 
   const isStandalone = child == null;
   const variant: "dot" | "standard" =
-    content == null || content.length === 0 ? "dot" : "standard";
+    text == null || text.length === 0 ? "dot" : "standard";
 
   const createStandaloneBadge = () => (
     <span
@@ -98,7 +86,7 @@ const BadgeBase = (props: Props, ref: React.Ref<HTMLSpanElement>) => {
         { [classes[`root--hidden`]!]: !visible },
       )}
     >
-      {content}
+      {text}
     </span>
   );
 
