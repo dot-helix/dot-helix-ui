@@ -18,7 +18,7 @@ import classes from "./Checkbox.module.css";
 import type { Instance } from "./instance";
 import * as Slots from "./slots";
 
-type OwnProps = Pick<CommonProps, "className"> &
+type OwnProps = Pick<CommonProps, "className" | "required" | "label" | "size"> &
   Pick<
     CheckboxProps,
     | "name"
@@ -30,23 +30,16 @@ type OwnProps = Pick<CommonProps, "className"> &
     | "autoFocus"
     | "readOnly"
   > & {
-    instanceRef?: React.RefObject<Instance>;
     /**
-     * The size of the checkbox.
-     *
-     * @default "medium"
+     * The instance ref of the component.
      */
-    size?: "large" | "medium" | "small";
+    instanceRef?: React.RefObject<Instance>;
     /**
      * If `true`, the checkbox will fill the parent's width.
      *
      * @default false
      */
     fluid?: boolean;
-    /**
-     * The visible label text of the checkbox.
-     */
-    label: string;
   };
 
 export type Props = Omit<
@@ -65,6 +58,7 @@ const CheckboxBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
     checked,
     defaultChecked,
     onCheckedChange,
+    required = false,
     disabled = false,
     readOnly = false,
     fluid = false,
@@ -107,10 +101,10 @@ const CheckboxBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
       {...otherProps}
       id={scopeId}
       ref={ref}
+      data-slot={Slots.Wrapper}
       className={cls(className, classes.root, classes[`root--${size}`], {
         [classes["root--fluid"]!]: fluid,
       })}
-      data-slot={Slots.Wrapper}
     >
       <StylelessCheckbox
         ref={checkboxRef}
@@ -152,7 +146,7 @@ const CheckboxBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
         id={labelId}
         targetId={boxId}
         className={classes.label}
-        data-slot={Slots.Label}
+        requiredIndication={required}
       >
         {label}
       </Label>
