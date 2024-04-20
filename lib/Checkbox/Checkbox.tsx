@@ -35,11 +35,22 @@ type OwnProps = Pick<CommonProps, "className" | "required" | "label" | "size"> &
      */
     instanceRef?: React.RefObject<Instance>;
     /**
+     * The feedback message of the component.
+     * Opt-in this prop when you want to provide feedback on user input.
+     */
+    feedbackMessage?: string;
+    /**
      * If `true`, the checkbox will fill the parent's width.
      *
      * @default false
      */
     fluid?: boolean;
+    /**
+     * If `true`, the component will indicate an error state.
+     *
+     * @default false
+     */
+    hasError?: boolean;
   };
 
 export type Props = Omit<
@@ -57,7 +68,9 @@ const CheckboxBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
     value,
     checked,
     defaultChecked,
+    feedbackMessage,
     onCheckedChange,
+    hasError = false,
     required = false,
     disabled = false,
     readOnly = false,
@@ -81,6 +94,19 @@ const CheckboxBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
     );
   }
 
+  const renderFeedbackMessage = () => {
+    if (!feedbackMessage) return null;
+
+    return (
+      <p
+        data-slot={Slots.FeedbackMessage}
+        className={classes["feedback-message"]}
+      >
+        {feedbackMessage}
+      </p>
+    );
+  };
+
   const getCheckboxNode = React.useCallback(() => checkboxRef.current, []);
 
   const isChecked = React.useCallback(() => {
@@ -101,55 +127,63 @@ const CheckboxBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
       {...otherProps}
       id={scopeId}
       ref={ref}
-      data-slot={Slots.Wrapper}
+      data-slot={Slots.Root}
       className={cls(className, classes.root, classes[`root--${size}`], {
         [classes["root--fluid"]!]: fluid,
+        [classes["root--error"]!]: hasError,
       })}
     >
-      <StylelessCheckbox
-        ref={checkboxRef}
-        id={boxId}
-        label={{ labelledBy: labelId }}
-        disabled={!readOnly && disabled}
-        readOnly={readOnly}
-        onCheckedChange={onCheckedChange}
-        checked={checked}
-        autoFocus={autoFocus}
-        defaultChecked={defaultChecked}
-        value={value}
-        name={name}
-        data-size={size}
-        data-fluid={fluid ? "" : undefined}
-        className={({
-          checked,
-          disabled,
-          indeterminated,
-          focusedVisible,
-          readOnly,
-        }) =>
-          cls(classes.input, {
-            [classes["input--disabled"]!]: disabled,
-            [classes["input--checked"]!]: checked,
-            [classes["input--focus-visible"]!]: focusedVisible,
-            [classes["input--indeterminated"]!]: indeterminated,
-            [classes["input--readonly"]!]: readOnly,
-          })
-        }
+      <div
+        data-slot={Slots.Container}
+        className={classes.container}
       >
-        <div
-          aria-hidden="true"
-          className={cls(classes["check-indicator"])}
-          data-slot={Slots.CheckIndicator}
-        ></div>
-      </StylelessCheckbox>
-      <Label
-        id={labelId}
-        targetId={boxId}
-        className={classes.label}
-        requiredIndication={required}
-      >
-        {label}
-      </Label>
+        <StylelessCheckbox
+          ref={checkboxRef}
+          id={boxId}
+          label={{ labelledBy: labelId }}
+          disabled={!readOnly && disabled}
+          readOnly={readOnly}
+          onCheckedChange={onCheckedChange}
+          checked={checked}
+          autoFocus={autoFocus}
+          defaultChecked={defaultChecked}
+          value={value}
+          name={name}
+          data-size={size}
+          data-fluid={fluid ? "" : undefined}
+          data-error={hasError ? "" : undefined}
+          className={({
+            checked,
+            disabled,
+            indeterminated,
+            focusedVisible,
+            readOnly,
+          }) =>
+            cls(classes.input, {
+              [classes["input--disabled"]!]: disabled,
+              [classes["input--checked"]!]: checked,
+              [classes["input--focus-visible"]!]: focusedVisible,
+              [classes["input--indeterminated"]!]: indeterminated,
+              [classes["input--readonly"]!]: readOnly,
+            })
+          }
+        >
+          <div
+            aria-hidden="true"
+            className={cls(classes["check-indicator"])}
+            data-slot={Slots.CheckIndicator}
+          ></div>
+        </StylelessCheckbox>
+        <Label
+          id={labelId}
+          targetId={boxId}
+          className={classes.label}
+          requiredIndication={required}
+        >
+          {label}
+        </Label>
+      </div>
+      {renderFeedbackMessage()}
     </div>
   );
 };

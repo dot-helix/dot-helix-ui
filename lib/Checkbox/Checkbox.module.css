@@ -1,16 +1,39 @@
 .root {
+  --checkbox-border-color: var(--color-neutral-border-normal);
+
+  --checkbox-border-color-normal: var(--color-neutral-border-normal);
+  --checkbox-border-color-hover: var(--color-primary-origin);
+  --checkbox-border-color-active: var(--color-primary-hover);
+  --checkbox-bg-color: transparent;
+
+  width: fit-content;
+
   display: inline-flex;
-  align-items: center;
+  flex-direction: column;
   vertical-align: middle;
 
-  gap: var(--checkbox-gap);
+  gap: var(--space-xs);
 
   direction: var(--direction);
 }
 
-.root.root--fluid {
+.container {
+  width: 100%;
+
   display: flex;
+  align-items: center;
   justify-content: space-between;
+
+  gap: var(--checkbox-gap);
+}
+
+.root.root--fluid {
+  width: 100%;
+  display: flex;
+}
+
+.root.root--error {
+  --checkbox-border-color: var(--color-error-active);
 }
 
 .root.root--large {
@@ -60,26 +83,19 @@ button.input {
   width: var(--checkbox-input-size);
   height: var(--checkbox-input-size);
 
-  color: var(--color-foregrounds-onprimary);
   background-color: transparent;
-  box-shadow: inset 0 0 0 1px var(--color-neutral-border-normal);
+  box-shadow: inset 0 0 0 1px var(--checkbox-border-color);
 
   transition: box-shadow 160ms ease;
 }
 
-button.input:is(.input--checked, .input--indeterminated) > .check-indicator {
-  background-color: var(--color-primary-origin);
-}
-
 button.input.input--disabled {
+  --checkbox-border-color: var(--color-neutral-border-secondary);
   pointer-events: none;
-  color: var(--color-neutral-disabled);
-  box-shadow: inset 0 0 0 1px var(--color-neutral-border-secondary);
 }
 
 button.input.input--readonly {
-  color: var(--color-neutral-origin);
-  box-shadow: inset 0 0 0 1px var(--color-primary-active);
+  --checkbox-border-color: var(--color-primary-active);
 }
 
 button.input.input--disabled + .label {
@@ -87,37 +103,64 @@ button.input.input--disabled + .label {
   pointer-events: none;
 }
 
-button.input:is(.input--checked, .input--indeterminated).input--disabled
-  > .check-indicator {
-  background-color: var(--color-primary-disabled);
-}
-
-button.input:is(.input--checked, .input--indeterminated).input--readonly
-  > .check-indicator {
-  background-color: var(--color-primary-active);
-}
-
 button.input:is(.input--focus-visible, :focus-visible) {
   outline: 2px solid var(--palette-cyan-600);
   outline-offset: 1px;
 }
 
+button.input:is(.input--checked, .input--indeterminated).input--disabled {
+  --checkbox-bg-color: var(--color-primary-disabled);
+}
+
+button.input:is(.input--checked, .input--indeterminated).input--readonly {
+  --checkbox-bg-color: var(--color-primary-active);
+}
+
+button.input:is(.input--checked, .input--indeterminated) {
+  --checkbox-bg-color: var(--color-primary-origin);
+}
+
+.root.root--error button.input:is(.input--checked, .input--indeterminated) {
+  --checkbox-bg-color: var(--color-error-origin);
+}
+
+.root.root--error
+  button.input:is(.input--checked, .input--indeterminated).input--disabled {
+  --checkbox-bg-color: var(--color-error-disabled);
+}
+
 button.input:hover {
-  box-shadow: inset 0 0 0 1px var(--color-primary-origin);
+  --checkbox-border-color: var(--color-primary-origin);
 }
 
 button.input:active {
-  box-shadow: inset 0 0 0 1px var(--color-primary-hover);
+  --checkbox-border-color: var(--color-primary-hover);
 }
 
-button.input:is(.input--checked, .input--indeterminated):hover
-  > .check-indicator {
-  background-color: var(--color-primary-hover);
+.root.root--error button.input:hover {
+  --checkbox-border-color: var(--color-error-origin);
 }
 
-button.input:is(.input--checked, .input--indeterminated):active
-  > .check-indicator {
-  background-color: var(--color-primary-active);
+.root.root--error button.input:active {
+  --checkbox-border-color: var(--color-error-hover);
+}
+
+button.input:is(.input--checked, .input--indeterminated):hover {
+  --checkbox-bg-color: var(--color-primary-hover);
+}
+
+button.input:is(.input--checked, .input--indeterminated):active {
+  --checkbox-bg-color: var(--color-primary-active);
+}
+
+.root.root--error
+  button.input:is(.input--checked, .input--indeterminated):hover {
+  --checkbox-bg-color: var(--color-error-hover);
+}
+
+.root.root--error
+  button.input:is(.input--checked, .input--indeterminated):active {
+  --checkbox-bg-color: var(--color-error-active);
 }
 
 button.input.input--indeterminated > .check-indicator {
@@ -125,7 +168,7 @@ button.input.input--indeterminated > .check-indicator {
 }
 
 .check-indicator {
-  background-color: transparent;
+  background-color: var(--checkbox-bg-color);
 
   width: var(--checkbox-check-size);
   height: var(--checkbox-check-size);
@@ -139,6 +182,7 @@ button.input.input--indeterminated > .check-indicator {
 
 .label {
   color: currentColor;
+
   font-size: var(--checkbox-label-size);
   line-height: var(--checkbox-label-leading);
   font-weight: 500;
@@ -148,4 +192,20 @@ button.input.input--indeterminated > .check-indicator {
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
+}
+
+.feedback-message {
+  color: var(--color-neutral-text-tertiary);
+
+  font-size: var(--typography-body2-size);
+  line-height: var(--typography-body2-leading);
+  font-weight: 400;
+
+  white-space: pre-line;
+
+  margin: 0;
+}
+
+.root.root--error .feedback-message {
+  color: var(--color-error-hover);
 }
