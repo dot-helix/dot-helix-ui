@@ -87,7 +87,7 @@
 
 .item > a:focus-visible {
   outline: none;
-  box-shadow: 0 2px 0 0 var(--color-palette-cyan-600);
+  box-shadow: 0 2px 0 0 var(--palette-cyan-600);
 }
 
 .separator {
