@@ -1,11 +1,16 @@
-import * as React from "react";
 import {
   CheckGroup as StylelessCheckGroup,
   type CheckGroupProps,
+  type MergeElementProps,
 } from "@styleless-ui/react";
-import Checkbox from "../Checkbox";
-import classes from "./CheckGroup.module.css";
 import cls from "classnames";
+import * as React from "react";
+import Checkbox from "../Checkbox";
+import Label from "../Label";
+import type { CommonProps } from "../types";
+import { componentWithForwardedRef, useDeterministicId } from "../utils";
+import classes from "./CheckGroup.module.css";
+import * as Slots from "./slots";
 
 type CheckItem = {
   /**
@@ -18,6 +23,7 @@ type CheckItem = {
   value: string;
   /**
    * If `true`, the checkbox will be disabled.
+   *
    * @default false
    */
   disabled?: boolean;
@@ -25,76 +31,145 @@ type CheckItem = {
 
 type OwnProps = Pick<
   CheckGroupProps,
-  "value" | "defaultValue" | "onChange" | "label" | "orientation"
-> & {
-  /**
-   * The className applied to the component.
-   */
-  className?: string;
-  /**
-   * The group items.
-   */
-  items: CheckItem[];
-  /**
-   * The size of the items.
-   * @default "medium"
-   */
-  size?: "large" | "medium" | "small";
-};
+  | "value"
+  | "defaultValue"
+  | "onValueChange"
+  | "orientation"
+  | "name"
+  | "readOnly"
+  | "disabled"
+> &
+  Pick<
+    CommonProps,
+    | "className"
+    | "required"
+    | "size"
+    | "label"
+    | "hasError"
+    | "description"
+    | "feedbackMessage"
+  > & {
+    /**
+     * The group items.
+     */
+    items: CheckItem[];
+  };
 
 export type Props = Omit<
-  React.ComponentPropsWithRef<"div">,
-  keyof OwnProps | "defaultChecked" | "children"
-> &
-  OwnProps;
+  MergeElementProps<"div", OwnProps>,
+  "checked" | "defaultChecked" | "onChange" | "onChangeCapture" | "children"
+>;
 
 const CheckGroupBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
   const {
     className,
     items: itemsProp,
+    id: idProp,
+    name,
     label,
-    onChange,
     value,
     defaultValue,
+    description,
+    feedbackMessage,
+    onValueChange,
+    disabled = false,
+    readOnly = false,
+    hasError = false,
+    required = false,
     orientation = "vertical",
     size = "medium",
     ...otherProps
   } = props;
 
-  const items = itemsProp.map(({ label, value, disabled = false }) => (
+  const scopeId = useDeterministicId(idProp, "hui-checkgroup-scope");
+  const groupId = `${scopeId}__group`;
+  const labelId = `${scopeId}__label`;
+  const descriptionId = `${scopeId}__description`;
+
+  const items = itemsProp.map(item => (
     <Checkbox
-      key={label + value}
-      label={label}
-      value={value}
-      disabled={disabled}
+      key={item.label + item.value}
+      label={item.label}
+      value={item.value}
+      hasError={hasError}
+      disabled={item.disabled ?? disabled}
+      readOnly={readOnly}
       size={size}
     />
   ));
 
+  const renderDescription = () => {
+    if (!description) return null;
+
+    return (
+      <p
+        id={descriptionId}
+        data-slot={Slots.Description}
+        className={classes.description}
+      >
+        {description}
+      </p>
+    );
+  };
+
+  const renderFeedbackMessage = () => {
+    if (!feedbackMessage) return null;
+
+    return (
+      <p
+        data-slot={Slots.FeedbackMessage}
+        className={classes["feedback-message"]}
+      >
+        {feedbackMessage}
+      </p>
+    );
+  };
+
   return (
-    <StylelessCheckGroup
+    <div
       {...otherProps}
-      orientation={orientation}
-      label={label}
-      onChange={onChange}
-      value={value}
-      defaultValue={defaultValue}
+      id={scopeId}
       ref={ref}
-      classes={{
-        root: cls(className, classes.root),
-        group: cls(
+      data-slot={Slots.Root}
+      className={cls(className, classes.root, {
+        [classes["root--error"]!]: hasError,
+      })}
+    >
+      <Label
+        id={labelId}
+        targetId={groupId}
+        className={classes.label}
+        data-slot={Slots.Label}
+        requiredIndication={required}
+      >
+        {label}
+      </Label>
+      {renderDescription()}
+      <StylelessCheckGroup
+        id={groupId}
+        name={name}
+        readOnly={readOnly}
+        disabled={disabled}
+        orientation={orientation}
+        label={{ labelledBy: labelId }}
+        onValueChange={onValueChange}
+        value={value}
+        defaultValue={defaultValue}
+        aria-describedby={description ? descriptionId : undefined}
+        data-size={size}
+        className={cls(
           classes.group,
           classes[`group--${orientation}`],
           classes[`group--${size}`],
-        ),
-        label: classes.label,
-      }}
-    >
-      {items}
-    </StylelessCheckGroup>
+        )}
+      >
+        {items}
+      </StylelessCheckGroup>
+      {renderFeedbackMessage()}
+    </div>
   );
 };
 
-const CheckGroup = React.forwardRef(CheckGroupBase) as typeof CheckGroupBase;
+const CheckGroup = componentWithForwardedRef(CheckGroupBase, "CheckGroup");
 
 export default CheckGroup;
