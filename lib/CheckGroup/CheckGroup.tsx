@@ -8,9 +8,15 @@ import * as React from "react";
 import Checkbox from "../Checkbox";
 import Label from "../Label";
 import type { CommonProps } from "../types";
-import { componentWithForwardedRef, useDeterministicId } from "../utils";
+import {
+  componentWithForwardedRef,
+  useDeterministicId,
+  useValidityChangeEmitter,
+} from "../utils";
 import classes from "./CheckGroup.module.css";
 import * as Slots from "./slots";
+import type { CheckGroupInstace, CheckGroupValidityState } from "./types";
+import { validate } from "./utils";
 
 type CheckItem = {
   /**
@@ -42,7 +48,6 @@ type OwnProps = Pick<
   Pick<
     CommonProps,
     | "className"
-    | "required"
     | "size"
     | "label"
     | "hasError"
@@ -50,9 +55,24 @@ type OwnProps = Pick<
     | "feedbackMessage"
   > & {
     /**
+     * The instance ref of the component.
+     */
+    instanceRef?: React.RefObject<CheckGroupInstace>;
+    /**
      * The group items.
      */
     items: CheckItem[];
+    /**
+     * If `true`, the `value` state of the component must not be empty in order to be valid.
+     * The component takes it into account when calculating validity state.
+     *
+     * @default false
+     */
+    required?: boolean;
+    /**
+     * The callback is fired when the validity state changes.
+     */
+    onValidityStateChange?: (validityState: CheckGroupValidityState) => void;
   };
 
 export type Props = Omit<
@@ -62,9 +82,10 @@ export type Props = Omit<
 
 const CheckGroupBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
   const {
-    className,
     items: itemsProp,
     id: idProp,
+    className,
+    instanceRef,
     name,
     label,
     value,
@@ -72,6 +93,7 @@ const CheckGroupBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
     description,
     feedbackMessage,
     onValueChange,
+    onValidityStateChange,
     disabled = false,
     readOnly = false,
     hasError = false,
@@ -97,6 +119,13 @@ const CheckGroupBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
       size={size}
     />
   ));
+
+  const validityChangeEmitter = useValidityChangeEmitter({
+    conditions: { required },
+    onStateChange: onValueChange,
+    onValidityChange: onValidityStateChange,
+    validator: validate,
+  });
 
   const renderDescription = () => {
     if (!description) return null;
@@ -125,6 +154,39 @@ const CheckGroupBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
     );
   };
 
+  React.useImperativeHandle(
+    instanceRef,
+    () => {
+      const getValue = () => {
+        const node = document.getElementById(groupId);
+
+        if (!node) return [];
+
+        const checkboxes = Array.from(
+          node.querySelectorAll<HTMLElement>("[role='checkbox']"),
+        );
+
+        return checkboxes.reduce((result, checkbox) => {
+          if (!checkbox.hasAttribute("data-checked")) return result;
+
+          const value = checkbox.getAttribute("data-value");
+
+          if (!value) return result;
+
+          result.push(value);
+
+          return result;
+        }, [] as string[]);
+      };
+
+      return {
+        getValue,
+        checkValidity: () => validate(getValue(), { required }),
+      } satisfies CheckGroupInstace;
+    },
+    [required, groupId],
+  );
+
   return (
     <div
       {...otherProps}
@@ -152,7 +214,7 @@ const CheckGroupBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
         disabled={disabled}
         orientation={orientation}
         label={{ labelledBy: labelId }}
-        onValueChange={onValueChange}
+        onValueChange={validityChangeEmitter}
         value={value}
         defaultValue={defaultValue}
         aria-describedby={description ? descriptionId : undefined}

@@ -94,8 +94,6 @@ const CheckboxBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
   const boxId = `${scopeId}__box`;
   const labelId = `${scopeId}__label`;
 
-  const checkboxRef = React.useRef<HTMLButtonElement>(null);
-
   if (disabled && readOnly) {
     Logger.devOnly.log(
       "You can't have both `disabled` and `readOnly` props set to `true`.",
@@ -127,10 +125,8 @@ const CheckboxBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
   React.useImperativeHandle(
     instanceRef,
     () => {
-      const getCheckboxNode = () => checkboxRef.current;
-
       const isChecked = () => {
-        const node = getCheckboxNode();
+        const node = document.getElementById(boxId);
 
         if (!node) return false;
 
@@ -142,7 +138,7 @@ const CheckboxBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
         checkValidity: () => validate(isChecked(), { required }),
       } satisfies CheckboxInstance;
     },
-    [required],
+    [required, boxId],
   );
 
   return (
@@ -161,7 +157,6 @@ const CheckboxBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
         className={classes.container}
       >
         <StylelessCheckbox
-          ref={checkboxRef}
           id={boxId}
           label={{ labelledBy: labelId }}
           disabled={!readOnly && disabled}
@@ -175,6 +170,7 @@ const CheckboxBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
           data-size={size}
           data-fluid={fluid ? "" : undefined}
           data-error={hasError ? "" : undefined}
+          data-value={value}
           className={({
             checked,
             disabled,
