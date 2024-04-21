@@ -5,7 +5,6 @@ export type CheckboxValidityState =
   | { valid: false; reason: ValidityReason.VALUE_MISSING };
 
 export type CheckboxInstance = {
-  getCheckboxNode: () => HTMLButtonElement | null;
   isChecked: () => boolean;
   checkValidity: () => CheckboxValidityState;
 };
