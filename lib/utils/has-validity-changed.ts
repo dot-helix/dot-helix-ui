@@ -10,7 +10,7 @@ const hasValidityChanged = (
     return prevValidity.reason !== currentValidity.reason;
   }
 
-  return true;
+  return false;
 };
 
 export default hasValidityChanged;
