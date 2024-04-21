@@ -75,6 +75,7 @@ const IconButtonBase = <
     if (loading) {
       return (
         <LoadingIndicator
+          label={{ screenReaderLabel: "Waiting for the button" }}
           className={classes["loading-indicator"]}
           data-slot={Slots.LoadingIndicator}
         />
@@ -83,6 +84,7 @@ const IconButtonBase = <
 
     return (
       <div
+        aria-hidden="true"
         className={classes.icon}
         data-slot={Slots.Icon}
       >
@@ -102,6 +104,9 @@ const IconButtonBase = <
         "screenReaderLabel" in label ? label.screenReaderLabel : undefined
       }
       data-loading={loading ? "" : undefined}
+      data-variant={variant}
+      data-size={size}
+      data-color={color}
       className={({ disabled, focusedVisible }) =>
         cls(
           className,
