@@ -64,7 +64,7 @@
   font-size: var(--breadcrumb-font-size);
   line-height: var(--breadcrumb-font-leading);
 
-  transition: color 240ms ease;
+  transition: color 160ms ease;
 }
 
 .item:last-child {

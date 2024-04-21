@@ -41,9 +41,9 @@
   color: var(--badge-color);
 
   transition:
-    transform 240ms ease,
-    visibility 240ms ease,
-    opacity 240ms ease;
+    transform 160ms ease,
+    visibility 160ms ease,
+    opacity 160ms ease;
 }
 
 .root.root--hidden {
