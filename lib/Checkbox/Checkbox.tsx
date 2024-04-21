@@ -11,8 +11,8 @@ import { Logger } from "../internals";
 import type { CommonProps } from "../types";
 import {
   componentWithForwardedRef,
-  hasValidityChanged,
   useDeterministicId,
+  useValidityChangeEmitter,
 } from "../utils";
 import classes from "./Checkbox.module.css";
 import * as Slots from "./slots";
@@ -96,8 +96,6 @@ const CheckboxBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
 
   const checkboxRef = React.useRef<HTMLButtonElement>(null);
 
-  const validityStateRef = React.useRef<CheckboxValidityState | null>(null);
-
   if (disabled && readOnly) {
     Logger.devOnly.log(
       "You can't have both `disabled` and `readOnly` props set to `true`.",
@@ -119,22 +117,12 @@ const CheckboxBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
     );
   };
 
-  const emitValidityChange = (validity: CheckboxValidityState) => {
-    onValidityStateChange?.(validity);
-
-    validityStateRef.current = validity;
-  };
-
-  const handleCheckedChange: Props["onCheckedChange"] = checkedState => {
-    onCheckedChange?.(checkedState);
-
-    const prevValidity = validityStateRef.current;
-    const validity = validate(checkedState, { required });
-
-    if (prevValidity && !hasValidityChanged(prevValidity, validity)) return;
-
-    emitValidityChange(validity);
-  };
+  const validityChangeEmitter = useValidityChangeEmitter({
+    conditions: { required },
+    onStateChange: onCheckedChange,
+    onValidityChange: onValidityStateChange,
+    validator: validate,
+  });
 
   React.useImperativeHandle(
     instanceRef,
@@ -151,9 +139,8 @@ const CheckboxBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
 
       return {
         isChecked,
-        getCheckboxNode,
         checkValidity: () => validate(isChecked(), { required }),
-      };
+      } satisfies CheckboxInstance;
     },
     [required],
   );
@@ -179,7 +166,7 @@ const CheckboxBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
           label={{ labelledBy: labelId }}
           disabled={!readOnly && disabled}
           readOnly={readOnly}
-          onCheckedChange={handleCheckedChange}
+          onCheckedChange={validityChangeEmitter}
           checked={checked}
           autoFocus={autoFocus}
           defaultChecked={defaultChecked}
