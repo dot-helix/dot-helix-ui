@@ -1,3 +1,4 @@
+import type { MergeElementProps } from "@styleless-ui/react";
 import cls from "classnames";
 import * as React from "react";
 import IconButton from "../IconButton";
@@ -30,10 +31,9 @@ type OwnProps = Pick<CommonProps, "className"> & {
 };
 
 export type Props = Omit<
-  React.ComponentPropsWithRef<"pre">,
-  keyof OwnProps | "children" | "defaultValue" | "defaultChecked"
-> &
-  OwnProps;
+  MergeElementProps<"pre", OwnProps>,
+  "children" | "value" | "defaultValue" | "checked" | "defaultChecked"
+>;
 
 const CodeSnippetBase = (props: Props, ref: React.Ref<HTMLPreElement>) => {
   const {
