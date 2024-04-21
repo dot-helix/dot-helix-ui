@@ -77,7 +77,13 @@ type OwnProps = Pick<
 
 export type Props = Omit<
   MergeElementProps<"div", OwnProps>,
-  "checked" | "defaultChecked" | "onChange" | "onChangeCapture" | "children"
+  | "checked"
+  | "defaultChecked"
+  | "onChange"
+  | "onChangeCapture"
+  | "children"
+  | "onInvalid"
+  | "onInvalidCapture"
 >;
 
 const CheckGroupBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
