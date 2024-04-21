@@ -1,16 +1,11 @@
+import type { MergeElementProps } from "@styleless-ui/react";
+import { componentWithForwardedRef } from "@styleless-ui/react/utils";
 import * as React from "react";
 import Icon, { type IconProps } from "../../Icon";
 
-type OwnProps = Pick<
-  IconProps,
-  "className" | "color" | "title" | "color" | "size"
->;
+type OwnProps = Pick<IconProps, "className" | "color" | "title" | "size">;
 
-export type Props = Omit<
-  React.ComponentPropsWithRef<"svg">,
-  keyof OwnProps | "children"
-> &
-  OwnProps;
+export type Props = Omit<MergeElementProps<"svg", OwnProps>, "children">;
 
 const CloseIconBase = (props: Props, ref: React.Ref<SVGSVGElement>) => (
   <Icon
@@ -20,6 +15,6 @@ const CloseIconBase = (props: Props, ref: React.Ref<SVGSVGElement>) => (
   />
 );
 
-const CloseIcon = React.forwardRef(CloseIconBase) as typeof CloseIconBase;
+const CloseIcon = componentWithForwardedRef(CloseIconBase, "CloseIcon");
 
 export default CloseIcon;
