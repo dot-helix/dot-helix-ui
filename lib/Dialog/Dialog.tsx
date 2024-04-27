@@ -15,6 +15,7 @@ import {
   useDeterministicId,
 } from "../utils";
 import classes from "./Dialog.module.css";
+import * as Slots from "./slots";
 
 type Action = Pick<
   ButtonProps<"button">,
@@ -113,7 +114,10 @@ const DialogBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
     >
       <StylelessDialog.Backdrop className={classes.backdrop} />
       <StylelessDialog.Content className={classes.content}>
-        <div className={classes.heading}>
+        <div
+          className={classes.heading}
+          data-slot={Slots.Heading}
+        >
           <StylelessDialog.Title
             className={classes.title}
             as="h2"
@@ -121,7 +125,6 @@ const DialogBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
             {title}
           </StylelessDialog.Title>
           <IconButton
-            className={classes.xbtn}
             variant="inlined"
             as="button"
             label={{ labelledBy: cancelBtnId }}
@@ -129,10 +132,15 @@ const DialogBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
             onClick={onClose}
           />
         </div>
-        <div className={classes.body}>{renderBodyContent()}</div>
+        <div
+          className={classes.body}
+          data-slot={Slots.Body}
+        >
+          {renderBodyContent()}
+        </div>
         <div
           className={classes.actions}
-          data-slot="Dialog:Actions"
+          data-slot={Slots.Actions}
         >
           <Button
             {...okAction}
