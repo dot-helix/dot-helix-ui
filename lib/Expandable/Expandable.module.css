@@ -1,5 +1,15 @@
 .root {
+  --expandable-text-color: var(--color-neutral-text-normal);
+  --expandable-icon-color: var(--color-neutral-text-quaternary);
+
   direction: var(--direction);
+}
+
+.root.root--disabled {
+  --expandable-text-color: var(--color-neutral-text-disabled);
+  --expandable-icon-color: var(--color-neutral-text-disabled);
+
+  pointer-events: none;
 }
 
 .root.root--expanded > .content-wrapper {
@@ -7,27 +17,27 @@
 }
 
 .root.root--large {
-  --trigger-gap: var(--space-md);
-  --trigger-height: 2.5rem;
-  --icon-size: 1.5rem;
-  --title-size: var(--typography-h6-size);
-  --title-leading: var(--typography-h6-leading);
+  --expandable-trigger-gap: var(--space-md);
+  --expandable-trigger-height: 2.5rem;
+  --expandable-icon-size: 1.5rem;
+  --expandable-title-size: var(--typography-h6-size);
+  --expandable-title-leading: var(--typography-h6-leading);
 }
 
 .root.root--medium {
-  --trigger-gap: var(--space-xs);
-  --trigger-height: 2rem;
-  --icon-size: 1.25rem;
-  --title-size: var(--typography-body1-size);
-  --title-leading: var(--typography-body1-leading);
+  --expandable-trigger-gap: var(--space-xs);
+  --expandable-trigger-height: 2rem;
+  --expandable-icon-size: 1.25rem;
+  --expandable-title-size: var(--typography-body1-size);
+  --expandable-title-leading: var(--typography-body1-leading);
 }
 
 .root.root--small {
-  --trigger-gap: var(--space-xs);
-  --trigger-height: 1.5rem;
-  --icon-size: 1rem;
-  --title-size: var(--typography-body2-size);
-  --title-leading: var(--typography-body2-leading);
+  --expandable-trigger-gap: var(--space-xs);
+  --expandable-trigger-height: 1.5rem;
+  --expandable-icon-size: 1rem;
+  --expandable-title-size: var(--typography-body2-size);
+  --expandable-title-leading: var(--typography-body2-leading);
 }
 
 .root.root--expanded.root--rtl > .trigger .icon {
@@ -60,9 +70,9 @@
   background-color: transparent;
   border: none;
 
-  height: var(--trigger-height);
+  height: var(--expandable-trigger-height);
 
-  gap: var(--trigger-gap);
+  gap: var(--expandable-trigger-gap);
 }
 
 .trigger:is(.trigger--focus-visible, :focus-visible) {
@@ -76,10 +86,10 @@
   backface-visibility: hidden;
   transform: translate3d(0, 0, 0);
 
-  color: var(--color-neutral-text-normal);
-  font-size: var(--title-size);
+  color: var(--expandable-text-color);
+  font-size: var(--expandable-title-size);
   font-weight: 400;
-  line-height: var(--title-leading);
+  line-height: var(--expandable-title-leading);
 
   flex-shrink: 0;
 
@@ -87,7 +97,7 @@
   text-overflow: ellipsis;
   overflow: hidden;
 
-  transition: color 240ms ease;
+  transition: color 160ms ease;
 }
 
 .icon-wrapper {
@@ -96,12 +106,12 @@
   backface-visibility: hidden;
   transform: translate3d(0, 0, 0);
 
-  color: var(--color-neutral-text-quaternary);
-  width: var(--icon-size);
-  height: var(--icon-size);
-  max-width: var(--icon-size);
-  max-height: var(--icon-size);
-  font-size: var(--icon-size);
+  color: var(--expandable-icon-color);
+  width: var(--expandable-icon-size);
+  height: var(--expandable-icon-size);
+  max-width: var(--expandable-icon-size);
+  max-height: var(--expandable-icon-size);
+  font-size: var(--expandable-icon-size);
   line-height: 100%;
 
   display: flex;
@@ -111,14 +121,14 @@
 }
 
 .icon {
-  transition: transform 240ms ease;
+  transition: transform 160ms ease;
 }
 
 .content-wrapper {
   display: grid;
   grid-template-rows: 0fr;
 
-  transition: grid-template-rows 240ms ease;
+  transition: grid-template-rows 160ms ease;
 }
 
 .content-container {
@@ -128,4 +138,9 @@
 .content {
   padding-top: var(--space-md);
   padding-bottom: var(--space-md);
+
+  color: var(--expandable-text-color);
+  font-size: var(--typography-body1-size);
+  line-height: var(--typography-body1-leading);
+  font-weight: 400;
 }

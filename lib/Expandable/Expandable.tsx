@@ -1,128 +1,105 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { Expandable as StylelessExpandable } from "@styleless-ui/react";
-import cls from "classnames";
+import {
+  Expandable as StylelessExpandable,
+  type MergeElementProps,
+} from "@styleless-ui/react";
 import * as React from "react";
-import { useTheme } from "../configuration";
 import { ChevronLeftIcon, ChevronRightIcon } from "../internals";
+import { useTokensClient } from "../systems";
+import type { CommonProps } from "../types";
+import { combineClasses as cls, componentWithForwardedRef } from "../utils";
 import classes from "./Expandable.module.css";
+import * as Slots from "./slots";
 
 type OwnProps = Pick<
   StylelessExpandable.RootProps,
   "expanded" | "defaultExpanded" | "onExpandChange"
-> & {
-  /**
-   * The className applied to the component.
-   */
-  className?: string;
-  /**
-   * The title of the component.
-   */
-  title: string;
-  /**
-   * The className applied to the title component.
-   */
-  titleClassName?: string;
-  /**
-   * The icon that indicates `expanded` state of the component.
-   */
-  icon?: ((ctx: { expanded: boolean }) => React.ReactNode) | null;
-  /**
-   * The position of the icon.
-   * @default "start";
-   */
-  iconPosition?: "start" | "end";
-  /**
-   * The className applied to the icon component.
-   */
-  iconClassName?: string;
-  /**
-   * The content of the component.
-   */
-  content: React.ReactNode;
-  /**
-   * The className applied to the content component.
-   */
-  contentClassName?: string;
-  /**
-   * The size of the component.
-   * @default "medium"
-   */
-  size?: "large" | "medium" | "small";
-};
+> &
+  Pick<CommonProps, "className" | "size"> & {
+    /**
+     * The title of the component.
+     */
+    title: string;
+    /**
+     * If `true`, the component will be disabled.
+     *
+     * @default false
+     */
+    disabled?: boolean;
+    /**
+     * The icon that indicates `expanded` state of the component.
+     */
+    icon?: ((renderProps: { expanded: boolean }) => React.ReactNode) | null;
+    /**
+     * The position of the icon.
+     *
+     * @default "start";
+     */
+    iconPosition?: "start" | "end";
+    /**
+     * The content of the component.
+     */
+    content: React.ReactNode;
+  };
 
 export type Props = Omit<
-  React.ComponentPropsWithRef<"div">,
-  keyof OwnProps | "defaultChecked" | "defaultValue"
-> &
-  OwnProps;
+  MergeElementProps<"div", OwnProps>,
+  "checked" | "defaultChecked" | "value" | "defaultValue"
+>;
 
 const ExpandableBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
   const {
     className,
     expanded,
     defaultExpanded,
-    titleClassName,
-    iconClassName,
-    contentClassName,
     content,
     title,
     icon,
+    disabled = false,
     size = "medium",
     iconPosition = "start",
     ...otherProps
   } = props;
 
-  const direction = useTheme().direction;
+  const { useDirection } = useTokensClient();
 
-  const renderChildren = (expanded: boolean): React.ReactNode => {
-    const iconComponent =
-      icon === undefined ? (
-        direction === "ltr" ? (
-          <ChevronRightIcon className={classes.icon} />
-        ) : (
-          <ChevronLeftIcon className={classes.icon} />
-        )
-      ) : (
-        icon?.({ expanded })
-      );
+  const direction = useDirection();
 
-    const titleComponent = (
-      <StylelessExpandable.Trigger
-        as="button"
-        className={({ focusedVisible }) =>
-          cls(titleClassName, classes.trigger, {
-            [classes["trigger--focus-visible"]!]: focusedVisible,
-          })
-        }
-      >
-        {iconComponent && iconPosition === "start" && (
-          <div className={cls(iconClassName, classes["icon-wrapper"])}>
-            {iconComponent}
-          </div>
-        )}
-        <span className={classes.title}>{title}</span>
-        {iconComponent && iconPosition === "end" && (
-          <div className={cls(iconClassName, classes["icon-wrapper"])}>
-            {iconComponent}
-          </div>
-        )}
-      </StylelessExpandable.Trigger>
-    );
+  const renderTriggerContent = (expanded: boolean) => {
+    let iconComponent: React.ReactNode = null;
 
-    const contentComponent = (
-      <StylelessExpandable.Content
-        className={cls(contentClassName, classes["content-wrapper"])}
-      >
-        <div className={classes["content-container"]}>
-          <div className={classes.content}>{content}</div>
-        </div>
-      </StylelessExpandable.Content>
-    );
+    if (typeof icon === "function") {
+      iconComponent = icon({ expanded });
+    } else if (direction === "ltr") {
+      iconComponent = <ChevronRightIcon className={classes.icon} />;
+    } else {
+      iconComponent = <ChevronLeftIcon className={classes.icon} />;
+    }
 
     return (
       <>
-        {titleComponent}
-        {contentComponent}
+        {iconPosition === "start" && (
+          <div
+            className={classes["icon-wrapper"]}
+            data-slot={Slots.TriggerIcon}
+          >
+            {iconComponent}
+          </div>
+        )}
+        <span
+          className={classes.title}
+          data-slot={Slots.TriggerTitle}
+        >
+          {title}
+        </span>
+        {iconPosition === "end" && (
+          <div
+            className={classes["icon-wrapper"]}
+            data-slot={Slots.TriggerIcon}
+          >
+            {iconComponent}
+          </div>
+        )}
       </>
     );
   };
@@ -139,17 +116,44 @@ const ExpandableBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
           classes[`root--${size}`],
           {
             [classes["root--expanded"]!]: expanded,
+            [classes["root--disabled"]!]: disabled,
           },
         )
       }
       expanded={expanded}
       defaultExpanded={defaultExpanded}
     >
-      {({ expanded }) => renderChildren(expanded)}
+      {({ expanded }) => (
+        <>
+          <StylelessExpandable.Trigger
+            disabled={disabled}
+            className={({ focusedVisible }) =>
+              cls(classes.trigger, {
+                [classes["trigger--focus-visible"]!]: focusedVisible,
+              })
+            }
+          >
+            {renderTriggerContent(expanded)}
+          </StylelessExpandable.Trigger>
+          <StylelessExpandable.Content className={classes["content-wrapper"]}>
+            <div
+              className={classes["content-container"]}
+              data-slot={Slots.ContentContainer}
+            >
+              <div
+                className={classes.content}
+                data-slot={Slots.ContentContent}
+              >
+                {content}
+              </div>
+            </div>
+          </StylelessExpandable.Content>
+        </>
+      )}
     </StylelessExpandable.Root>
   );
 };
 
-const Expandable = React.forwardRef(ExpandableBase) as typeof ExpandableBase;
+const Expandable = componentWithForwardedRef(ExpandableBase, "Expandable");
 
 export default Expandable;
