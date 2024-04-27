@@ -1,6 +1,6 @@
-import cls from "classnames";
 import { useTokensClient } from "../systems";
 import type { CommonProps } from "../types";
+import { combineClasses as cls } from "../utils";
 import classes from "./LoadingIndicator.module.css";
 
 export type Props = Pick<CommonProps, "className"> & {

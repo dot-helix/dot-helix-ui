@@ -1,9 +1,8 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import type { MergeElementProps } from "@styleless-ui/react";
-import cls from "classnames";
 import * as React from "react";
 import type { CommonProps } from "../types";
-import { componentWithForwardedRef } from "../utils";
+import { combineClasses as cls, componentWithForwardedRef } from "../utils";
 import classes from "./Badge.module.css";
 import * as Slots from "./slots";
 import { getValidChild } from "./utils";

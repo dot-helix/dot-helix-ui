@@ -3,12 +3,12 @@ import {
   type CheckGroupProps,
   type MergeElementProps,
 } from "@styleless-ui/react";
-import cls from "classnames";
 import * as React from "react";
 import Checkbox from "../Checkbox";
 import Label from "../Label";
 import type { CommonProps } from "../types";
 import {
+  combineClasses as cls,
   componentWithForwardedRef,
   useDeterministicId,
   useValidityChangeEmitter,

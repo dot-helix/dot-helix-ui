@@ -4,13 +4,16 @@ import {
   type MergeElementProps,
 } from "@styleless-ui/react";
 import { setRef, useEventCallback } from "@styleless-ui/react/utils";
-import cls from "classnames";
 import * as React from "react";
 import Button, { type ButtonProps } from "../Button";
 import IconButton from "../IconButton";
 import { CloseIcon } from "../internals";
 import type { CommonProps } from "../types";
-import { componentWithForwardedRef, useDeterministicId } from "../utils";
+import {
+  combineClasses as cls,
+  componentWithForwardedRef,
+  useDeterministicId,
+} from "../utils";
 import classes from "./Dialog.module.css";
 
 type Action = Pick<

@@ -3,6 +3,7 @@ export {
   isFragment,
   useDeterministicId,
 } from "@styleless-ui/react/utils";
+export { default as combineClasses } from "classnames";
 export * from "./color";
 export { default as forkCallbacks } from "./fork-callbacks";
 export { default as hasValidityChanged } from "./has-validity-changed";

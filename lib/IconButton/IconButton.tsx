@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { Button as StylelessButton } from "@styleless-ui/react";
-import cls from "classnames";
 import * as React from "react";
 import type { ButtonProps } from "../Button";
 import classes from "../Button/Button.module.css";
@@ -8,7 +7,7 @@ import * as Slots from "../Button/slots";
 import LoadingIndicator from "../LoadingIndicator";
 import { useTokensClient } from "../systems";
 import type { PolymorphicWithOmittedProps } from "../types";
-import { componentWithForwardedRef } from "../utils";
+import { combineClasses as cls, componentWithForwardedRef } from "../utils";
 
 type OwnProps = Pick<
   ButtonProps,

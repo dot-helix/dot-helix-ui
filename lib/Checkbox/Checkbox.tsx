@@ -4,12 +4,12 @@ import {
   type CheckboxProps,
   type MergeElementProps,
 } from "@styleless-ui/react";
-import cls from "classnames";
 import * as React from "react";
 import Label from "../Label";
 import { Logger } from "../internals";
 import type { CommonProps } from "../types";
 import {
+  combineClasses as cls,
   componentWithForwardedRef,
   useDeterministicId,
   useValidityChangeEmitter,

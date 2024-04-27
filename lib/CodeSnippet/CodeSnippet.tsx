@@ -1,10 +1,13 @@
 import type { MergeElementProps } from "@styleless-ui/react";
-import cls from "classnames";
 import * as React from "react";
 import IconButton from "../IconButton";
 import { CopyIcon } from "../internals";
 import type { CommonProps } from "../types";
-import { componentWithForwardedRef, useCopyToClipboard } from "../utils";
+import {
+  combineClasses as cls,
+  componentWithForwardedRef,
+  useCopyToClipboard,
+} from "../utils";
 import classes from "./CodeSnippet.module.css";
 import * as Slots from "./slots";
 
