@@ -11,6 +11,11 @@ import { combineClasses as cls, componentWithForwardedRef } from "../utils";
 import classes from "./Expandable.module.css";
 import * as Slots from "./slots";
 
+export type IconRenderProps = Pick<
+  StylelessExpandable.RootRenderProps,
+  "expanded"
+>;
+
 type OwnProps = Pick<
   StylelessExpandable.RootProps,
   "expanded" | "defaultExpanded" | "onExpandChange"
@@ -29,7 +34,7 @@ type OwnProps = Pick<
     /**
      * The icon that indicates `expanded` state of the component.
      */
-    icon?: ((renderProps: { expanded: boolean }) => React.ReactNode) | null;
+    icon?: ((renderProps: IconRenderProps) => React.ReactNode) | null;
     /**
      * The position of the icon.
      *
