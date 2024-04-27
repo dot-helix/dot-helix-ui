@@ -2,13 +2,12 @@
 import {
   Button as StylelessButton,
   type ButtonProps,
-  type PolymorphicProps,
 } from "@styleless-ui/react";
 import cls from "classnames";
 import * as React from "react";
 import LoadingIndicator from "../LoadingIndicator";
 import { useTokensClient } from "../systems";
-import type { CommonProps } from "../types";
+import type { CommonProps, PolymorphicWithOmittedProps } from "../types";
 import { componentWithForwardedRef } from "../utils";
 import classes from "./Button.module.css";
 import * as Slots from "./slots";
@@ -41,10 +40,8 @@ type OwnProps = Pick<ButtonProps, "disabled"> &
     endIcon?: React.ReactNode;
   };
 
-export type Props<E extends React.ElementType = "button"> = Omit<
-  PolymorphicProps<E, OwnProps>,
-  "children" | "value" | "defaultValue" | "checked" | "defaultChecked"
->;
+export type Props<E extends React.ElementType = "button"> =
+  PolymorphicWithOmittedProps<E, OwnProps, "children">;
 
 const ButtonBase = <
   E extends React.ElementType = "button",

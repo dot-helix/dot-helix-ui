@@ -1,13 +1,29 @@
 /* eslint-disable @typescript-eslint/ban-types */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import type { ValidityReason } from "./ValidityReason";
+import type { Overwrite } from "@styleless-ui/react/types";
+import type ValidityReason from "./ValidityReason";
 
 export type AnyObject = Record<keyof any, unknown>;
 export type AnyFunction = (...args: any) => any;
 export type AnyVoidFunction = (...args: any) => void;
 
 export type EmptyObjectNotation = {};
+
+export type PolymorphicWithOmittedProps<
+  E extends React.ElementType = "button",
+  P = EmptyObjectNotation,
+  O extends keyof any = never,
+> = Overwrite<
+  Omit<React.ComponentPropsWithRef<E>, O>,
+  P & {
+    /**
+     * The component used for the root node.
+     * Either a string to use a HTML element or a component.
+     */
+    as?: E;
+  }
+>;
 
 export type CommonProps = {
   /**
