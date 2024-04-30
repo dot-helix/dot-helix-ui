@@ -78,6 +78,7 @@ const cssVariableGenerator: CSSVariableGenerator = ctx => {
 
       return defaultCSSVariableGenerator({
         ...ctx,
+        tokenValue: value,
         tokenFamilyKey: "space",
       });
     }
