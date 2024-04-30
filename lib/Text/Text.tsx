@@ -1,18 +1,14 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
-import type { PolymorphicProps } from "@styleless-ui/react/typings";
+import type {
+  PolymorphicComponent,
+  PolymorphicProps,
+} from "@styleless-ui/react";
 import cls from "classnames";
 import * as React from "react";
+import type { CommonProps } from "../types";
+import { componentWithForwardedRef } from "../utils";
 import classes from "./Text.module.css";
 
-interface OwnProps {
-  /**
-   * The className applied to the component.
-   */
-  className?: string;
-  /**
-   * The content of the component.
-   */
-  children?: React.ReactNode;
+type OwnProps = Pick<CommonProps, "className" | "children"> & {
   /**
    * Applies the theme typography styles.
    */
@@ -30,6 +26,7 @@ interface OwnProps {
     | "caption";
   /**
    * The color of the text.
+   *
    * @default "current"
    */
   color?:
@@ -57,9 +54,10 @@ interface OwnProps {
   /**
    * Set the display on the text.
    */
-  display?: "inline" | "block" | "inline-block" | "flex" | "inline-flex";
+  display?: "inline" | "block" | "inline-block";
   /**
    * Set the text-overflow on the text.
+   *
    * @default "ellipsis"
    */
   textOverflow?: "clip" | "ellipsis";
@@ -69,15 +67,22 @@ interface OwnProps {
    *
    * Note that text overflow can only happen
    * when the element has a width in order to overflow.
-   * ('block', 'inline-block', 'flex', 'inline-flex')
+   * ('block', 'inline-block')
+   *
    * @default false
    */
   noWrap?: boolean;
-}
+};
 
-export type Props<E extends React.ElementType> = PolymorphicProps<E, OwnProps>;
+export type Props<E extends React.ElementType = "span"> = PolymorphicProps<
+  E,
+  OwnProps
+>;
 
-const TextBase = <E extends React.ElementType, R extends HTMLElement>(
+const TextBase = <
+  E extends React.ElementType = "span",
+  R extends HTMLElement = HTMLSpanElement,
+>(
   props: Props<E>,
   ref: React.Ref<R>,
 ) => {
@@ -93,12 +98,19 @@ const TextBase = <E extends React.ElementType, R extends HTMLElement>(
     textOverflow = "ellipsis",
     noWrap = false,
     ...otherProps
-  } = props;
+  } = props as Props<"span">;
 
   return (
     <RootNode
       {...otherProps}
       ref={ref}
+      data-color={color}
+      data-variant={variant}
+      data-text-overflow={textOverflow}
+      data-nowrap={noWrap ? "" : undefined}
+      data-align={align}
+      data-weight={weight}
+      data-display={display}
       className={cls(
         className,
         classes.root,
@@ -118,6 +130,9 @@ const TextBase = <E extends React.ElementType, R extends HTMLElement>(
   );
 };
 
-const Text = React.forwardRef(TextBase) as typeof TextBase;
+const Text: PolymorphicComponent<"span", OwnProps> = componentWithForwardedRef(
+  TextBase,
+  "Text",
+);
 
 export default Text;

@@ -1,5 +1,7 @@
 .root {
   direction: var(--direction);
+
+  overflow: hidden;
 }
 
 a:where(.root) {
@@ -217,12 +219,4 @@ h6:where(.root) {
 
 .root.root--display-inline-block {
   display: inline-block;
-}
-
-.root.root--display-flex {
-  display: flex;
-}
-
-.root.root--display-inline-flex {
-  display: inline-flex;
 }
