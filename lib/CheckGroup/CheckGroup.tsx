@@ -6,6 +6,7 @@ import {
 import * as React from "react";
 import Checkbox from "../Checkbox";
 import Label from "../Label";
+import { Logger } from "../internals";
 import type { CommonProps } from "../types";
 import {
   combineClasses as cls,
@@ -113,6 +114,14 @@ const CheckGroupBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
   const groupId = `${scopeId}__group`;
   const labelId = `${scopeId}__label`;
   const descriptionId = `${scopeId}__description`;
+
+  if (disabled && readOnly) {
+    Logger.devOnly.log(
+      "You can't have both `disabled` and `readOnly` props set to `true`.",
+      "error",
+      "CheckGroup",
+    );
+  }
 
   const items = itemsProp.map(item => (
     <Checkbox

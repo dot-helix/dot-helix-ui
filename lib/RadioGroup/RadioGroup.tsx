@@ -6,6 +6,7 @@ import {
 import * as React from "react";
 import Label from "../Label";
 import Radio from "../Radio";
+import { Logger } from "../internals";
 import type { CommonProps } from "../types";
 import {
   combineClasses as cls,
@@ -113,6 +114,14 @@ const RadioGroupBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
   const groupId = `${scopeId}__group`;
   const labelId = `${scopeId}__label`;
   const descriptionId = `${scopeId}__description`;
+
+  if (disabled && readOnly) {
+    Logger.devOnly.log(
+      "You can't have both `disabled` and `readOnly` props set to `true`.",
+      "error",
+      "RadioGroup",
+    );
+  }
 
   const items = itemsProp.map(item => (
     <Radio
