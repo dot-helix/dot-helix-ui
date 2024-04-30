@@ -1,3 +1,4 @@
+export { default as CheckIcon } from "./CheckIcon";
 export * from "./ChevronLeftIcon";
 export { default as ChevronLeftIcon } from "./ChevronLeftIcon";
 export * from "./ChevronRightIcon";
@@ -6,5 +7,6 @@ export * from "./CloseIcon";
 export { default as CloseIcon } from "./CloseIcon";
 export * from "./CopyIcon";
 export { default as CopyIcon } from "./CopyIcon";
+export { default as DotIcon } from "./DotIcon";
 export { default as SystemError } from "./SystemError";
 export { default as Logger } from "./logger";
