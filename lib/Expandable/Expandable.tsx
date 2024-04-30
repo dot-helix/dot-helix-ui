@@ -49,7 +49,7 @@ type OwnProps = Pick<
 
 export type Props = Omit<
   MergeElementProps<"div", OwnProps>,
-  "checked" | "defaultChecked" | "value" | "defaultValue"
+  "checked" | "defaultChecked" | "value" | "defaultValue" | "children"
 >;
 
 const ExpandableBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
@@ -85,6 +85,7 @@ const ExpandableBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
       <>
         {iconPosition === "start" && (
           <div
+            aria-hidden="true"
             className={classes["icon-wrapper"]}
             data-slot={Slots.TriggerIcon}
           >
@@ -99,6 +100,7 @@ const ExpandableBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
         </span>
         {iconPosition === "end" && (
           <div
+            aria-hidden="true"
             className={classes["icon-wrapper"]}
             data-slot={Slots.TriggerIcon}
           >
