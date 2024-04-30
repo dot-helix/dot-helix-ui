@@ -17,16 +17,6 @@
   direction: var(--direction);
 }
 
-.container {
-  width: fit-content;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  gap: var(--checkbox-gap);
-}
-
 .root.root--fluid {
   width: 100%;
 
@@ -68,6 +58,16 @@
   --checkbox-label-leading: var(--typography-caption-leading);
 }
 
+.container {
+  width: fit-content;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: var(--checkbox-gap);
+}
+
 button.input {
   --checkbox-bg-color: transparent;
 
@@ -101,6 +101,12 @@ button.input {
 
 button.input.input--disabled {
   --checkbox-border-color: var(--color-neutral-border-secondary);
+
+  pointer-events: none;
+}
+
+button.input.input--disabled + .label {
+  color: var(--color-neutral-disabled);
   pointer-events: none;
 }
 
@@ -115,11 +121,6 @@ button.input.input--readonly {
 
 .root.root--error button.input.input--readonly {
   --checkbox-border-color: var(--color-error-active);
-}
-
-button.input.input--disabled + .label {
-  color: var(--color-neutral-disabled);
-  pointer-events: none;
 }
 
 button.input:is(.input--focus-visible, :focus-visible) {
