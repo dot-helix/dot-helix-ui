@@ -1,0 +1,81 @@
+.root {
+  width: 20rem;
+
+  display: inline-flex;
+  flex-direction: column;
+  vertical-align: middle;
+
+  direction: var(--direction);
+}
+
+.root.root--fluid {
+  width: 100%;
+
+  display: flex;
+}
+
+.root.root--info {
+  --meter-fill-bg-color: var(--color-info-active);
+}
+
+.root.root--warning {
+  --meter-fill-bg-color: var(--color-warning-active);
+}
+
+.root.root--success {
+  --meter-fill-bg-color: var(--color-success-active);
+}
+
+.root.root--error {
+  --meter-fill-bg-color: var(--color-error-active);
+}
+
+.heading {
+  display: flex;
+  justify-content: space-between;
+
+  margin-bottom: var(--space-md);
+
+  gap: var(--space-xs);
+}
+
+.title {
+  color: var(--color-neutral-text-normal);
+
+  font-size: var(--typography-body2-size);
+  line-height: var(--typography-body2-leading);
+  font-weight: 500;
+}
+
+.value {
+  flex-shrink: 0;
+
+  color: var(--color-neutral-text-secondary);
+
+  font-size: var(--typography-body2-size);
+  line-height: var(--typography-body2-leading);
+  font-weight: 400;
+}
+
+.track {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+
+  padding: 0.125rem;
+
+  border-radius: var(--rounded-full);
+
+  background-color: var(--color-neutral-border-normal);
+}
+
+.fill {
+  height: 0.25rem;
+
+  border-radius: var(--rounded-full);
+
+  background-color: var(--meter-fill-bg-color);
+
+  transition: width 160ms ease;
+}
