@@ -3,11 +3,10 @@ import {
   type MergeElementProps,
 } from "@styleless-ui/react";
 import { setRef, useEventCallback } from "@styleless-ui/react/utils";
-import cls from "classnames";
 import * as React from "react";
 import Button, { type ButtonProps } from "../Button";
 import type { CommonProps } from "../types";
-import { componentWithForwardedRef } from "../utils";
+import { combineClasses as cls, componentWithForwardedRef } from "../utils";
 import classes from "./Toast.module.css";
 import * as Slots from "./slots";
 

@@ -4,12 +4,15 @@ import {
   type MergeElementProps,
   type SwitchProps,
 } from "@styleless-ui/react";
-import cls from "classnames";
 import * as React from "react";
 import Label from "../Label";
 import { Logger } from "../internals";
 import type { CommonProps } from "../types";
-import { useDeterministicId, useValidityChangeEmitter } from "../utils";
+import {
+  combineClasses as cls,
+  useDeterministicId,
+  useValidityChangeEmitter,
+} from "../utils";
 import classes from "./Switch.module.css";
 import * as Slots from "./slots";
 import type { SwitchInstance, SwitchValidityState } from "./types";

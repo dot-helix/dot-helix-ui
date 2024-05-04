@@ -2,10 +2,9 @@ import type {
   PolymorphicComponent,
   PolymorphicProps,
 } from "@styleless-ui/react";
-import cls from "classnames";
 import * as React from "react";
 import type { CommonProps } from "../types";
-import { componentWithForwardedRef } from "../utils";
+import { combineClasses as cls, componentWithForwardedRef } from "../utils";
 import classes from "./Text.module.css";
 
 type OwnProps = Pick<CommonProps, "className" | "children"> & {
