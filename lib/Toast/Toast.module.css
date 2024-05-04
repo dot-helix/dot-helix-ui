@@ -63,6 +63,7 @@
 }
 
 .text {
+  color: var(--color-neutral-text-normal);
   font-size: var(--typography-body2-size);
   line-height: var(--typography-body2-leading);
   font-weight: 400;
