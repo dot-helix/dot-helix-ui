@@ -1,39 +1,26 @@
 "use client";
 
 import * as React from "react";
-import { Switch } from "../lib";
-import { getVariablesAsInlineStyle, Initializer } from "../lib/configuration";
 import classes from "./layout.module.css";
 
+import { HelixClient } from "../lib/systems";
 import "./global.css";
 
-const ssrCssVariables = getVariablesAsInlineStyle();
-
 const RootLayout = (props: { children: React.ReactNode }) => {
-  const [scheme, setScheme] = React.useState<"light" | "dark">("light");
-
-  const primitives = React.useMemo<
-    Parameters<typeof getVariablesAsInlineStyle>[0]
-  >(() => ({ colorScheme: scheme }), [scheme]);
-
   return (
-    <html lang="en" style={ssrCssVariables}>
+    <html lang="en">
       <body>
-        <Initializer primitives={primitives}>
+        <HelixClient
+          colorScheme="dark"
+          direction="ltr"
+        >
           <div className={classes.root}>
             <div className={classes.toolbar}>
               <h1 className={classes.title}>Dev Sandbox</h1>
-              <Switch
-                fluid
-                label="Dark Scheme"
-                onChange={() =>
-                  void setScheme(s => (s === "light" ? "dark" : "light"))
-                }
-              />
             </div>
             {props.children}
           </div>
-        </Initializer>
+        </HelixClient>
       </body>
     </html>
   );
