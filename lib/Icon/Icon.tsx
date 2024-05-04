@@ -1,18 +1,17 @@
-import cls from "classnames";
+import type { MergeElementProps } from "@styleless-ui/react";
 import * as React from "react";
+import type { CommonProps } from "../types";
+import { combineClasses as cls, componentWithForwardedRef } from "../utils";
 import classes from "./Icon.module.css";
 
-interface OwnProps {
-  /**
-   * The className applied to the component.
-   */
-  className?: string;
+type OwnProps = Pick<CommonProps, "className"> & {
   /**
    * The `d` attribute of the path element.
    */
   pathData: string;
   /**
    * The viewBox of the SVG.
+   *
    * @default "0 0 24 24"
    */
   viewBox?: string;
@@ -24,11 +23,13 @@ interface OwnProps {
   /**
    * The size of the icon.
    * If set to `"auto"`, the icon will get the parent's width and height.
+   *
    * @default "auto"
    */
   size?: number | "auto";
   /**
    * The color of the icon.
+   *
    * @default "inherit"
    */
   color?:
@@ -45,13 +46,9 @@ interface OwnProps {
     | "error"
     | "warning"
     | "info";
-}
+};
 
-export type Props = Omit<
-  React.ComponentPropsWithRef<"svg">,
-  keyof OwnProps | "children"
-> &
-  OwnProps;
+export type Props = Omit<MergeElementProps<"svg", OwnProps>, "children">;
 
 const IconBase = (props: Props, ref: React.Ref<SVGSVGElement>) => {
   const {
@@ -96,6 +93,6 @@ const IconBase = (props: Props, ref: React.Ref<SVGSVGElement>) => {
   );
 };
 
-const Icon = React.forwardRef(IconBase) as typeof IconBase;
+const Icon = componentWithForwardedRef(IconBase, "Icon");
 
 export default Icon;

@@ -1,0 +1,13 @@
+.root {
+  color: var(--color-neutral-text-normal);
+
+  font-size: var(--typography-body1-size);
+  line-height: var(--typography-body1-leading);
+  font-weight: 500;
+}
+
+.required-indicator {
+  padding-left: var(--space-xs);
+
+  color: var(--palette-pink-600);
+}

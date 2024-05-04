@@ -1,19 +1,35 @@
 .root {
   direction: var(--direction);
 
-  background-color: var(--color-neutral-origin);
-  backdrop-filter: saturate(180%) blur(2px);
-  color: var(--color-neutral-text-inverted);
+  background-color: var(--color-neutral-background-spotlight);
+  box-shadow: var(--shadow-md);
 
   padding: var(--space-sm);
 
   border-radius: var(--rounded-sm);
 
+  color: #fff;
   font-size: var(--typography-body2-size);
   line-height: var(--typography-body2-leading);
   font-weight: 500;
 
   z-index: var(--z-5);
+
+  visibility: hidden;
+  opacity: 0;
+
+  -moz-backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+
+  transition:
+    visibility 160ms ease,
+    opacity 160ms ease;
+}
+
+.root.root--visible {
+  visibility: visible;
+  opacity: 1;
 }
 
 .root::after {
@@ -23,35 +39,46 @@
 
   z-index: -1;
 
-  width: 0.5rem;
-  height: 0.5rem;
-
-  background-color: var(--color-neutral-origin);
-}
-
-.root.root--open {
+  width: 0;
+  height: 0;
 }
 
 .root.root--top::after {
   bottom: 0;
   left: 50%;
-  transform: translate(-50%, 50%) rotate(45deg);
+  transform: translate(-50%, 100%);
+
+  border-left: 0.5rem solid transparent;
+  border-right: 0.5rem solid transparent;
+  border-top: 0.5rem solid var(--color-neutral-background-spotlight);
 }
 
 .root.root--left::after {
   top: 50%;
   right: 0;
-  transform: translate(50%, -50%) rotate(45deg);
+  transform: translate(100%, -50%);
+
+  border-left: 0.5rem solid var(--color-neutral-background-spotlight);
+  border-top: 0.5rem solid transparent;
+  border-bottom: 0.5rem solid transparent;
 }
 
 .root.root--right::after {
   top: 50%;
   left: 0;
-  transform: translate(-50%, -50%) rotate(45deg);
+  transform: translate(-100%, -50%);
+
+  border-right: 0.5rem solid var(--color-neutral-background-spotlight);
+  border-top: 0.5rem solid transparent;
+  border-bottom: 0.5rem solid transparent;
 }
 
 .root.root--bottom::after {
   top: 0;
   left: 50%;
-  transform: translate(-50%, -50%) rotate(45deg);
+  transform: translate(-50%, -100%);
+
+  border-left: 0.5rem solid transparent;
+  border-right: 0.5rem solid transparent;
+  border-bottom: 0.5rem solid var(--color-neutral-background-spotlight);
 }

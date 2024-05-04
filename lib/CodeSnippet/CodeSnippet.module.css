@@ -12,6 +12,7 @@ pre.root {
   background-color: var(--color-secondary-surface-tertiary);
 
   display: inline-block;
+  position: relative;
 
   border-radius: var(--rounded-sm);
   padding: 0 var(--space-sm);
@@ -19,7 +20,9 @@ pre.root {
 
 code.root.root--block,
 pre.root.root--block {
-  display: block;
+  display: flex;
+  justify-content: space-between;
+
   overflow: auto;
 
   direction: ltr;
@@ -31,4 +34,25 @@ pre.root.root--block {
 
   color: currentColor;
   background-color: var(--color-secondary-surface-tertiary);
+
+  gap: var(--space-xlg);
+}
+
+.root:hover > .copy-btn {
+  opacity: 1;
+  visibility: visible;
+}
+
+.copy-btn {
+  position: sticky;
+  right: 0;
+
+  flex-shrink: 0;
+
+  opacity: 0;
+  visibility: hidden;
+
+  transition:
+    opacity 160ms ease,
+    visibility 160ms ease;
 }

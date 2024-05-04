@@ -1,1 +1,5 @@
-export { default, type Props as ExpandProps } from "./Expandable";
+export {
+  default,
+  type IconRenderProps as ExpandableIconRenderProps,
+  type Props as ExpandableProps,
+} from "./Expandable";

@@ -9,7 +9,7 @@
     "noImplicitAny": true,
     "noUnusedParameters": true,
     "incremental": true,
-    "target": "ESNext",
+    "target": "ES5",
     "useDefineForClassFields": true,
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "allowJs": false,
@@ -19,7 +19,7 @@
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "module": "ESNext",
-    "moduleResolution": "node",
+    "moduleResolution": "Node",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noUncheckedIndexedAccess": true,
@@ -27,6 +27,6 @@
     "jsx": "preserve",
     "plugins": [{ "name": "next" }]
   },
-  "include": ["lib", "scripts", "app", "next-env.d.ts", ".next/types/**/*.ts"],
+  "include": ["**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules", "dist"]
 }

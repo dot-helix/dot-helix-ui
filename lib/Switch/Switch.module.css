@@ -1,65 +1,75 @@
 .root {
+  --switch-border-color: var(--color-neutral-border-normal);
+
+  --switch-border-color-normal: var(--color-neutral-border-normal);
+  --switch-border-color-hover: var(--color-primary-origin);
+  --switch-border-color-active: var(--color-primary-hover);
+  --switch-thumb-bg-color: var(--color-neutral-text-normal);
+  --switch-bg-color: transparent;
+
+  width: fit-content;
+
   display: inline-flex;
-  align-items: center;
+  flex-direction: column;
   vertical-align: middle;
 
-  gap: var(--switch-gap);
+  gap: var(--space-xs);
 
   direction: var(--direction);
 }
 
 .root.root--fluid {
+  width: 100%;
+
   display: flex;
-  justify-content: space-between;
+}
+
+.root.root--fluid > .container {
+  width: 100%;
+}
+
+.root.root--error {
+  --switch-border-color: var(--color-error-origin);
 }
 
 .root.root--large {
   --switch-gap: var(--space-md);
   --switch-input-width: 2.5rem;
-  --switch-input-height: 1.5rem;
-  --switch-thumb-size: 1.25rem;
+  --switch-input-height: 1.25rem;
+  --switch-thumb-move: 1.25rem;
+  --switch-thumb-size: 0.875rem;
   --switch-label-size: var(--typography-body1-size);
   --switch-label-leading: var(--typography-body1-leading);
 }
 
 .root.root--medium {
   --switch-gap: var(--space-xs);
-  --switch-input-width: 1.75rem;
-  --switch-input-height: 1.125rem;
-  --switch-thumb-size: 0.875rem;
+  --switch-input-width: 2rem;
+  --switch-input-height: 1rem;
+  --switch-thumb-move: 1rem;
+  --switch-thumb-size: 0.625rem;
   --switch-label-size: var(--typography-body2-size);
   --switch-label-leading: var(--typography-body2-leading);
 }
 
 .root.root--small {
   --switch-gap: var(--space-xs);
-  --switch-input-width: 1.25rem;
+  --switch-input-width: 1.75rem;
   --switch-input-height: 0.875rem;
-  --switch-thumb-size: 0.625rem;
+  --switch-thumb-move: 0.875rem;
+  --switch-thumb-size: 0.5rem;
   --switch-label-size: var(--typography-caption-size);
   --switch-label-leading: var(--typography-caption-leading);
 }
 
-.root.root--disabled .label {
-  pointer-events: none;
-  color: var(--color-neutral-disabled);
-}
+.container {
+  width: fit-content;
 
-.root.root--disabled .track {
-  background-color: var(--color-neutral-disabled);
-}
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 
-.root.root--disabled .thumb {
-  background-color: var(--color-neutral-background-base);
-}
-
-.root.root--disabled button.input {
-  pointer-events: none;
-  color: var(--color-neutral-disabled);
-}
-
-.root.root--disabled button.input.input--checked .track {
-  background-color: var(--color-primary-disabled);
+  gap: var(--switch-gap);
 }
 
 button.input {
@@ -70,58 +80,143 @@ button.input {
   appearance: none;
   vertical-align: middle;
   cursor: pointer;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  backface-visibility: hidden;
 
   display: inline-flex;
   align-items: center;
   flex-shrink: 0;
   position: relative;
 
-  background-color: transparent;
+  border-radius: var(--rounded-full);
+
+  padding: 0 calc((var(--switch-input-height) - var(--switch-thumb-size)) / 2);
 
   width: var(--switch-input-width);
   height: var(--switch-input-height);
+
+  background-color: var(--switch-bg-color);
+  box-shadow: inset 0 0 0 1px var(--switch-border-color);
+
+  transition:
+    box-shadow 160ms ease,
+    background-color 160ms ease;
 }
 
-button.input.input--checked .track {
-  background-color: var(--color-primary-origin);
+button.input.input--disabled {
+  --switch-border-color: var(--color-neutral-border-secondary);
+
+  pointer-events: none;
 }
 
-button.input.input--checked .thumb-wrapper {
-  transform: translateX(calc(100% - 0.125rem));
+button.input.input--disabled .thumb {
+  --switch-thumb-bg-color: var(--color-neutral-text-disabled);
+}
+
+.label.label--disabled {
+  color: var(--color-neutral-disabled);
+  pointer-events: none;
+}
+
+button.input.input--readonly {
+  --switch-border-color: var(--color-primary-active);
+  --switch-bg-color: var(--color-primary-disabled);
+}
+
+.root.root--error button.input.input--disabled {
+  --switch-border-color: var(--color-error-disabled);
+}
+
+.root.root--error button.input.input--readonly {
+  --switch-border-color: var(--color-error-active);
 }
 
 button.input:is(.input--focus-visible, :focus-visible) {
-  outline: 2px solid var(--color-palette-cyan-600);
+  outline: 2px solid var(--palette-cyan-600);
   outline-offset: 1px;
+}
+
+button.input.input--checked.input--disabled {
+  --switch-bg-color: var(--color-primary-disabled);
+}
+
+button.input.input--checked.input--readonly {
+  --switch-bg-color: var(--color-primary-active);
+}
+
+button.input.input--checked {
+  --switch-bg-color: var(--color-primary-origin);
+
+  box-shadow: none;
+}
+
+button.input.input--checked .thumb {
+  transform: translateX(var(--switch-thumb-move));
+}
+
+.root.root--error button.input.input--checked {
+  --switch-bg-color: var(--color-error-origin);
+}
+
+.root.root--error button.input.input--checked.input--readonly {
+  --switch-bg-color: var(--color-error-active);
+}
+
+.root.root--error button.input.input--checked.input--disabled {
+  --switch-bg-color: var(--color-error-disabled);
+}
+
+button.input:hover {
+  --switch-border-color: var(--color-primary-origin);
+}
+
+button.input:not(.input--readonly):active {
+  --switch-border-color: var(--color-primary-hover);
+}
+
+.root.root--error button.input:hover {
+  --switch-border-color: var(--color-error-hover);
+}
+
+.root.root--error button.input:not(.input--readonly):active {
+  --switch-border-color: var(--color-error-active);
+}
+
+button.input.input--checked:hover {
+  --switch-bg-color: var(--color-primary-hover);
+}
+
+button.input.input--checked:not(.input--readonly):active {
+  --switch-bg-color: var(--color-primary-active);
+}
+
+.root.root--error button.input.input--checked:hover {
+  --switch-bg-color: var(--color-error-hover);
+}
+
+.root.root--error button.input.input--checked:not(.input--readonly):active {
+  --switch-bg-color: var(--color-error-active);
+}
+
+.thumb {
+  background-color: var(--switch-thumb-bg-color);
+
+  width: var(--switch-thumb-size);
+  height: var(--switch-thumb-size);
+
   border-radius: var(--rounded-full);
-}
 
-button.input:not(.input--checked):hover .track {
-  background-color: var(--color-neutral-origin);
-}
+  transform: translateX(0);
 
-button.input:not(.input--checked):active .track {
-  background-color: var(--color-neutral-origin);
-}
-
-button.input:not(.input--checked):active .thumb {
-  right: -25%;
-}
-
-button.input.input--checked:hover .track {
-  background-color: var(--color-primary-hover);
-}
-
-button.input.input--checked:active .track {
-  background-color: var(--color-primary-active);
-}
-
-button.input.input--checked:active .thumb {
-  left: -25%;
+  transition:
+    background-color 160ms ease,
+    transform 160ms ease;
 }
 
 .label {
   color: currentColor;
+
   font-size: var(--switch-label-size);
   line-height: var(--switch-label-leading);
   font-weight: 500;
@@ -133,46 +228,18 @@ button.input.input--checked:active .thumb {
   overflow: hidden;
 }
 
-.track-wrapper {
-  position: absolute;
-  inset: 0;
+.feedback-message {
+  color: var(--color-neutral-text-tertiary);
+
+  font-size: var(--typography-caption-size);
+  line-height: var(--typography-caption-leading);
+  font-weight: 400;
+
+  white-space: pre-line;
+
+  margin: 0;
 }
 
-.thumb-wrapper {
-  position: absolute;
-
-  width: var(--switch-thumb-size);
-  height: var(--switch-thumb-size);
-
-  transform: translateX(0.125rem);
-
-  display: flex;
-  align-items: center;
-
-  transition: transform 240ms ease;
-}
-
-.track {
-  border-radius: var(--rounded-full);
-
-  width: 100%;
-  height: 100%;
-
-  background-color: var(--color-neutral-surface-base);
-
-  transition: background-color 240ms ease;
-}
-
-.thumb {
-  position: absolute;
-  left: 0;
-  right: 0;
-
-  border-radius: var(--rounded-full);
-
-  height: 100%;
-
-  background-color: #fff;
-
-  transition: background-color 240ms ease, left 240ms ease, right 240ms ease;
+.root.root--error .feedback-message {
+  color: var(--color-error-hover);
 }

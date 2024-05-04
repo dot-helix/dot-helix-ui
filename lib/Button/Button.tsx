@@ -1,93 +1,138 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { Button as StylelessButton } from "@styleless-ui/react";
-import type { PolymorphicProps } from "@styleless-ui/react/typings";
-import cls from "classnames";
+import {
+  Button as StylelessButton,
+  type ButtonProps,
+} from "@styleless-ui/react";
 import * as React from "react";
-import { useTheme } from "../configuration";
 import LoadingIndicator from "../LoadingIndicator";
+import { useTokensClient } from "../systems";
+import type { CommonProps, PolymorphicWithOmittedProps } from "../types";
+import { combineClasses as cls, componentWithForwardedRef } from "../utils";
 import classes from "./Button.module.css";
+import * as Slots from "./slots";
 
-interface OwnProps {
-  /**
-   * The className applied to the component.
-   */
-  className?: string;
-  /**
-   * If `true`, the component will be disabled.
-   * @default false
-   */
-  disabled?: boolean;
-  /**
-   * If `true`, the button will have a loading indicator.
-   * @default false
-   */
-  loading?: boolean;
-  /**
-   * The size of the button.
-   * @default "medium"
-   */
-  size?: "large" | "medium" | "small";
-  /**
-   * The color of the button.
-   * @default "neutral"
-   */
-  color?:
-    | "neutral"
-    | "primary"
-    | "secondary"
-    | "success"
-    | "error"
-    | "warning"
-    | "info";
-  /**
-   * The variant of the button.
-   * @default "filled"
-   */
-  variant?: "filled" | "outlined" | "inlined";
-  /**
-   * The content of the button.
-   */
-  text: string;
-  /**
-   * The leading icon element placed before the text.
-   */
-  leadingIcon?: React.ReactNode;
-  /**
-   * The trailing icon element placed after the text.
-   */
-  trailingIcon?: React.ReactNode;
-}
+type OwnProps = Pick<ButtonProps, "disabled"> &
+  Pick<CommonProps, "className" | "size" | "color"> & {
+    /**
+     * If `true`, the button will have a loading indicator.
+     *
+     * @default false
+     */
+    loading?: boolean;
+    /**
+     * The variant of the button.
+     *
+     * @default "filled"
+     */
+    variant?: "filled" | "outlined" | "inlined";
+    /**
+     * The content of the button.
+     */
+    text: string;
+    /**
+     * The start icon element placed before the text.
+     */
+    startIcon?: React.ReactNode;
+    /**
+     * The end icon element placed after the text.
+     */
+    endIcon?: React.ReactNode;
+  };
 
-export type Props<E extends React.ElementType> = PolymorphicProps<E, OwnProps>;
+export type Props<E extends React.ElementType = "button"> =
+  PolymorphicWithOmittedProps<E, OwnProps, "children">;
 
-const ButtonBase = <E extends React.ElementType, R extends HTMLElement>(
+const ButtonBase = <
+  E extends React.ElementType = "button",
+  R extends HTMLElement = HTMLButtonElement,
+>(
   props: Props<E>,
   ref: React.Ref<R>,
 ) => {
+  const polymorphicProps = props as Props<"button">;
+
   const {
-    as,
-    text,
     className,
-    leadingIcon,
-    trailingIcon,
+    text,
+    startIcon,
+    endIcon,
+    as = "button",
     size = "medium",
     variant = "filled",
     color = "neutral",
     loading = false,
     disabled = false,
     ...otherProps
-  } = props as Props<"button">;
+  } = polymorphicProps;
 
-  const direcrion = useTheme().direction;
+  const { useDirection } = useTokensClient();
+
+  const direcrion = useDirection();
+
+  const renderContent = () => {
+    if (loading) {
+      return (
+        <LoadingIndicator
+          label={{ screenReaderLabel: "Waiting for the button" }}
+          className={classes["loading-indicator"]}
+          data-slot={Slots.LoadingIndicator}
+        />
+      );
+    }
+
+    const renderStartIcon = () => {
+      if (!startIcon) return null;
+
+      return (
+        <div
+          aria-hidden="true"
+          className={cls(classes.icon, classes["icon--start"])}
+          data-slot={Slots.StartIcon}
+        >
+          {startIcon}
+        </div>
+      );
+    };
+
+    const renderEndIcon = () => {
+      if (!endIcon) return null;
+
+      return (
+        <div
+          aria-hidden="true"
+          className={cls(classes.icon, classes["icon--end"])}
+          data-slot={Slots.EndIcon}
+        >
+          {endIcon}
+        </div>
+      );
+    };
+
+    return (
+      <>
+        {renderStartIcon()}
+        <span
+          className={classes.text}
+          data-slot={Slots.Text}
+        >
+          {text}
+        </span>
+        {renderEndIcon()}
+      </>
+    );
+  };
 
   return (
     <StylelessButton
       {...otherProps}
       as={as}
       disabled={disabled || loading}
-      aria-label={loading ? text : undefined}
       ref={ref as React.Ref<HTMLButtonElement>}
+      aria-label={loading ? text : undefined}
       data-loading={loading ? "" : undefined}
+      data-variant={variant}
+      data-size={size}
+      data-color={color}
       className={({ disabled, focusedVisible }) =>
         cls(
           className,
@@ -104,38 +149,18 @@ const ButtonBase = <E extends React.ElementType, R extends HTMLElement>(
         )
       }
     >
-      {loading ? (
-        <LoadingIndicator
-          className={classes["loading-indicator"]}
-          data-slot="Button:LoadingIndicator"
-        />
-      ) : (
-        <>
-          {leadingIcon && (
-            <div
-              className={cls(classes.icon, classes["icon--leading"])}
-              data-slot="Button:LeadingIcon"
-            >
-              {leadingIcon}
-            </div>
-          )}
-          <span className={classes.text} data-slot="Button:Text">
-            {text}
-          </span>
-          {trailingIcon && (
-            <div
-              className={cls(classes.icon, classes["icon--trailing"])}
-              data-slot="Button:TrailingIcon"
-            >
-              {trailingIcon}
-            </div>
-          )}
-        </>
-      )}
+      {renderContent()}
     </StylelessButton>
   );
 };
 
-const Button = React.forwardRef(ButtonBase) as typeof ButtonBase;
+type PolymorphicButton = <E extends React.ElementType = "button">(
+  props: Props<E>,
+) => React.ReactNode;
+
+const Button: PolymorphicButton = componentWithForwardedRef(
+  ButtonBase,
+  "Button",
+);
 
 export default Button;

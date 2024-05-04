@@ -23,7 +23,9 @@
   background-color: var(--btn-bg-color);
   border: 1px solid var(--btn-border-color);
 
-  transition: background-color 240ms ease, border-color 240ms ease;
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease;
 }
 
 .root.root--large {
@@ -34,14 +36,10 @@
   --btn-icon-size: 1.25rem;
   --btn-text-size: var(--typography-body1-size);
   --btn-text-leading: var(--typography-body1-leading);
-  --btn-leading-icon-gap-before: calc(
-    var(--space-lg) - var(--btn-padding-right)
-  );
-  --btn-leading-icon-gap-after: var(--space-md);
-  --btn-trailing-icon-gap-before: var(--space-lg);
-  --btn-trailing-icon-gap-after: calc(
-    var(--space-lg) - var(--btn-padding-right)
-  );
+  --btn-start-icon-gap-before: calc(var(--space-lg) - var(--btn-padding-right));
+  --btn-start-icon-gap-after: var(--space-md);
+  --btn-end-icon-gap-before: var(--space-lg);
+  --btn-end-icon-gap-after: calc(var(--space-lg) - var(--btn-padding-right));
 }
 
 .root.root--medium {
@@ -52,14 +50,10 @@
   --btn-icon-size: 1rem;
   --btn-text-size: var(--typography-body2-size);
   --btn-text-leading: var(--typography-body2-leading);
-  --btn-leading-icon-gap-before: calc(
-    var(--space-md) - var(--btn-padding-right)
-  );
-  --btn-leading-icon-gap-after: var(--space-xs);
-  --btn-trailing-icon-gap-before: var(--space-md);
-  --btn-trailing-icon-gap-after: calc(
-    var(--space-md) - var(--btn-padding-right)
-  );
+  --btn-start-icon-gap-before: calc(var(--space-md) - var(--btn-padding-right));
+  --btn-start-icon-gap-after: var(--space-xs);
+  --btn-end-icon-gap-before: var(--space-md);
+  --btn-end-icon-gap-after: calc(var(--space-md) - var(--btn-padding-right));
 }
 
 .root.root--small {
@@ -70,14 +64,10 @@
   --btn-icon-size: 0.875rem;
   --btn-text-size: var(--typography-caption-size);
   --btn-text-leading: var(--typography-caption-leading);
-  --btn-leading-icon-gap-before: calc(
-    var(--space-md) - var(--btn-padding-right)
-  );
-  --btn-leading-icon-gap-after: var(--space-xs);
-  --btn-trailing-icon-gap-before: var(--space-md);
-  --btn-trailing-icon-gap-after: calc(
-    var(--space-md) - var(--btn-padding-right)
-  );
+  --btn-start-icon-gap-before: calc(var(--space-md) - var(--btn-padding-right));
+  --btn-start-icon-gap-after: var(--space-xs);
+  --btn-end-icon-gap-before: var(--space-md);
+  --btn-end-icon-gap-after: calc(var(--space-md) - var(--btn-padding-right));
 }
 
 .root.root--neutral.root--filled {
@@ -511,28 +501,28 @@
   pointer-events: none;
 }
 
-.root--ltr .icon.icon--leading {
-  margin-right: var(--btn-leading-icon-gap-after);
-  margin-left: var(--btn-leading-icon-gap-before);
+.root--ltr .icon.icon--start {
+  margin-right: var(--btn-start-icon-gap-after);
+  margin-left: var(--btn-start-icon-gap-before);
 }
 
-.root--ltr .icon.icon--trailing {
-  margin-right: var(--btn-trailing-icon-gap-after);
-  margin-left: var(--btn-trailing-icon-gap-before);
+.root--ltr .icon.icon--end {
+  margin-right: var(--btn-end-icon-gap-after);
+  margin-left: var(--btn-end-icon-gap-before);
 }
 
-.root--rtl .icon.icon--leading {
-  margin-right: var(--btn-leading-icon-gap-before);
-  margin-left: var(--btn-leading-icon-gap-after);
+.root--rtl .icon.icon--start {
+  margin-right: var(--btn-start-icon-gap-before);
+  margin-left: var(--btn-start-icon-gap-after);
 }
 
-.root--rtl .icon.icon--trailing {
-  margin-right: var(--btn-trailing-icon-gap-before);
-  margin-left: var(--btn-trailing-icon-gap-after);
+.root--rtl .icon.icon--end {
+  margin-right: var(--btn-end-icon-gap-before);
+  margin-left: var(--btn-end-icon-gap-after);
 }
 
 .root:is(.root--focus-visible, :focus-visible) {
-  outline: 2px solid var(--color-palette-cyan-600);
+  outline: 2px solid var(--palette-cyan-600);
   outline-offset: 1px;
 }
 
@@ -572,7 +562,7 @@
   text-overflow: ellipsis;
   overflow: hidden;
 
-  transition: color 240ms ease;
+  transition: color 160ms ease;
 }
 
 .icon {
@@ -594,7 +584,7 @@
   justify-content: center;
   flex-shrink: 0;
 
-  transition: color 240ms ease;
+  transition: color 160ms ease;
 }
 
 @media (hover: none) {

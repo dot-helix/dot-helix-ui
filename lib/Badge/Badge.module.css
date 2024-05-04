@@ -1,4 +1,4 @@
-.relative-root {
+.wrapper {
   display: inline-flex;
 
   position: relative;
@@ -7,14 +7,14 @@
   flex-shrink: 0;
 }
 
-.relative-root > .root {
+.wrapper > .root {
   position: absolute;
 
   transform-origin: 100% 0;
   transform: scale(1) translate(50%, -50%);
 }
 
-.relative-root > .root.root.root--hidden {
+.wrapper > .root.root.root--hidden {
   transform: scale(0) translate(50%, -50%);
 }
 
@@ -40,7 +40,10 @@
   background-color: var(--badge-bg-color);
   color: var(--badge-color);
 
-  transition: transform 240ms ease, visibility 240ms ease, opacity 240ms ease;
+  transition:
+    transform 160ms ease,
+    visibility 160ms ease,
+    opacity 160ms ease;
 }
 
 .root.root--hidden {
