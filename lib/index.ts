@@ -34,6 +34,8 @@ export * from "./Text";
 export { default as Text } from "./Text";
 export * from "./Toast";
 export { default as Toast } from "./Toast";
+export * from "./ToggleGroup";
+export { default as ToggleGroup } from "./ToggleGroup";
 export * from "./Tooltip";
 export { default as Tooltip } from "./Tooltip";
 export { default as ValidityReason } from "./ValidityReason";
