@@ -28,6 +28,8 @@ export * from "./RadioGroup";
 export { default as RadioGroup } from "./RadioGroup";
 export * from "./Switch";
 export { default as Switch } from "./Switch";
+export * from "./TabGroup";
+export { default as TabGroup } from "./TabGroup";
 export * from "./Tag";
 export { default as Tag } from "./Tag";
 export * from "./Text";
