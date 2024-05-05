@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@styleless-ui/react':
-        specifier: 1.0.0-rc.5
-        version: 1.0.0-rc.5(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+        specifier: 1.0.0-rc.6
+        version: 1.0.0-rc.6(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       classnames:
         specifier: ^2.5.1
         version: 2.5.1
@@ -372,8 +372,8 @@ packages:
     resolution: {integrity: sha512-cq8o4cWH0ibXh9VGi5P20Tu9XF/0fFXl9EUinr9QfTM7a7p0oTA4iJRCQWppXR1Pg8dSM0UCItCkPwsk9qWWYA==}
     engines: {node: ^12.20.0 || ^14.18.0 || >=16.0.0}
 
-  '@styleless-ui/react@1.0.0-rc.5':
-    resolution: {integrity: sha512-3dB/nTeUl515tY2eUE6O0U3P0/Xd2sJ+aKiB1kMrvRKWuDZuh2eJskK20P2ckxWFbZ1+ZC+5/94jDjFsPgX5XA==}
+  '@styleless-ui/react@1.0.0-rc.6':
+    resolution: {integrity: sha512-Yzi4izBOOqvWCxTj2PHnTipcwxDKYENdh9wk2nY9ofpTnFjEfBnrWzkpHxFDq4lVa0VkmW7A4qJtQ5xeEFpy/g==}
     engines: {node: '>=20'}
     peerDependencies:
       react: '>=17'
@@ -1990,7 +1990,7 @@ snapshots:
 
   '@pkgr/core@0.1.1': {}
 
-  '@styleless-ui/react@1.0.0-rc.5(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
+  '@styleless-ui/react@1.0.0-rc.6(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
     dependencies:
       '@utilityjs/use-controlled-prop': 1.1.2(react@18.2.0)
       '@utilityjs/use-deterministic-id': 1.2.0(react@18.2.0)
