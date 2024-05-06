@@ -98,6 +98,7 @@ const ProgressBarBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
       })}
       label={{ labelledBy: labelId }}
       data-color={color}
+      data-fluid={fluid ? "" : undefined}
     >
       <div
         className={classes.heading}

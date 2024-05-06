@@ -129,6 +129,8 @@ const ExpandableBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
       }
       expanded={expanded}
       defaultExpanded={defaultExpanded}
+      data-size={size}
+      data-icon-position={iconPosition}
     >
       {({ expanded }) => (
         <>

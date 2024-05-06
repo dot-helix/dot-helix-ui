@@ -86,6 +86,7 @@ const IconBase = (props: Props, ref: React.Ref<SVGSVGElement>) => {
       style={style}
       ref={ref}
       data-slot="Icon:Root"
+      data-color={color}
     >
       {title && <title>{title}</title>}
       <path d={pathData} />
