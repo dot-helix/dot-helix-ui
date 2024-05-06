@@ -1,5 +1,5 @@
 .root {
-  --togglegroup-border-color: var(--color-neutral-origin);
+  --togglegroup-border-color: var(--color-neutral-border-normal);
 
   display: inline-flex;
   align-items: center;
@@ -21,7 +21,7 @@
 }
 
 .root.root--disabled {
-  --togglegroup-border-color: var(--color-neutral-disabled);
+  --togglegroup-border-color: var(--color-neutral-text-disabled);
 
   pointer-events: none;
 }
@@ -90,7 +90,6 @@
 
   transition:
     background-color 160ms ease,
-    box-shadow 160ms ease,
     border-radius 160ms ease;
 }
 
