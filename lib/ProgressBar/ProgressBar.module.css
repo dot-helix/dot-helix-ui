@@ -63,8 +63,8 @@
   display: flex;
   align-items: center;
 
+  overflow: hidden;
   padding: 0.125rem;
-
   border-radius: var(--rounded-full);
 
   background-color: var(--color-neutral-border-normal);
@@ -73,9 +73,40 @@
 .fill {
   height: 0.25rem;
 
+  position: relative;
   border-radius: var(--rounded-full);
 
   background-color: var(--progressbar-fill-bg-color);
 
   transition: width 160ms ease;
+}
+
+.root.root--indeterminate .fill {
+  width: 50%;
+}
+
+.root.root--indeterminate.root--ltr .fill {
+  animation: fill-animate-ltr 1s infinite;
+}
+
+.root.root--indeterminate.root--rtl .fill {
+  animation: fill-animate-rtl 1s infinite;
+}
+
+@keyframes fill-animate-ltr {
+  0% {
+    left: -50%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+@keyframes fill-animate-rtl {
+  0% {
+    right: -50%;
+  }
+  100% {
+    right: 100%;
+  }
 }
