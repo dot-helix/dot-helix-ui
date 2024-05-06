@@ -174,7 +174,7 @@ const CheckboxBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
           className={({
             checked,
             disabled,
-            indeterminated,
+            indeterminate,
             focusedVisible,
             readOnly,
           }) =>
@@ -182,7 +182,7 @@ const CheckboxBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
               [classes["input--disabled"]!]: disabled,
               [classes["input--checked"]!]: checked,
               [classes["input--focus-visible"]!]: focusedVisible,
-              [classes["input--indeterminated"]!]: indeterminated,
+              [classes["input--indeterminate"]!]: indeterminate,
               [classes["input--readonly"]!]: readOnly,
             })
           }
