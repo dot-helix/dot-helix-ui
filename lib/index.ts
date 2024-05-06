@@ -18,6 +18,8 @@ export * from "./IconButton";
 export { default as IconButton } from "./IconButton";
 export * from "./LoadingIndicator";
 export { default as LoadingIndicator } from "./LoadingIndicator";
+export * from "./Menu";
+export { default as Menu } from "./Menu";
 export * from "./Meter";
 export { default as Meter } from "./Meter";
 export * from "./ProgressBar";

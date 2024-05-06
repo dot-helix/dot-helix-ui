@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import type { MergeElementProps } from "@styleless-ui/react";
+import { setRef, useDeterministicId } from "@styleless-ui/react/utils";
 import * as React from "react";
 import type { CommonProps } from "../types";
 import { combineClasses as cls, componentWithForwardedRef } from "../utils";
@@ -48,6 +49,7 @@ export type Props = Omit<
 
 const BadgeBase = (props: Props, ref: React.Ref<HTMLSpanElement>) => {
   const {
+    id: idProp,
     wrapperClassName,
     className,
     children,
@@ -58,15 +60,44 @@ const BadgeBase = (props: Props, ref: React.Ref<HTMLSpanElement>) => {
     ...otherProps
   } = props;
 
-  const child = children ? getValidChild(children) : null;
+  const id = useDeterministicId(idProp, "hui-badge-scope");
+
+  const child = children
+    ? (getValidChild(children) as React.ReactElement<
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        Record<keyof any, unknown>
+      >)
+    : null;
 
   const isStandalone = child == null;
   const variant: "dot" | "standard" =
     text == null || text.length === 0 ? "dot" : "standard";
 
+  const childRefCallback = React.useCallback(
+    (node: HTMLElement | null) => {
+      if (!child) return;
+
+      setRef(child.props.ref as React.Ref<HTMLElement>, node);
+
+      if (!node) return;
+
+      let describedBy = node.getAttribute("aria-describedby");
+
+      if (describedBy) {
+        if (describedBy.includes(id)) return;
+
+        describedBy = `${id} ` + describedBy;
+      } else describedBy = id;
+
+      node.setAttribute("aria-describedby", describedBy);
+    },
+    [child, id],
+  );
+
   const createStandaloneBadge = () => (
     <span
       {...otherProps}
+      id={id}
       // @ts-expect-error React hasn't added `inert` yet
       inert={!visible ? "" : undefined}
       ref={ref}
@@ -97,7 +128,9 @@ const BadgeBase = (props: Props, ref: React.Ref<HTMLSpanElement>) => {
       className={cls(wrapperClassName, classes["wrapper"])}
     >
       {createStandaloneBadge()}
-      {child}
+      {React.cloneElement(child, {
+        ref: childRefCallback,
+      })}
     </div>
   );
 };

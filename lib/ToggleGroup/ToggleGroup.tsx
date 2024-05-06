@@ -105,6 +105,9 @@ const ToggleGroupBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
       onValueChange={handleValueChange}
       aria-disabled={disabled}
       data-disabled={disabled ? "" : undefined}
+      data-fluid={fluid ? "" : undefined}
+      data-size={size}
+      data-select-mode={selectMode}
       className={cls(
         className,
         classes.root,

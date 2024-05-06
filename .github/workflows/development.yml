@@ -14,6 +14,8 @@ jobs:
     name: Code standards
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    env:
+      COREPACK_ENABLE_STRICT: 0
     steps:
       - name: "☁️ checkout repository"
         uses: actions/checkout@v4

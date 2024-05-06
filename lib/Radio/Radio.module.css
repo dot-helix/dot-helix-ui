@@ -137,7 +137,7 @@ button.input.input--checked {
   --radio-check-bg-color: var(--color-primary-origin);
 }
 
-.root.root--error button.input:is(.input--checked, .input--indeterminated) {
+.root.root--error button.input.input--checked {
   --radio-check-bg-color: var(--color-error-origin);
 }
 
@@ -177,10 +177,7 @@ button.input.input--checked:not(.input--readonly):active {
   --radio-check-bg-color: var(--color-error-hover);
 }
 
-.root.root--error
-  button.input:is(.input--checked, .input--indeterminated):not(
-    .input--readonly
-  ):active {
+.root.root--error button.input.input--checked:not(.input--readonly):active {
   --radio-check-bg-color: var(--color-error-active);
 }
 
