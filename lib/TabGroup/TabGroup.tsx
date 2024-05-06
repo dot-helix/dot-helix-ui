@@ -146,6 +146,7 @@ const TabGroupBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
       aria-disabled={disabled}
       data-disabled={disabled ? "" : undefined}
       data-fluid={fluid ? "" : undefined}
+      data-size={size}
       className={cls(
         className,
         classes.root,
