@@ -97,6 +97,7 @@ const MeterBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
         [classes["root--fluid"]!]: fluid,
       })}
       label={{ labelledBy: labelId }}
+      data-fluid={fluid ? "" : undefined}
       data-color={color}
     >
       <div
