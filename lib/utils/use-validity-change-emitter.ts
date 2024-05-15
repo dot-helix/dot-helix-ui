@@ -2,8 +2,12 @@ import * as React from "react";
 import type { AnyVoidFunction, ValidityState } from "../types";
 import hasValidityChanged from "./has-validity-changed";
 
-type ConditionsMap = {
+export type ConditionsMap = {
+  type?: "text" | "email" | "password" | "url";
   required?: boolean;
+  maxLength?: number;
+  minLength?: number;
+  pattern?: string;
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
