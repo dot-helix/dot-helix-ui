@@ -24,6 +24,7 @@ import {
   type FocusWithinPredicateCallback,
 } from "../utils";
 import classes from "./TextField.module.css";
+import * as Slots from "./slots";
 import type { TextFieldInstance, TextFieldValidityState } from "./types";
 import { validate } from "./utils";
 
@@ -389,6 +390,7 @@ const TextFieldBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
         disabled={disabled}
         aria-label={hideLabel ? label : undefined}
         aria-describedby={description ? descriptionId : undefined}
+        data-slot={Slots.Input}
       />
       {renderEndAddons()}
     </InputWrapper>
