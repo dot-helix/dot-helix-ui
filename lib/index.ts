@@ -36,6 +36,8 @@ export * from "./Tag";
 export { default as Tag } from "./Tag";
 export * from "./Text";
 export { default as Text } from "./Text";
+export * from "./TextField";
+export { default as TextField } from "./TextField";
 export * from "./Toast";
 export { default as Toast } from "./Toast";
 export * from "./ToggleGroup";
