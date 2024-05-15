@@ -41,6 +41,12 @@ export type CommonProps = {
    */
   hasError?: boolean;
   /**
+   * If `true`, the component will be disabled.
+   *
+   * @default false
+   */
+  disabled?: boolean;
+  /**
    * The visible text label of the component.
    */
   label: string;
