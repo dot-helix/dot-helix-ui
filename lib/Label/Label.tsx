@@ -16,7 +16,7 @@ type OwnProps = Pick<CommonProps, "children" | "className"> & {
    */
   impactOnTarget?: "focus" | "click";
   /**
-   * If `true`, will display `*` at the the end of the label
+   * If `true`, it will display `*` at the the end of the label
    * to indicate the required state of the target.
    *
    * @default false
