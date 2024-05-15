@@ -6,14 +6,7 @@ import {
   useEventCallback,
 } from "@styleless-ui/react/utils";
 import * as React from "react";
-import IconButton from "../IconButton";
-import {
-  EyeIcon,
-  EyeOffIcon,
-  InputAddon,
-  InputWrapper,
-  Logger,
-} from "../internals";
+import { InputAddon, InputWrapper, Logger } from "../internals";
 import { Container as InputWrapperContainerSlot } from "../internals/InputWrapper/slots";
 import type { CommonProps } from "../types";
 import {
@@ -23,10 +16,14 @@ import {
   useValidityChangeEmitter,
   type FocusWithinPredicateCallback,
 } from "../utils";
-import classes from "./TextField.module.css";
+import classes from "./TextArea.module.css";
 import * as Slots from "./slots";
-import type { TextFieldInstance, TextFieldValidityState } from "./types";
-import { validate } from "./utils";
+import type {
+  SyncedHeightState,
+  TextAreaInstance,
+  TextAreaValidityState,
+} from "./types";
+import { syncHeights, validate } from "./utils";
 
 type Addon =
   | {
@@ -52,12 +49,6 @@ type OwnProps = Pick<
   | "disabled"
   | "hasError"
 > & {
-  /**
-   * Specifies the type of the input text.
-   *
-   * @default "text"
-   */
-  type?: "text" | "email" | "password" | "url";
   /**
    * Sets the directionality of the text input.
    *
@@ -95,13 +86,6 @@ type OwnProps = Pick<
    */
   maxLength?: number;
   /**
-   * Defines a regular expression that the input's value must match
-   * in order for the value to pass constraint validation.
-   *
-   * @see {@link https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#pattern MDN Web Docs} for more information.
-   */
-  pattern?: string;
-  /**
    * The variant of the component.
    *
    * @default "outlined"
@@ -132,6 +116,20 @@ type OwnProps = Pick<
    */
   name?: string;
   /**
+   * The number of minimum visible text lines for the control.
+   * If it is specified, it must be a positive integer and smaller than or equal to `maxRows`.
+   *
+   * @default 3
+   */
+  minRows?: number;
+  /**
+   * The number of maximum visible text lines for the control.
+   * If it is specified, it must be a positive integer and greater than or equal to `minRows`.
+   *
+   * @default 6
+   */
+  maxRows?: number;
+  /**
    * The value of the input.
    */
   value?: string;
@@ -150,7 +148,7 @@ type OwnProps = Pick<
   /**
    * The instance ref of the component.
    */
-  instanceRef?: React.RefObject<TextFieldInstance>;
+  instanceRef?: React.RefObject<TextAreaInstance>;
   /**
    * Callback is called when the value changes.
    */
@@ -158,7 +156,7 @@ type OwnProps = Pick<
   /**
    * The callback is fired when the validity state changes.
    */
-  onValidityStateChange?: (validityState: TextFieldValidityState) => void;
+  onValidityStateChange?: (validityState: TextAreaValidityState) => void;
 };
 
 export type Props = Omit<
@@ -176,9 +174,12 @@ export type Props = Omit<
   | "onInvalidCapture"
   | "spellCheck"
   | "defaultChecked"
+  | "cols"
+  | "rows"
+  | "wrap"
 >;
 
-const TextFieldBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
+const TextAreaBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
   const {
     id: idProp,
     className,
@@ -190,12 +191,12 @@ const TextFieldBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
     placeholder,
     minLength,
     maxLength,
-    pattern,
     value: valueProp,
     defaultValue,
     startAddon,
     endAddon,
-    type = "text",
+    minRows = 3,
+    maxRows = 6,
     dir = "auto",
     size = "medium",
     variant = "outlined",
@@ -209,7 +210,7 @@ const TextFieldBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
     ...otherProps
   } = props;
 
-  const scopeId = useDeterministicId(idProp, "hui-textfield-scope");
+  const scopeId = useDeterministicId(idProp, "hui-textarea-scope");
   const controllerId = `${scopeId}__controller`;
   const labelId = `${scopeId}__label`;
   const descriptionId = `${scopeId}__description`;
@@ -218,21 +219,43 @@ const TextFieldBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
     Logger.devOnly.log(
       "You can't have both `disabled` and `readOnly` props set to `true`.",
       "error",
-      "TextField",
+      "TextArea",
     );
   }
 
-  const [showPassword, setShowPassword] = React.useState(false);
-
   const [value, setValue] = useControlledProp(valueProp, defaultValue, "");
+
+  const [syncedStyle, setSyncedStyle] =
+    React.useState<SyncedHeightState | null>(null);
 
   const validationConditions = {
     required,
     minLength,
     maxLength,
-    pattern,
-    type,
   };
+
+  const updateSyncedHeights = React.useCallback(
+    (controller: HTMLTextAreaElement) => {
+      const shadowInput =
+        controller.nextElementSibling as HTMLTextAreaElement | null;
+
+      if (!shadowInput) return;
+
+      const newSyncedHeights = syncHeights(
+        controller,
+        shadowInput,
+        minRows,
+        maxRows,
+        syncedStyle,
+      );
+
+      if (!newSyncedHeights) return;
+
+      setSyncedStyle(newSyncedHeights);
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [maxRows, minRows, syncedStyle, size],
+  );
 
   const validityChangeEmitter = useValidityChangeEmitter({
     conditions: validationConditions,
@@ -241,12 +264,13 @@ const TextFieldBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
     validator: validate,
   });
 
-  const handleChange = useEventCallback<React.ChangeEvent<HTMLInputElement>>(
+  const handleChange = useEventCallback<React.ChangeEvent<HTMLTextAreaElement>>(
     event => {
       const inputValue = event.target.value;
 
       setValue(inputValue);
       validityChangeEmitter(inputValue);
+      updateSyncedHeights(event.currentTarget);
     },
   );
 
@@ -302,7 +326,7 @@ const TextFieldBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
       ({
         getValue: () => value,
         checkValidity: () => validate(value, validationConditions),
-      }) satisfies TextFieldInstance,
+      }) satisfies TextAreaInstance,
   );
 
   const renderStartAddon = () => {
@@ -319,44 +343,46 @@ const TextFieldBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
     );
   };
 
-  const renderEndAddons = () => {
-    const addons: Addon[] = [];
-
-    if (endAddon) addons.push(endAddon);
-    if (type === "password") {
-      addons.push({
-        type: "node",
-        content: (
-          <IconButton
-            variant="inlined"
-            size={size}
-            label={{ screenReaderLabel: "Show password" }}
-            onClick={() => void setShowPassword(s => !s)}
-            icon={showPassword ? <EyeOffIcon /> : <EyeIcon />}
-          />
-        ),
-      });
-    }
+  const renderEndAddon = () => {
+    if (!endAddon) return null;
 
     return (
-      <div className={classes["end-addons"]}>
-        {addons.map((addon, idx) => (
-          <InputAddon
-            key={addon.type + String(idx)}
-            variant={addon.type}
-            size={size}
-            disabled={disabled}
-          >
-            {addon.content}
-          </InputAddon>
-        ))}
-      </div>
+      <InputAddon
+        key={endAddon.type}
+        variant={endAddon.type}
+        size={size}
+        disabled={disabled}
+      >
+        {endAddon.content}
+      </InputAddon>
     );
+  };
+
+  const controllerRefCallback = React.useCallback(
+    (node: HTMLTextAreaElement | null) => {
+      if (!node) return;
+
+      updateSyncedHeights(node);
+    },
+    [updateSyncedHeights],
+  );
+
+  const getControllerStyles = () => {
+    const styles: React.CSSProperties = {
+      height: syncedStyle?.outerHeight,
+
+      // Need a large enough difference to allow scrolling.
+      // This prevents infinite rendering loop.
+      overflow: syncedStyle?.overflow ? "hidden" : undefined,
+    };
+
+    return styles;
   };
 
   return (
     <InputWrapper
       {...otherProps}
+      resizableHeight
       id={scopeId}
       label={label}
       description={description}
@@ -377,26 +403,35 @@ const TextFieldBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
       focusWithinPredicate={handleFocusWithinPredicate}
     >
       {renderStartAddon()}
-      <input
+      <textarea
+        ref={controllerRefCallback}
         id={controllerId}
         className={classes.input}
         value={value}
-        type={showPassword ? "text" : type}
         name={name}
         dir={dir}
+        rows={minRows}
         placeholder={placeholder}
         onChange={handleChange}
         readOnly={readOnly}
         disabled={disabled}
+        style={getControllerStyles()}
         aria-label={hideLabel ? label : undefined}
         aria-describedby={description ? descriptionId : undefined}
         data-slot={Slots.Input}
       />
-      {renderEndAddons()}
+      <textarea
+        readOnly
+        aria-hidden="true"
+        tabIndex={-1}
+        className={classes.shadow}
+        data-slot={Slots.ShadowInput}
+      />
+      {renderEndAddon()}
     </InputWrapper>
   );
 };
 
-const TextField = componentWithForwardedRef(TextFieldBase, "TextField");
+const TextArea = componentWithForwardedRef(TextAreaBase, "TextArea");
 
-export default TextField;
+export default TextArea;

@@ -1,0 +1,87 @@
+.root[data-size="large"] {
+  --textarea-input-text-size: var(--typography-body1-size);
+  --textarea-input-text-leading: var(--typography-body1-leading);
+  --textarea-input-placeholder-text-size: var(--typography-body2-size);
+  --textarea-input-placeholder-text-leading: 1.5rem;
+}
+
+.root[data-size="medium"] {
+  --textarea-input-text-size: var(--typography-body2-size);
+  --textarea-input-text-leading: var(--typography-body2-leading);
+  --textarea-input-placeholder-text-size: var(--typography-caption-size);
+  --textarea-input-placeholder-text-leading: 1.25rem;
+}
+
+.root[data-size="small"] {
+  --textarea-input-text-size: var(--typography-caption-size);
+  --textarea-input-text-leading: var(--typography-caption-leading);
+  --textarea-input-placeholder-text-size: var(--typography-caption-size);
+  --textarea-input-placeholder-text-leading: 1.25rem;
+}
+
+.input {
+  --textarea-input-color: var(--color-neutral-text-normal);
+  --textarea-input-placeholder-color: var(--color-neutral-text-secondary);
+
+  all: unset;
+
+  width: 100%;
+  height: 100%;
+
+  color: var(--textarea-input-color);
+
+  white-space: pre-line;
+
+  font-size: var(--textarea-input-text-size);
+  line-height: var(--textarea-input-text-leading);
+  font-weight: 400;
+
+  transition: color 160ms ease;
+}
+
+.shadow {
+  all: unset;
+
+  white-space: pre-line;
+
+  visibility: hidden;
+  overflow: hidden;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 0;
+
+  border: none;
+  padding: 0;
+  margin: 0;
+
+  isolation: isolate;
+
+  font-size: var(--textarea-input-text-size);
+  line-height: var(--textarea-input-text-leading);
+  font-weight: 400;
+}
+
+.shadow::placeholder {
+  font-size: var(--textarea-input-placeholder-text-size);
+  line-height: var(--textarea-input-placeholder-text-leading);
+  font-weight: 400;
+}
+
+.input::placeholder {
+  color: var(--textarea-input-placeholder-color);
+
+  font-size: var(--textarea-input-placeholder-text-size);
+  line-height: var(--textarea-input-placeholder-text-leading);
+  font-weight: 400;
+
+  transition: color 160ms ease;
+}
+
+.input[disabled] {
+  --textarea-input-color: var(--color-neutral-text-quaternary);
+  --textarea-input-placeholder-color: var(--color-neutral-text-quaternary);
+}
