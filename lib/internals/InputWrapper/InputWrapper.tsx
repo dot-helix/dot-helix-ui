@@ -46,6 +46,12 @@ type OwnProps = Pick<
    */
   readOnly?: boolean;
   /**
+   * Indicates whether the component has a static height or resizable one.
+   *
+   * @default false
+   */
+  resizableHeight?: boolean;
+  /**
    * The id used for the label.
    */
   labelId: string;
@@ -80,6 +86,7 @@ const InputWrapper = (props: Props) => {
     feedbackMessage,
     variant = "outlined",
     size = "medium",
+    resizableHeight = false,
     required = false,
     hasError = false,
     disabled = false,
@@ -147,12 +154,14 @@ const InputWrapper = (props: Props) => {
       data-required={required ? "" : undefined}
       data-focus-within={isFocusWithin ? "" : undefined}
       data-readonly={readOnly ? "" : undefined}
+      data-resizable-height={resizableHeight ? "" : undefined}
       className={cls(
         className,
         classes.root,
         classes[`root--${variant}`],
         classes[`root--${size}`],
         {
+          [classes["root--resizable"]!]: resizableHeight,
           [classes["root--error"]!]: hasError,
           [classes["root--disabled"]!]: disabled,
           [classes["root--readonly"]!]: readOnly,

@@ -9,7 +9,7 @@
 
 .root.root--medium {
   --inputwrapper-container-height: 2rem;
-  --inputwrapper-container-gap: var(--space-xs);
+  --inputwrapper-container-gap: var(--space-sm);
 }
 
 .root.root--small {
@@ -21,7 +21,6 @@
   --inputwrapper-container-border-color: transparent;
   --inputwrapper-container-border-width: 1px;
   --inputwrapper-container-bg-color: transparent;
-  --inputwrapper-container-gap: var(--space-xs);
 
   display: flex;
   align-items: center;
@@ -29,10 +28,10 @@
 
   cursor: pointer;
 
+  position: relative;
+
   padding: var(--space-xs) var(--space-md);
   gap: var(--inputwrapper-container-gap);
-
-  height: var(--inputwrapper-container-height);
 
   border-radius: var(--rounded-md);
 
@@ -43,6 +42,14 @@
   transition:
     box-shadow 160ms ease,
     background-color 160ms ease;
+}
+
+.root.root--resizable .container {
+  min-height: var(--inputwrapper-container-height);
+}
+
+.root:not(.root--resizable) .container {
+  height: var(--inputwrapper-container-height);
 }
 
 .root.root--outlined .container {
