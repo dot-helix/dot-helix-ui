@@ -1,9 +1,9 @@
 import createTokens from "./create-tokens";
-import { fuschsia, indigo } from "./palette";
+import { fuschsia } from "./palette";
 import type { PrimitiveTokens } from "./types";
 
 export const defaultPrimitives: PrimitiveTokens = {
-  primaryColor: indigo,
+  primaryColor: "#6366f1",
   secondaryColor: fuschsia,
   density: "normal",
   typographySize: "normal",
