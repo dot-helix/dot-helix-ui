@@ -1,4 +1,6 @@
 export { default as CheckIcon } from "./CheckIcon";
+export * from "./ChevronDownIcon";
+export { default as ChevronDownIcon } from "./ChevronDownIcon";
 export * from "./ChevronLeftIcon";
 export { default as ChevronLeftIcon } from "./ChevronLeftIcon";
 export * from "./ChevronRightIcon";
