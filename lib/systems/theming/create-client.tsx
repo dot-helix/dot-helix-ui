@@ -1,9 +1,9 @@
 import { create } from "react-design-tokens";
 import { createCommonTokens, createVariantTokensMap } from "./create-tokens";
 import cssVariableGenerator from "./css-variable-generator";
-import type { Client, PrimitiveTokens } from "./types";
+import type { HelixThemingClient, PrimitiveTokens } from "./types";
 
-const createClient = (primitiveTokens: PrimitiveTokens): Client => {
+const createClient = (primitiveTokens: PrimitiveTokens): HelixThemingClient => {
   const { primaryColor, secondaryColor, ...otherPrimitives } = primitiveTokens;
 
   const variantTokensMap = createVariantTokensMap({
@@ -25,10 +25,7 @@ const createClient = (primitiveTokens: PrimitiveTokens): Client => {
     { cssVariableGenerator },
   );
 
-  const {
-    VariantSelector: DirectionVariantSelector,
-    useTokens: useDirectionToken,
-  } = create(
+  const directionClient = create(
     {
       variants: {
         ltr: { direction: "ltr" },
@@ -39,7 +36,22 @@ const createClient = (primitiveTokens: PrimitiveTokens): Client => {
     { cssVariableGenerator },
   );
 
-  const useDirection = () => useDirectionToken().direction as "ltr" | "rtl";
+  const useDirection = () =>
+    directionClient.useTokens().direction as "ltr" | "rtl";
+
+  const DirectionVariantSelector: typeof directionClient.VariantSelector =
+    props => {
+      const { variant, disableCSSVariableGeneration, children } = props;
+
+      return (
+        <directionClient.VariantSelector
+          variant={variant}
+          disableCSSVariableGeneration={disableCSSVariableGeneration}
+        >
+          <div dir={variant}>{children}</div>
+        </directionClient.VariantSelector>
+      );
+    };
 
   return {
     generateCSSVariablesAsInlineStyle,
@@ -47,7 +59,7 @@ const createClient = (primitiveTokens: PrimitiveTokens): Client => {
     DirectionVariantSelector,
     useTokens,
     useDirection,
-  } satisfies Client;
+  } satisfies HelixThemingClient;
 };
 
 export default createClient;
