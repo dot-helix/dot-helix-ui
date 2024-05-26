@@ -64,6 +64,10 @@ type OwnProps = Pick<
    */
   descriptionId: string;
   /**
+   * The callback fires when container is clicked.
+   */
+  onContainerClick?: React.MouseEventHandler<HTMLDivElement>;
+  /**
    * The predicate callback to determine focusWithin state.
    */
   focusWithinPredicate?: FocusWithinPredicateCallback<HTMLDivElement>;
@@ -92,6 +96,7 @@ const InputWrapper = (props: Props) => {
     disabled = false,
     hideLabel = false,
     readOnly = false,
+    onContainerClick,
     focusWithinPredicate,
     ...otherProps
   } = props;
@@ -175,6 +180,7 @@ const InputWrapper = (props: Props) => {
         data-slot={Slots.Container}
         onFocus={handleFocus}
         onBlur={handleBlur}
+        onClick={onContainerClick}
         className={cls(classes.container, {
           [classes["container--focus-within"]!]: isFocusWithin,
         })}

@@ -24,7 +24,6 @@
 
   display: flex;
   align-items: center;
-  vertical-align: middle;
 
   cursor: pointer;
 
@@ -123,7 +122,7 @@
 }
 
 .label {
-  display: block;
+  display: inline-block;
 
   margin-bottom: var(--space-md);
 }
