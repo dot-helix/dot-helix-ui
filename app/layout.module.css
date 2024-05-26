@@ -22,3 +22,9 @@
   line-height: var(--typography-h5-leading);
   margin: 0;
 }
+
+.toggles {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
