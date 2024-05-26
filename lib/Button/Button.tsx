@@ -56,6 +56,7 @@ const ButtonBase = <
     text,
     startIcon,
     endIcon,
+    tabIndex,
     as = "button",
     size = "medium",
     variant = "filled",
@@ -126,6 +127,7 @@ const ButtonBase = <
     <StylelessButton
       {...otherProps}
       as={as}
+      overrideTabIndex={tabIndex}
       disabled={disabled || loading}
       ref={ref as React.Ref<HTMLButtonElement>}
       aria-label={loading ? text : undefined}
