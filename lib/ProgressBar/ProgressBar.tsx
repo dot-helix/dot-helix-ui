@@ -87,9 +87,7 @@ const ProgressBarBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
     ...otherProps
   } = props;
 
-  const { useDirection } = useTokensClient();
-
-  const direction = useDirection();
+  const { direction } = useTokensClient();
 
   const id = useDeterministicId(idProp, "hui-progressbar-scope");
   const labelId = `${id}__label`;

@@ -66,9 +66,7 @@ const ExpandableBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
     ...otherProps
   } = props;
 
-  const { useDirection } = useTokensClient();
-
-  const direction = useDirection();
+  const { direction } = useTokensClient();
 
   const renderTriggerContent = (expanded: boolean) => {
     let iconComponent: React.ReactNode = null;

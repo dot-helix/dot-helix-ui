@@ -68,9 +68,7 @@ const ToggleGroupBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
     ...otherProps
   } = props;
 
-  const { useDirection } = useTokensClient();
-
-  const direction = useDirection();
+  const { direction } = useTokensClient();
 
   const transformValue = (value?: string[]) => {
     if (typeof value === "undefined") return value;

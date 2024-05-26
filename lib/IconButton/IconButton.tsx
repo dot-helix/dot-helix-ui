@@ -63,9 +63,7 @@ const IconButtonBase = <
     ...otherProps
   } = polymorphicProps;
 
-  const { useDirection } = useTokensClient();
-
-  const direcrion = useDirection();
+  const { direction } = useTokensClient();
 
   const renderContent = () => {
     if (loading) {
@@ -111,7 +109,7 @@ const IconButtonBase = <
           classes[`root--${size}`],
           classes[`root--${color}`],
           classes[`root--${variant}`],
-          classes[`root--${direcrion}`],
+          classes[`root--${direction}`],
           classes["root--icon-button"],
           {
             [classes["root--disabled"]!]: disabled,
