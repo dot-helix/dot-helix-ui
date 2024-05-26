@@ -53,6 +53,7 @@ const IconButtonBase = <
     className,
     label,
     icon,
+    tabIndex,
     as = "button",
     size = "medium",
     variant = "filled",
@@ -92,6 +93,7 @@ const IconButtonBase = <
     <StylelessButton
       {...otherProps}
       as={as}
+      overrideTabIndex={tabIndex}
       disabled={disabled || loading}
       ref={ref as React.Ref<HTMLButtonElement>}
       aria-labelledby={"labelledBy" in label ? label.labelledBy : undefined}
