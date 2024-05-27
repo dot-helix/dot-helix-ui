@@ -15,6 +15,16 @@ const RootLayout = (props: { children: React.ReactNode }) => {
 
   const [direction, setDirection] = React.useState<Direction>("ltr");
 
+  const makeHandleToggleValueChange =
+    <T extends string | string[]>(
+      stateUpdater: React.Dispatch<React.SetStateAction<T>>,
+    ) =>
+    (value: T) => {
+      if (value.length === 0) return;
+
+      stateUpdater(value);
+    };
+
   return (
     <html lang="en">
       <body>
@@ -27,10 +37,13 @@ const RootLayout = (props: { children: React.ReactNode }) => {
               <h1 className={classes.title}>Dev Sandbox</h1>
               <div className={classes.toggles}>
                 <ToggleGroup
+                  selectMode="single"
                   size="small"
-                  value={[colorScheme]}
+                  value={colorScheme}
                   onValueChange={value =>
-                    setColorScheme(value[0]! as ColorScheme)
+                    makeHandleToggleValueChange(setColorScheme)(
+                      value as ColorScheme,
+                    )
                   }
                   label={{ screenReaderLabel: "Toggle color scheme" }}
                   items={[
@@ -39,9 +52,14 @@ const RootLayout = (props: { children: React.ReactNode }) => {
                   ]}
                 />
                 <ToggleGroup
+                  selectMode="single"
                   size="small"
-                  value={[direction]}
-                  onValueChange={value => setDirection(value[0]! as Direction)}
+                  value={direction}
+                  onValueChange={value =>
+                    makeHandleToggleValueChange(setDirection)(
+                      value as Direction,
+                    )
+                  }
                   label={{ screenReaderLabel: "Toggle color scheme" }}
                   items={[
                     { title: "RTL", value: "rtl" },
