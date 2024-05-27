@@ -46,9 +46,7 @@ const MenuBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
 
   const scopeId = useDeterministicId(idProp, "hui-menu-scope");
 
-  const { useDirection } = useTokensClient();
-
-  const direction = useDirection();
+  const { direction } = useTokensClient();
 
   const renderItems = (items: ItemType[]) => {
     if (items.length === 0) return null;

@@ -1,2 +1,2 @@
 export { default } from "./HelixClient";
-export { useTokensClient } from "./TokensClientContext";
+export { default as useTokensClient } from "./useTokensClient";

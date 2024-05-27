@@ -43,8 +43,8 @@ export type Props = Pick<CommonProps, "className"> & {
 };
 
 const LoadingIndicator = (props: Props) => {
-  const { useTokens } = useTokensClient();
-  const { colors } = useTokens();
+  const { tokens } = useTokensClient();
+  const { colors } = tokens;
 
   const {
     label,

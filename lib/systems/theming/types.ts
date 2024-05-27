@@ -177,7 +177,7 @@ export type PrimitiveTokens = {
 
 export type VariantTokensMap = Record<Variants, VariantTokens>;
 
-export type Client = {
+export type HelixThemingClient = {
   ColorVariantSelector: (props: {
     children?: React.ReactNode;
     disableCSSVariableGeneration?: boolean;

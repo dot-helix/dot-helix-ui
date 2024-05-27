@@ -8,16 +8,13 @@ import * as React from "react";
 import { SystemError } from "../../internals";
 import { useConstantValue, useDeterministicId } from "../../utils";
 import {
-  createClient,
+  createClient as createThemingClient,
   defaultPrimitives,
   type PrimitiveTokens,
   type Variants,
 } from "../theming";
 import { HELIX_CLIENT_ROOT_PREFIX } from "./constants";
-import {
-  TokensClientContext,
-  TokensClientProvider,
-} from "./TokensClientContext";
+import { ThemingClientContext, ThemingClientProvider } from "./ThemingClient";
 
 import "./baseline.css";
 import UtilityClasses from "./UtilityClasses";
@@ -39,26 +36,19 @@ const HelixClient = (props: Props) => {
     disableUtilityClassesGeneration = false,
   } = props;
 
-  const helixClientRootId = useDeterministicId(
-    undefined,
-    HELIX_CLIENT_ROOT_PREFIX,
-  );
+  const outerThemingClient = React.useContext(ThemingClientContext);
 
-  const outerTokensClient = React.useContext(TokensClientContext);
-
-  const portalConfig: PortalConfigProviderProps["config"] = React.useMemo(
-    () => ({
-      resolveContainer: () => document.getElementById(helixClientRootId),
-    }),
-    [helixClientRootId],
-  );
-
-  if (outerTokensClient) {
+  if (outerThemingClient) {
     throw new SystemError(
       "You must not use <HelixClient> in a tree that is already wrapped by it.",
       "HelixClient",
     );
   }
+
+  const helixClientRootId = useDeterministicId(
+    undefined,
+    HELIX_CLIENT_ROOT_PREFIX,
+  );
 
   const primitiveTokens = useConstantValue(
     () =>
@@ -68,7 +58,9 @@ const HelixClient = (props: Props) => {
       }) as PrimitiveTokens,
   );
 
-  const client = useConstantValue(() => createClient(primitiveTokens));
+  const themingClient = useConstantValue(() =>
+    createThemingClient(primitiveTokens),
+  );
 
   const rootStyles: React.CSSProperties = {
     direction: "var(--direction)" as "ltr" | "rtl",
@@ -87,11 +79,18 @@ const HelixClient = (props: Props) => {
     zIndex: "-1",
   };
 
+  const portalConfig: PortalConfigProviderProps["config"] = React.useMemo(
+    () => ({
+      resolveContainer: () => document.getElementById(helixClientRootId),
+    }),
+    [helixClientRootId],
+  );
+
   return (
-    <TokensClientProvider tokensClient={client}>
+    <ThemingClientProvider themingClient={themingClient}>
       <PortalConfigProvider config={portalConfig}>
-        <client.DirectionVariantSelector variant={direction}>
-          <client.ColorVariantSelector variant={colorScheme}>
+        <themingClient.DirectionVariantSelector variant={direction}>
+          <themingClient.ColorVariantSelector variant={colorScheme}>
             <div
               id={helixClientRootId}
               data-name="HelixClient:Root"
@@ -105,10 +104,10 @@ const HelixClient = (props: Props) => {
               <UtilityClasses enable={!disableUtilityClassesGeneration} />
               {children}
             </div>
-          </client.ColorVariantSelector>
-        </client.DirectionVariantSelector>
+          </themingClient.ColorVariantSelector>
+        </themingClient.DirectionVariantSelector>
       </PortalConfigProvider>
-    </TokensClientProvider>
+    </ThemingClientProvider>
   );
 };
 

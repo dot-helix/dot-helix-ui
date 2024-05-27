@@ -35,30 +35,56 @@ type OwnProps = Pick<ToggleGroupProps, "keyboardActivationBehavior" | "label"> &
      * @default "single"
      */
     selectMode?: "multiple" | "single";
-    /**
-     * The value of the active toggles.
-     */
-    value?: string[];
-    /**
-     * The default value. Use when the component is not controlled.
-     */
-    defaultValue?: string[];
-    /**
-     * The Callback is fired when the value state changes.
-     */
-    onValueChange?: (value: string[]) => void;
   };
 
 export type Props = Omit<
   MergeElementProps<"div", OwnProps>,
-  "checked" | "defaultChecked" | "children" | "content" | "color"
->;
+  | "checked"
+  | "defaultChecked"
+  | "children"
+  | "content"
+  | "color"
+  | "value"
+  | "defaultValue"
+  | "onChange"
+  | "onChangeCapture"
+> &
+  (
+    | {
+        selectMode: "single";
+        /**
+         * The value of the active toggles.
+         */
+        value?: string;
+        /**
+         * The default value. Use when the component is not controlled.
+         */
+        defaultValue?: string;
+        /**
+         * The Callback is fired when the value state changes.
+         */
+        onValueChange?: (value: string) => void;
+      }
+    | {
+        selectMode: "multiple";
+        /**
+         * The value of the active toggles.
+         */
+        value?: string[];
+        /**
+         * The default value. Use when the component is not controlled.
+         */
+        defaultValue?: string[];
+        /**
+         * The Callback is fired when the value state changes.
+         */
+        onValueChange?: (value: string[]) => void;
+      }
+  );
 
 const ToggleGroupBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
   const {
     className,
-    value,
-    defaultValue,
     items: itemsProp,
     selectMode = "single",
     fluid = false,
@@ -68,23 +94,7 @@ const ToggleGroupBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
     ...otherProps
   } = props;
 
-  const { useDirection } = useTokensClient();
-
-  const direction = useDirection();
-
-  const transformValue = (value?: string[]) => {
-    if (typeof value === "undefined") return value;
-    if (selectMode === "multiple") return value;
-
-    return value[0];
-  };
-
-  const handleValueChange = (value: string | string[]) => {
-    if (disabled) return;
-
-    if (selectMode === "multiple") onValueChange?.(value as string[]);
-    else onValueChange?.([value as string]);
-  };
+  const { direction } = useTokensClient();
 
   const items = itemsProp.map(item => (
     <Item
@@ -94,20 +104,25 @@ const ToggleGroupBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
     />
   ));
 
+  const handleValueChange = (value: string | string[]) => {
+    if (disabled) return;
+
+    onValueChange?.(value as string & string[]);
+  };
+
   return (
-    // @ts-expect-error It is confused due to multiple is being set dynamically
     <StylelessToggleGroup
       {...otherProps}
+      // @ts-expect-error React hasn't added `inert` yet
+      inert={disabled ? "" : undefined}
       ref={ref}
       multiple={selectMode === "multiple"}
-      value={transformValue(value)}
-      defaultValue={transformValue(defaultValue)}
-      onValueChange={handleValueChange}
       aria-disabled={disabled}
       data-disabled={disabled ? "" : undefined}
       data-fluid={fluid ? "" : undefined}
       data-size={size}
       data-select-mode={selectMode}
+      onValueChange={handleValueChange}
       className={cls(
         className,
         classes.root,

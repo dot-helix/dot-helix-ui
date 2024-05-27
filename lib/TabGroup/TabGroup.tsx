@@ -81,9 +81,7 @@ const TabGroupBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
     ...otherProps
   } = props;
 
-  const { useDirection } = useTokensClient();
-
-  const direction = useDirection();
+  const { direction } = useTokensClient();
 
   const { tabs, panels } = tabsProp.reduce(
     (result, tab) => {
