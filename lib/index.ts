@@ -16,6 +16,8 @@ export * from "./Expandable";
 export { default as Expandable } from "./Expandable";
 export * from "./IconButton";
 export { default as IconButton } from "./IconButton";
+export * from "./InputSlider";
+export { default as InputSlider } from "./InputSlider";
 export * from "./LoadingIndicator";
 export { default as LoadingIndicator } from "./LoadingIndicator";
 export * from "./Menu";
