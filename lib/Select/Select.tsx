@@ -103,10 +103,8 @@ type OwnProps = Pick<
     name?: string;
     /**
      * The select mode of the items.
-     *
-     * @default "single"
      */
-    selectMode?: "multiple" | "single";
+    selectMode: "multiple" | "single";
     /**
      * The addon component to put at the start of the input.
      */
@@ -254,7 +252,11 @@ const SelectBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
     }
   });
 
-  const [value, setValue] = useControlledProp(valueProp, defaultValue, []);
+  const [value, setValue] = useControlledProp(
+    valueProp,
+    defaultValue,
+    selectMode === "single" ? "" : [],
+  );
 
   const validityChangeEmitter = useValidityChangeEmitter({
     conditions: { required },

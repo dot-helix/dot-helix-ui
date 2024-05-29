@@ -31,10 +31,8 @@ type OwnProps = Pick<ToggleGroupProps, "keyboardActivationBehavior" | "label"> &
     disabled?: boolean;
     /**
      * The select mode of the items.
-     *
-     * @default "single"
      */
-    selectMode?: "multiple" | "single";
+    selectMode: "multiple" | "single";
   };
 
 export type Props = Omit<
