@@ -8,7 +8,7 @@ import * as React from "react";
 import { SystemError } from "../../internals";
 import { useConstantValue, useDeterministicId } from "../../utils";
 import {
-  createClient as createThemingClient,
+  createThemingClient,
   defaultPrimitives,
   type PrimitiveTokens,
   type Variants,

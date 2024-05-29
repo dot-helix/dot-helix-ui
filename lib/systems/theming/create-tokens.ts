@@ -1,13 +1,8 @@
+import { ColorUtils } from "../../utils";
 import {
-  adjustAlpha,
-  generateColorSet,
-  getForegroundColor,
-  isValidHexColor,
-} from "../../utils";
-import {
-  SEMANTIC_FOREGROUNDS,
   neutralColorVariantsMap,
   semanticColorVariantsMap,
+  semanticForegrounds,
 } from "./constants";
 import palette from "./palette";
 import type {
@@ -17,6 +12,9 @@ import type {
   VariantTokensMap,
   Variants,
 } from "./types";
+
+const { adjustAlpha, generateColorSet, getForegroundColor, isValidHexColor } =
+  ColorUtils;
 
 const typeScaling = {
   normal: {
@@ -261,7 +259,7 @@ export const createVariantTokensMap = (
         secondary: secondaryDark,
         neutral: neutralColorVariantsMap["dark"],
         foregrounds: {
-          ...SEMANTIC_FOREGROUNDS,
+          ...semanticForegrounds,
           onPrimary: getForegroundColor(primaryDark.origin),
           onSecondary: getForegroundColor(secondaryDark.origin),
         },
@@ -274,7 +272,7 @@ export const createVariantTokensMap = (
         secondary: secondaryLight,
         neutral: neutralColorVariantsMap["light"],
         foregrounds: {
-          ...SEMANTIC_FOREGROUNDS,
+          ...semanticForegrounds,
           onPrimary: getForegroundColor(primaryLight.origin),
           onSecondary: getForegroundColor(secondaryLight.origin),
         },

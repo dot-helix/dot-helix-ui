@@ -4,7 +4,8 @@ export {
   useDeterministicId,
 } from "@styleless-ui/react/utils";
 export { default as combineClasses } from "classnames";
-export * from "./color";
+export * as BreakpointUtils from "./breakpoints.utils";
+export * as ColorUtils from "./colors.utils";
 export { default as forkCallbacks } from "./fork-callbacks";
 export { default as getFocusableDescendants } from "./get-focusable-descendants";
 export { default as hasValidityChanged } from "./has-validity-changed";

@@ -1,18 +1,24 @@
-import { adjustAlpha, getForegroundColor } from "../../utils";
+import { ColorUtils } from "../../utils";
 import { green, orange, rose, sky, zinc } from "./palette";
 import type {
+  BreakpointTokens,
   ColorTokens,
   ForegroundColorTokens,
   NeutralColorTokens,
   Variants,
 } from "./types";
 
+const { adjustAlpha, getForegroundColor } = ColorUtils;
+
+export const breakpointKeys: Readonly<Array<keyof BreakpointTokens>> =
+  Object.freeze(["xxs", "xs", "sm", "md", "lg", "xlg"]);
+
 const successColor = green;
 const errorColor = rose;
 const warningColor = orange;
 const infoColor = sky;
 
-export const SEMANTIC_FOREGROUNDS: Pick<
+export const semanticForegrounds: Pick<
   ForegroundColorTokens,
   "onSuccess" | "onError" | "onWarning" | "onInfo"
 > = {
