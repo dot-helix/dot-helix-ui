@@ -20,4 +20,5 @@ export { default as InputAddon } from "./InputAddon";
 export * from "./InputWrapper";
 export { default as InputWrapper } from "./InputWrapper";
 export { default as SystemError } from "./SystemError";
+export { default as generateClassesWithBreakpoints } from "./generate-classes-with-breakpoints";
 export { default as Logger } from "./logger";
