@@ -1,4 +1,4 @@
-import { ColorUtils } from "../../utils";
+import * as ColorUtils from "../../utils/color-utils";
 import { green, orange, rose, sky, zinc } from "./palette";
 import type {
   BreakpointTokens,
