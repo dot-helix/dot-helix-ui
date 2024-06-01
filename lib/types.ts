@@ -3,6 +3,7 @@
 
 import type { Overwrite } from "@styleless-ui/react/types";
 import type ValidityReason from "./ValidityReason";
+import type { BreakpointTokens } from "./systems/theming";
 
 export type AnyObject = Record<keyof any, unknown>;
 export type AnyFunction = (...args: any) => any;
@@ -83,3 +84,12 @@ export type CommonProps = {
 export type ValidityState =
   | { valid: true }
   | { valid: false; reason: ValidityReason };
+
+export type PropWithBreakpoints<T> =
+  | T
+  | ({ [P in keyof BreakpointTokens]?: T } & {
+      /**
+       * The value to fallback to when no breakpoint is hit.
+       */
+      fallback: T;
+    });
