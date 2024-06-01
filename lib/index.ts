@@ -14,6 +14,11 @@ export * from "./Dialog";
 export { default as Dialog } from "./Dialog";
 export * from "./Expandable";
 export { default as Expandable } from "./Expandable";
+export * as Flex from "./Flex";
+export type {
+  ContainerProps as FlexContainerProps,
+  ItemProps as FlexItemProps,
+} from "./Flex";
 export * from "./IconButton";
 export { default as IconButton } from "./IconButton";
 export * from "./InputSlider";

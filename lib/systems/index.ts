@@ -1,6 +1,6 @@
 export { default as HelixClient, useTokensClient } from "./helix-client";
 export {
-  createClient as createThemingClient,
+  createThemingClient,
   defaultPrimitives,
   defaultThemeTokens,
 } from "./theming";
