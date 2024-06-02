@@ -85,11 +85,4 @@ export type ValidityState =
   | { valid: true }
   | { valid: false; reason: ValidityReason };
 
-export type PropWithBreakpoints<T> =
-  | T
-  | ({ [P in keyof BreakpointTokens]?: T } & {
-      /**
-       * The value to fallback to when no breakpoint is hit.
-       */
-      fallback: T;
-    });
+export type PropWithBreakpoints<T> = T | { [P in keyof BreakpointTokens]?: T };

@@ -13,19 +13,28 @@ const generateClassesWithBreakpoints = <T>(
       type PropValueType = keyof typeof propWithBreakpoints;
 
       const value = propWithBreakpoints[propKey as PropValueType];
-      const baseModifierClass = `${modifierBaseName}-${String(value)}`;
 
-      if ((propKey as PropValueType) === "fallback") {
-        return classes[`${selfName}--${baseModifierClass}`];
+      let baseModifierClass: string;
+
+      if (typeof value === "boolean") {
+        if (value) baseModifierClass = modifierBaseName;
+        else baseModifierClass = `${modifierBaseName}-unset`;
+      } else {
+        baseModifierClass = `${modifierBaseName}-${String(value)}`;
       }
 
       return classes[`${selfName}--${propKey}-${baseModifierClass}`];
     });
   }
 
-  return classes[
-    `${selfName}--${modifierBaseName}-${String(propWithBreakpoints)}`
-  ];
+  const className = `${selfName}--${modifierBaseName}`;
+
+  if (typeof propWithBreakpoints === "boolean") {
+    if (propWithBreakpoints) return classes[className];
+    else return undefined;
+  } else {
+    return classes[`${className}-${String(propWithBreakpoints)}`];
+  }
 };
 
 export default generateClassesWithBreakpoints;
