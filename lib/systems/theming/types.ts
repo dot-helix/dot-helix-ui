@@ -19,8 +19,8 @@ export type NeutralColorTokens = {
   border: { normal: string; secondary: string };
   background: {
     base: string;
-    elevated: string;
-    layout: string;
+    elevated1: string;
+    elevated2: string;
     spotlight: string;
     overlay: string;
   };

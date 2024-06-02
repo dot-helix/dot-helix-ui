@@ -2,7 +2,7 @@
   direction: var(--direction);
 
   background-color: var(--color-neutral-background-spotlight);
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-sm);
 
   padding: var(--space-sm);
 
