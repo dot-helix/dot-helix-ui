@@ -4,6 +4,14 @@ export * from "./Breadcrumb";
 export { default as Breadcrumb } from "./Breadcrumb";
 export * from "./Button";
 export { default as Button } from "./Button";
+export * as Card from "./Card";
+export type {
+  ActionsProps as CardActionsProps,
+  ContainerProps as CardContainerProps,
+  ContentProps as CardContentProps,
+  HeaderProps as CardHeaderProps,
+  MediaProps as CardMediaProps,
+} from "./Card";
 export * from "./CheckGroup";
 export { default as CheckGroup } from "./CheckGroup";
 export * from "./Checkbox";

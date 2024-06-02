@@ -5,6 +5,7 @@ import { generateClassesWithBreakpoints } from "../../internals";
 import type { CommonProps, PropWithBreakpoints } from "../../types";
 import { combineClasses as cls } from "../../utils";
 import classes from "../FlexLayout.module.css";
+import * as Slots from "../slots";
 
 type OwnProps = Pick<CommonProps, "className" | "children"> & {
   /**
@@ -32,6 +33,7 @@ const ColBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
     <div
       {...otherProps}
       ref={ref}
+      data-slot={Slots.Col}
       className={cls(
         className,
         classes.col,
