@@ -19,6 +19,12 @@ export type {
   ContainerProps as FlexContainerProps,
   ItemProps as FlexItemProps,
 } from "./Flex";
+export * as FlexLayout from "./FlexLayout";
+export type {
+  ColGroupProps as FlexLayoutColGroupProps,
+  ColProps as FlexLayoutColProps,
+  ContainerProps as FlexLayoutContainerProps,
+} from "./FlexLayout";
 export * from "./IconButton";
 export { default as IconButton } from "./IconButton";
 export * from "./InputSlider";
