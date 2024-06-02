@@ -49,8 +49,10 @@
 
   position: relative;
 
-  background-color: var(--color-neutral-background-elevated);
-  box-shadow: var(--shadow-xlg);
+  background-color: var(--color-neutral-background-elevated1);
+  box-shadow:
+    0 0 0 1px var(--color-neutral-border-normal),
+    var(--shadow-lg);
 }
 
 .heading {

@@ -141,9 +141,9 @@ export const neutralColorVariantsMap: Record<Variants, NeutralColorTokens> = {
     active: zinc[100],
     disabled: zinc[800],
     background: {
-      base: "#000000",
-      elevated: "#1f1f1f",
-      layout: "#141414",
+      base: "#0a0a0a",
+      elevated1: "#0f0f0f",
+      elevated2: zinc[900],
       overlay: "rgba(0, 0, 0, 0.45)",
       spotlight: "#424242",
     },
@@ -173,8 +173,8 @@ export const neutralColorVariantsMap: Record<Variants, NeutralColorTokens> = {
     disabled: zinc[200],
     background: {
       base: "#ffffff",
-      elevated: "#ffffff",
-      layout: "#f5f5f5",
+      elevated1: "#ffffff",
+      elevated2: zinc[200],
       overlay: "rgba(0, 0, 0, 0.45)",
       spotlight: "#252525",
     },

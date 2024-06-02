@@ -56,10 +56,10 @@
   backface-visibility: hidden;
   transform: translate3d(0, 0, 0);
 
-  background-color: var(--color-neutral-background-elevated);
+  background-color: var(--color-neutral-background-elevated1);
   box-shadow:
-    var(--shadow-md),
-    inset 0 0 0 1px var(--color-neutral-border-normal);
+    inset 0 0 0 1px var(--color-neutral-border-normal),
+    var(--shadow-sm);
 }
 
 .text {
