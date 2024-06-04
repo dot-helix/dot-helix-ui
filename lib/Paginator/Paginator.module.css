@@ -1,0 +1,33 @@
+.root {
+  direction: var(--direction);
+
+  position: relative;
+
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+
+  max-width: 100%;
+
+  gap: var(--space-md);
+}
+
+.root.root--disabled {
+  pointer-events: none;
+}
+
+.root > * {
+  flex-shrink: 0;
+}
+
+.root > .page {
+  width: auto;
+  min-width: var(--btn-height);
+  padding: 0 var(--space-xs);
+}
+
+.root > .page [data-slot="Button:Icon"] {
+  width: auto;
+  max-width: unset;
+  min-width: var(--btn-icon-size);
+}
