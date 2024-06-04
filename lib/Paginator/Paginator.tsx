@@ -4,6 +4,7 @@ import { clamp, useControlledProp } from "@styleless-ui/react/utils";
 import * as React from "react";
 import IconButton, { type IconButtonProps } from "../IconButton";
 import { ChevronLeftIcon, ChevronRightIcon } from "../internals";
+import { useTokensClient } from "../systems";
 import type { CommonProps } from "../types";
 import { combineClasses as cls, componentWithForwardedRef } from "../utils";
 import classes from "./Paginator.module.css";
@@ -110,6 +111,8 @@ const PaginatorBase = (props: Props, ref: React.Ref<HTMLElement>) => {
 
   const [page, setPage] = useControlledProp(pageProp, defaultPage, 1);
 
+  const { direction } = useTokensClient();
+
   const pagesCount = Math.ceil(entriesCount / pageSize);
 
   const labelProps: Partial<Record<"aria-label" | "aria-labelledby", string>> =
@@ -162,7 +165,7 @@ const PaginatorBase = (props: Props, ref: React.Ref<HTMLElement>) => {
         variant={isDisabled ? "outlined" : "inlined"}
         disabled={isDisabled}
         size={size}
-        icon={<ChevronRightIcon />}
+        icon={direction === "ltr" ? <ChevronRightIcon /> : <ChevronLeftIcon />}
         label={{ screenReaderLabel: label }}
         onClick={() => updatePage(page + 1)}
       />
@@ -182,7 +185,7 @@ const PaginatorBase = (props: Props, ref: React.Ref<HTMLElement>) => {
         variant={isDisabled ? "outlined" : "inlined"}
         disabled={isDisabled}
         size={size}
-        icon={<ChevronLeftIcon />}
+        icon={direction === "ltr" ? <ChevronLeftIcon /> : <ChevronRightIcon />}
         label={{ screenReaderLabel: label }}
         onClick={() => updatePage(page - 1)}
       />
