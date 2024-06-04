@@ -4,7 +4,9 @@ export const generatePages = (params: { page: number; pagesCount: number }) => {
   const { page, pagesCount: n } = params;
 
   if (n <= 7) {
-    return Array<number>(n).map((_, idx) => idx + 1);
+    return Array<number>(n)
+      .fill(0)
+      .map((_, idx) => idx + 1);
   }
 
   if (page - 2 <= 1) {
