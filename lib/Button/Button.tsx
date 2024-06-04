@@ -128,7 +128,9 @@ const ButtonBase = <
       overrideTabIndex={tabIndex}
       disabled={disabled || loading}
       ref={ref as React.Ref<HTMLButtonElement>}
-      aria-label={loading ? text : undefined}
+      aria-label={
+        polymorphicProps["aria-label"] ?? (loading ? text : undefined)
+      }
       data-loading={loading ? "" : undefined}
       data-variant={variant}
       data-size={size}
