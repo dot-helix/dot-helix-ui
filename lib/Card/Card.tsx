@@ -46,6 +46,8 @@ const CardBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
       {...otherProps}
       ref={ref}
       data-slot={Slots.Root}
+      data-smaller={smaller ? "" : undefined}
+      data-hoverable={hoverable ? "" : undefined}
       className={cls(className, classes.root, {
         [classes["root--hoverable"]!]: hoverable,
         [classes["root--smaller"]!]: smaller,
