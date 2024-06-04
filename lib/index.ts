@@ -43,6 +43,8 @@ export * from "./Menu";
 export { default as Menu } from "./Menu";
 export * from "./Meter";
 export { default as Meter } from "./Meter";
+export * from "./Paginator";
+export { default as Paginator } from "./Paginator";
 export * from "./ProgressBar";
 export { default as ProgressBar } from "./ProgressBar";
 export * from "./Radio";
