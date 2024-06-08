@@ -1,0 +1,156 @@
+.root {
+  direction: var(--direction);
+  isolation: isolate;
+
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  width: 100%;
+
+  color: var(--color-neutral-text-normal);
+  font-size: var(--typography-body1-size);
+  line-height: var(--typography-body1-leading);
+  font-weight: 500;
+}
+
+.root:focus-visible {
+  outline: 2px solid var(--palette-cyan-600);
+  outline-offset: 1px;
+}
+
+.item {
+  user-select: none;
+}
+
+.item.item--active > .item-container {
+  color: var(--color-neutral-text-inverted);
+  background-color: var(--color-neutral-origin);
+}
+
+.item.item--disabled .item-container {
+  pointer-events: none;
+
+  color: var(--color-neutral-text-disabled);
+}
+
+.item.item--selected:not(.item--disabled) > .item-container {
+  color: var(--color-neutral-text-normal);
+  background-color: var(--color-primary-surface-secondary);
+  box-shadow: inset 0 0 0 1px var(--color-primary-disabled);
+}
+
+.item.item--selected.item--disabled > .item-container {
+  color: var(--color-primary-disabled);
+}
+
+.item.item--selected.item--active > .item-container {
+  background-color: var(--color-primary-surface-base);
+  box-shadow: inset 0 0 0 1px var(--color-primary-origin);
+}
+
+.item.item--expanded > .item-container .item-expand-icon {
+  transform: rotate(90deg);
+}
+
+.item:not(.item--expandable) {
+  color: var(--color-neutral-text-secondary);
+  font-weight: 400;
+}
+
+.item-container {
+  color: currentColor;
+
+  cursor: pointer;
+
+  border-radius: var(--rounded-sm);
+
+  padding: 0 var(--space-md);
+  gap: var(--space-md);
+
+  min-height: 1.5rem;
+  max-width: fit-content;
+
+  background-color: transparent;
+
+  display: flex;
+  align-items: center;
+
+  position: relative;
+}
+
+.subtree .item-container::before {
+  content: "";
+
+  position: absolute;
+  top: 0;
+  bottom: 0;
+
+  width: 2px;
+
+  background-color: transparent;
+}
+
+.root.root--ltr .subtree .item-container::before {
+  left: calc(-1 * var(--space-md));
+}
+
+.root.root--rtl .subtree .item-container::before {
+  right: calc(-1 * var(--space-md));
+}
+
+.subtree .item.item--selected > .item-container::before {
+  background-color: var(--color-primary-origin);
+}
+
+.item-icon,
+.item-expand-icon {
+  color: currentColor;
+
+  width: 1rem;
+  height: 1rem;
+  max-width: 1rem;
+  max-height: 1rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+}
+
+.item-expand-icon {
+  margin-inline-end: calc(-1 * var(--space-xs));
+}
+
+.root.root--rtl .item-expand-icon {
+  transform: rotate(180deg);
+}
+
+.subtree {
+  position: relative;
+
+  padding-inline-start: var(--space-xlg);
+}
+
+.subtree::before {
+  content: "";
+
+  position: absolute;
+  top: 0;
+  bottom: 0;
+
+  width: 1px;
+
+  background-color: var(--color-neutral-border-normal);
+}
+
+.root.root--ltr .subtree::before {
+  left: var(--space-md);
+}
+
+.root.root--rtl .subtree::before {
+  right: var(--space-md);
+}
