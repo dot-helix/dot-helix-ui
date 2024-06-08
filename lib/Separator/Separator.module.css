@@ -1,0 +1,63 @@
+.root {
+  --separator-margin-size: 0;
+
+  background-color: var(--color-neutral-border-normal);
+}
+
+.root.root--horizontal {
+  height: 1px;
+}
+
+.root.root--vertical {
+  width: 1px;
+}
+
+.root.root--full.root--horizontal {
+  width: 100%;
+}
+
+.root.root--full.root--vertical {
+  height: 100%;
+}
+
+.root.root--auto.root--horizontal {
+  width: auto;
+}
+
+.root.root--auto.root--vertical {
+  height: auto;
+}
+
+.root.root--horizontal.root--margin {
+  margin-block-start: var(--separator-margin-size);
+  margin-block-end: var(--separator-margin-size);
+}
+
+.root.root--vertical.root--margin {
+  margin-inline-start: var(--separator-margin-size);
+  margin-inline-end: var(--separator-margin-size);
+}
+
+.root.root--margin-xxs {
+  --separator-margin-size: var(--space-xxs);
+}
+
+.root.root--margin-xs {
+  --separator-margin-size: var(--space-xs);
+}
+
+.root.root--margin-sm {
+  --separator-margin-size: var(--space-sm);
+}
+
+.root.root--margin-md {
+  --separator-margin-size: var(--space-md);
+}
+
+.root.root--margin-lg {
+  --separator-margin-size: var(--space-lg);
+}
+
+.root.root--margin-xlg {
+  --separator-margin-size: var(--space-xlg);
+}
