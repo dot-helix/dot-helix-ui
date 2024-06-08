@@ -18,6 +18,8 @@ export * from "./Checkbox";
 export { default as Checkbox } from "./Checkbox";
 export * from "./CodeSnippet";
 export { default as CodeSnippet } from "./CodeSnippet";
+export * from "./ContextualHint";
+export { default as ContextualHint } from "./ContextualHint";
 export * from "./Dialog";
 export { default as Dialog } from "./Dialog";
 export * from "./Expandable";
