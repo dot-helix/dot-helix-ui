@@ -1,0 +1,63 @@
+.root {
+  direction: var(--direction);
+  display: block;
+
+  background-color: var(--color-neutral-surface-base);
+
+  height: 1.2em;
+
+  animation-name: pulse;
+  animation-duration: 1.5s;
+  animation-timing-function: ease-in-out;
+  animation-delay: 0.5s;
+  animation-iteration-count: infinite;
+}
+
+.root.root--text {
+  margin: 0;
+
+  height: auto;
+
+  transform-origin: 0 55%;
+  transform: scale(1, 0.6);
+
+  border-radius: var(--rounded-sm);
+}
+
+.root.root--text:empty::before {
+  content: "\00a0";
+}
+
+.root.root--circular {
+  border-radius: var(--rounded-full);
+}
+
+.root.root--rectangular {
+  border-radius: var(--rounded-md);
+}
+
+.root.root--has-children > * {
+  visibility: hidden;
+}
+
+.root.root--auto-width {
+  max-width: fit-content;
+}
+
+.root.root--auto-height {
+  height: auto;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.4;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
