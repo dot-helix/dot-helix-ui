@@ -1,10 +1,11 @@
 import type { MergeElementProps } from "@styleless-ui/react";
 import * as React from "react";
+import type { CommonProps } from "../types";
 import { combineClasses as cls, componentWithForwardedRef } from "../utils";
 import classes from "./Separator.module.css";
 import * as Slots from "./slots";
 
-type OwnProps = {
+type OwnProps = Pick<CommonProps, "className"> & {
   /**
    * The orientation of the separator.
    */
