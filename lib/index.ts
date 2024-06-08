@@ -55,6 +55,8 @@ export * from "./RadioGroup";
 export { default as RadioGroup } from "./RadioGroup";
 export * from "./Select";
 export { default as Select } from "./Select";
+export * from "./Separator";
+export { default as Separator } from "./Separator";
 export * from "./Switch";
 export { default as Switch } from "./Switch";
 export * from "./TabGroup";
