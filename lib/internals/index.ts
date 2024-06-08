@@ -15,6 +15,8 @@ export * from "./EyeIcon";
 export { default as EyeIcon } from "./EyeIcon";
 export * from "./EyeOffIcon";
 export { default as EyeOffIcon } from "./EyeOffIcon";
+export * from "./InfoIcon";
+export { default as InfoIcon } from "./InfoIcon";
 export * from "./InputAddon";
 export { default as InputAddon } from "./InputAddon";
 export * from "./InputWrapper";
