@@ -79,5 +79,7 @@ export * from "./ToggleGroup";
 export { default as ToggleGroup } from "./ToggleGroup";
 export * from "./Tooltip";
 export { default as Tooltip } from "./Tooltip";
+export * from "./TreeView";
+export { default as TreeView } from "./TreeView";
 export { default as ValidityReason } from "./ValidityReason";
 export { HelixClient } from "./systems";
