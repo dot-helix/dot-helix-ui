@@ -37,6 +37,8 @@ export type {
 } from "./FlexLayout";
 export * from "./IconButton";
 export { default as IconButton } from "./IconButton";
+export * from "./InlineAlert";
+export { default as InlineAlert } from "./InlineAlert";
 export * from "./InputSlider";
 export { default as InputSlider } from "./InputSlider";
 export * from "./LoadingIndicator";
