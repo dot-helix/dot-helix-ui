@@ -160,10 +160,14 @@ export const neutralColorVariantsMap: Record<Variants, NeutralColorTokens> = {
       disabled: "#404040",
     },
     surface: {
-      base: "rgba(255, 255, 255, 0.24)",
-      secondary: "rgba(255, 255, 255, 0.16)",
-      tertiary: "rgba(255, 255, 255, 0.08)",
-      quaternary: "rgba(255, 255, 255, 0.04)",
+      base: zinc[600],
+      secondary: zinc[700],
+      tertiary: zinc[800],
+      quaternary: zinc[900],
+      // base: "rgba(255, 255, 255, 0.24)",
+      // secondary: "rgba(255, 255, 255, 0.16)",
+      // tertiary: "rgba(255, 255, 255, 0.08)",
+      // quaternary: "rgba(255, 255, 255, 0.04)",
     },
   },
   light: {
@@ -191,10 +195,10 @@ export const neutralColorVariantsMap: Record<Variants, NeutralColorTokens> = {
       disabled: "#bfbfbf",
     },
     surface: {
-      base: "rgba(0, 0, 0, 0.16)",
-      secondary: "rgba(0, 0, 0, 0.08)",
-      tertiary: "rgba(0, 0, 0, 0.04)",
-      quaternary: "rgba(0, 0, 0, 0.02)",
+      base: zinc[300],
+      secondary: zinc[200],
+      tertiary: zinc[100],
+      quaternary: zinc[50],
     },
   },
 } as const;
