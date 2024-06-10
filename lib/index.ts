@@ -67,6 +67,16 @@ export * from "./Switch";
 export { default as Switch } from "./Switch";
 export * from "./TabGroup";
 export { default as TabGroup } from "./TabGroup";
+export * as Table from "./Table";
+export type {
+  BodyProps as TableBodyProps,
+  CellProps as TableCellProps,
+  ContainerProps as TableContainerProps,
+  FooterProps as TableFooterProps,
+  HeadProps as TableHeadProps,
+  HeaderProps as TableHeaderProps,
+  RowProps as TableRowProps,
+} from "./Table";
 export * from "./Tag";
 export { default as Tag } from "./Tag";
 export * from "./Text";
