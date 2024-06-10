@@ -1,0 +1,147 @@
+.wrapper {
+  width: 100%;
+
+  overflow-x: auto;
+
+  margin-bottom: var(--space-xlg);
+}
+
+.root {
+  direction: var(--direction);
+
+  overflow-x: auto;
+
+  border-collapse: collapse;
+  border-spacing: 0;
+  caption-side: bottom;
+}
+
+.root.root--dense :is(.caption, .cell, .head) {
+  padding: var(--space-md);
+}
+
+.head {
+  padding: var(--space-xlg);
+
+  font-size: var(--typography-subheading2-size);
+  line-height: var(--typography-subheading2-leading);
+  font-weight: 500;
+}
+
+.head[scope="row"] {
+  border-inline-end: 1px solid var(--color-neutral-border-normal);
+}
+
+.head[scope="rowgroup"] {
+  border-inline-end: 1px solid var(--color-neutral-border-secondary);
+}
+
+.cell {
+  padding: var(--space-xlg);
+
+  color: var(--color-neutral-text-secondary);
+
+  font-size: var(--typography-body2-size);
+  line-height: var(--typography-body2-leading);
+  font-weight: var(--typography-body2-weight);
+}
+
+.cell.cell--v-align-inherit,
+.head.head--v-align-inherit {
+  vertical-align: inherit;
+}
+
+.cell.cell--v-align-top,
+.head.head--v-align-top {
+  vertical-align: top;
+}
+
+.cell.cell--v-align-middle,
+.head.head--v-align-middle {
+  vertical-align: middle;
+}
+
+.cell.cell--v-align-bottom,
+.head.head--v-align-bottom {
+  vertical-align: bottom;
+}
+
+.cell.cell--t-align-center,
+.head.head--t-align-center {
+  text-align: center;
+}
+
+.cell.cell--t-align-justify,
+.head.head--t-align-justify {
+  text-align: justify;
+}
+
+.cell.cell--t-align-left,
+.head.head--t-align-left {
+  text-align: left;
+}
+
+.cell.cell--t-align-right,
+.head.head--t-align-right {
+  text-align: right;
+}
+
+.cell.cell--t-align-start,
+.head.head--t-align-start {
+  text-align: start;
+}
+
+.cell.cell--t-align-end,
+.head.head--t-align-end {
+  text-align: end;
+}
+
+.row {
+  outline: none;
+
+  border-bottom: 1px solid var(--color-neutral-border-secondary);
+}
+
+.header .row {
+  border-bottom: 1px solid var(--color-neutral-border-normal);
+}
+
+.row:is(.row--hoverable, .row--selectable):not(.row--selected):hover {
+  background-color: var(--color-neutral-surface-tertiary);
+}
+
+.row.row--selectable {
+  cursor: pointer;
+}
+
+.row.row--selected {
+  background-color: var(--color-primary-surface-secondary);
+}
+
+.row.row--selected:hover {
+  background-color: var(--color-primary-surface-tertiary);
+}
+
+.row.row--v-align-top {
+  vertical-align: top;
+}
+
+.row.row--v-align-middle {
+  vertical-align: middle;
+}
+
+.row.row--v-align-bottom {
+  vertical-align: bottom;
+}
+
+.caption {
+  color: var(--color-neutral-text-tertiary);
+
+  font-size: var(--typography-caption-size);
+  line-height: var(--typography-caption-leading);
+  font-weight: 500;
+
+  text-align: start;
+
+  padding: var(--space-xlg);
+}
