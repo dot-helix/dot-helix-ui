@@ -3,11 +3,8 @@ name: CodeQL
 on:
   push:
     branches:
-      - "next"
+      - "main"
   pull_request:
-  schedule:
-    # on sunday of each month at 5:55
-    - cron: "55 5 * * 0"
   workflow_call:
 
 jobs:
