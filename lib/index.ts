@@ -61,6 +61,8 @@ export * from "./Separator";
 export { default as Separator } from "./Separator";
 export * from "./Skeleton";
 export { default as Skeleton } from "./Skeleton";
+export * from "./Surface";
+export { default as Surface } from "./Surface";
 export * from "./Switch";
 export { default as Switch } from "./Switch";
 export * from "./TabGroup";

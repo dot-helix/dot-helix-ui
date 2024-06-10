@@ -1,0 +1,44 @@
+.root {
+  --surface-color: var(--color-neutral-text-normal);
+
+  direction: var(--direction);
+  isolation: isolate;
+
+  color: var(--surface-color);
+  background-color: var(--surface-bg-color);
+
+  border-radius: var(--rounded-md);
+  padding: var(--space-xlg);
+
+  box-shadow: inset 0 0 0 1px var(--color-neutral-border-normal);
+}
+
+[data-name="VariableGenerator"][data-variant="light"] .root.root--low {
+  --surface-bg-color: var(--color-neutral-surface-secondary);
+}
+
+[data-name="VariableGenerator"][data-variant="light"] .root.root--mid {
+  --surface-bg-color: var(--color-neutral-surface-tertiary);
+  box-shadow:
+    var(--shadow-xs),
+    inset 0 0 0 1px var(--color-neutral-border-normal);
+}
+
+[data-name="VariableGenerator"][data-variant="light"] .root.root--high {
+  --surface-bg-color: var(--color-neutral-surface-quaternary);
+  box-shadow:
+    var(--shadow-xs),
+    inset 0 0 0 1px var(--color-neutral-border-normal);
+}
+
+[data-name="VariableGenerator"][data-variant="dark"] .root.root--low {
+  --surface-bg-color: var(--color-neutral-surface-quaternary);
+}
+
+[data-name="VariableGenerator"][data-variant="dark"] .root.root--mid {
+  --surface-bg-color: var(--color-neutral-surface-tertiary);
+}
+
+[data-name="VariableGenerator"][data-variant="dark"] .root.root--high {
+  --surface-bg-color: var(--color-neutral-surface-secondary);
+}
