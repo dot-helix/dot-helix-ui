@@ -1,12 +1,14 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { Button as StylelessButton } from "@styleless-ui/react";
+import {
+  Button as StylelessButton,
+  type PolymorphicProps,
+} from "@styleless-ui/react";
 import * as React from "react";
 import type { ButtonProps } from "../Button";
 import classes from "../Button/Button.module.css";
 import * as Slots from "../Button/slots";
 import LoadingIndicator from "../LoadingIndicator";
 import { useTokensClient } from "../systems";
-import type { PolymorphicWithOmittedProps } from "../types";
 import { combineClasses as cls, componentWithForwardedRef } from "../utils";
 
 type OwnProps = Pick<
@@ -37,8 +39,15 @@ type OwnProps = Pick<
   icon: React.ReactNode;
 };
 
-export type Props<E extends React.ElementType = "button"> =
-  PolymorphicWithOmittedProps<E, OwnProps, "children">;
+type PProps<E extends React.ElementType = "button"> = PolymorphicProps<
+  E,
+  OwnProps
+>;
+
+export type Props<E extends React.ElementType = "button"> = Omit<
+  PProps<E>,
+  "children"
+>;
 
 const IconButtonBase = <
   E extends React.ElementType = "button",
