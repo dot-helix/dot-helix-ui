@@ -8,11 +8,12 @@ import type { ButtonProps } from "../Button";
 import classes from "../Button/Button.module.css";
 import * as Slots from "../Button/slots";
 import LoadingIndicator from "../LoadingIndicator";
+import { Logger } from "../internals";
 import { useTokensClient } from "../systems";
 import { combineClasses as cls, componentWithForwardedRef } from "../utils";
 
 type OwnProps = Pick<
-  ButtonProps,
+  ButtonProps<"button">,
   "className" | "disabled" | "loading" | "size" | "color" | "variant"
 > & {
   /**
@@ -39,18 +40,16 @@ type OwnProps = Pick<
   icon: React.ReactNode;
 };
 
-type PProps<E extends React.ElementType = "button"> = PolymorphicProps<
-  E,
-  OwnProps
->;
+export type Props<E extends React.ElementType> = PolymorphicProps<E, OwnProps>;
 
-export type Props<E extends React.ElementType = "button"> = Omit<
-  PProps<E>,
-  "children"
->;
+// TODO: Find a solution to omit props in polymorphic components
+// export type Props<E extends React.ElementType> = Omit<
+//   PolymorphicProps<E, OwnProps>,
+//   "children"
+// >;
 
 const IconButtonBase = <
-  E extends React.ElementType = "button",
+  E extends React.ElementType,
   R extends HTMLElement = HTMLButtonElement,
 >(
   props: Props<E>,
@@ -59,6 +58,7 @@ const IconButtonBase = <
   const polymorphicProps = props as Props<"button">;
 
   const {
+    children,
     className,
     label,
     icon,
@@ -73,6 +73,14 @@ const IconButtonBase = <
   } = polymorphicProps;
 
   const { direction } = useTokensClient();
+
+  if (children) {
+    Logger.devOnly.log(
+      "Button component doesn't expect a `children` prop.",
+      "warn",
+      "IconButton",
+    );
+  }
 
   const renderContent = () => {
     if (loading) {
