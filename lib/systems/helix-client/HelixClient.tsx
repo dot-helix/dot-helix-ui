@@ -13,17 +13,35 @@ import {
   type PrimitiveTokens,
   type Variants,
 } from "../theming";
-import { HELIX_CLIENT_ROOT_PREFIX } from "./constants";
 import { ThemingClientContext, ThemingClientProvider } from "./ThemingClient";
+import { HELIX_CLIENT_ROOT_PREFIX } from "./constants";
 
-import "./baseline.css";
+import type { CommonProps } from "../../types";
 import UtilityClasses from "./UtilityClasses";
+import "./baseline.css";
 
-export type Props = {
-  children?: React.ReactNode;
+export type Props = Pick<CommonProps, "children"> & {
+  /**
+   * The tokens generation configuration.
+   */
   tokensConfiguration?: Partial<PrimitiveTokens>;
+  /**
+   * The color scheme of the tree.
+   *
+   * @default "dark"
+   */
   colorScheme?: Variants;
+  /**
+   * The direction of the tree.
+   *
+   * @default "ltr"
+   */
   direction?: "ltr" | "rtl";
+  /**
+   * Determines whether it should disable generating utility classes or not.
+   *
+   * @default false
+   */
   disableUtilityClassesGeneration?: boolean;
 };
 
