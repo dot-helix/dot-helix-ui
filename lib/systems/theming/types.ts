@@ -2,6 +2,7 @@ import type { ReactElement } from "react";
 import type { Palette } from "./palette";
 
 export type Variants = "dark" | "light";
+export type ColorScheme = Variants;
 
 export type NeutralColorTokens = {
   origin: string;
