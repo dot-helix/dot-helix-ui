@@ -1,6 +1,6 @@
 {
   "name": "@dot-helix/ui",
-  "version": "1.0.0-canary.4",
+  "version": "1.0.0-canary.5",
   "description": "An accessibility-first React component library for building modern websites and applications.",
   "license": "MIT",
   "type": "module",
@@ -25,7 +25,7 @@
   "scripts": {
     "dev": "next dev",
     "prod": "next build && next start",
-    "lint": "eslint \"**/*.{ts,tsx}\" --config .eslintrc",
+    "lint": "eslint \"**/*.{ts,tsx}\" --config .eslintrc && tsc --project tsconfig.json",
     "clear": "rimraf dist",
     "prebuild": "npm-run-all clear lint",
     "build": "npm-run-all build:transpile build:css build:minify build:package",
