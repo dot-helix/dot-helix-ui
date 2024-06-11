@@ -6,6 +6,7 @@ import {
 } from "@styleless-ui/react";
 import * as React from "react";
 import LoadingIndicator from "../LoadingIndicator";
+import { Logger } from "../internals";
 import { useTokensClient } from "../systems";
 import type { CommonProps } from "../types";
 import { combineClasses as cls, componentWithForwardedRef } from "../utils";
@@ -40,18 +41,16 @@ type OwnProps = Pick<ButtonProps, "disabled"> &
     endIcon?: React.ReactNode;
   };
 
-type PProps<E extends React.ElementType = "button"> = PolymorphicProps<
-  E,
-  OwnProps
->;
+export type Props<E extends React.ElementType> = PolymorphicProps<E, OwnProps>;
 
-export type Props<E extends React.ElementType = "button"> = Omit<
-  PProps<E>,
-  "children"
->;
+// TODO: Find a solution to omit props in polymorphic components
+// export type Props<E extends React.ElementType> = Omit<
+//   PolymorphicProps<E, OwnProps>,
+//   "children"
+// >;
 
 const ButtonBase = <
-  E extends React.ElementType = "button",
+  E extends React.ElementType,
   R extends HTMLElement = HTMLButtonElement,
 >(
   props: Props<E>,
@@ -65,6 +64,7 @@ const ButtonBase = <
     startIcon,
     endIcon,
     tabIndex,
+    children,
     as = "button",
     size = "medium",
     variant = "filled",
@@ -75,6 +75,14 @@ const ButtonBase = <
   } = polymorphicProps;
 
   const { direction } = useTokensClient();
+
+  if (children) {
+    Logger.devOnly.log(
+      "Button component doesn't expect a `children` prop.",
+      "warn",
+      "Button",
+    );
+  }
 
   const renderContent = () => {
     if (loading) {
