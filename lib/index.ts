@@ -35,6 +35,8 @@ export type {
   ColProps as FlexLayoutColProps,
   ContainerProps as FlexLayoutContainerProps,
 } from "./FlexLayout";
+export * from "./Icon";
+export { default as Icon } from "./Icon";
 export * from "./IconButton";
 export { default as IconButton } from "./IconButton";
 export * from "./InlineAlert";
@@ -94,4 +96,4 @@ export { default as Tooltip } from "./Tooltip";
 export * from "./TreeView";
 export { default as TreeView } from "./TreeView";
 export { default as ValidityReason } from "./ValidityReason";
-export { HelixClient } from "./systems";
+export * from "./systems";
