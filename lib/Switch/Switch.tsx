@@ -10,6 +10,7 @@ import { Logger } from "../internals";
 import type { CommonProps } from "../types";
 import {
   combineClasses as cls,
+  componentWithForwardedRef,
   useDeterministicId,
   useValidityChangeEmitter,
 } from "../utils";
@@ -201,6 +202,6 @@ const SwitchBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
   );
 };
 
-const Switch = React.forwardRef(SwitchBase) as typeof SwitchBase;
+const Switch = componentWithForwardedRef(SwitchBase, "Switch");
 
 export default Switch;
