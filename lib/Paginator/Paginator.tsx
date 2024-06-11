@@ -131,7 +131,10 @@ const PaginatorBase = (props: Props, ref: React.Ref<HTMLElement>) => {
       ({
         variant: "filled",
         color: "primary",
-      }) satisfies PickAsMandatory<IconButtonProps, "variant" | "color">,
+      }) satisfies PickAsMandatory<
+        IconButtonProps<"button">,
+        "variant" | "color"
+      >,
     [],
   );
 
@@ -140,7 +143,10 @@ const PaginatorBase = (props: Props, ref: React.Ref<HTMLElement>) => {
       ({
         variant: "inlined",
         color: "neutral",
-      }) satisfies PickAsMandatory<IconButtonProps, "variant" | "color">,
+      }) satisfies PickAsMandatory<
+        IconButtonProps<"button">,
+        "variant" | "color"
+      >,
     [],
   );
 
