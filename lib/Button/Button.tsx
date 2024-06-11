@@ -2,11 +2,12 @@
 import {
   Button as StylelessButton,
   type ButtonProps,
+  type PolymorphicProps,
 } from "@styleless-ui/react";
 import * as React from "react";
 import LoadingIndicator from "../LoadingIndicator";
 import { useTokensClient } from "../systems";
-import type { CommonProps, PolymorphicWithOmittedProps } from "../types";
+import type { CommonProps } from "../types";
 import { combineClasses as cls, componentWithForwardedRef } from "../utils";
 import classes from "./Button.module.css";
 import * as Slots from "./slots";
@@ -39,8 +40,15 @@ type OwnProps = Pick<ButtonProps, "disabled"> &
     endIcon?: React.ReactNode;
   };
 
-export type Props<E extends React.ElementType = "button"> =
-  PolymorphicWithOmittedProps<E, OwnProps, "children">;
+type PProps<E extends React.ElementType = "button"> = PolymorphicProps<
+  E,
+  OwnProps
+>;
+
+export type Props<E extends React.ElementType = "button"> = Omit<
+  PProps<E>,
+  "children"
+>;
 
 const ButtonBase = <
   E extends React.ElementType = "button",
