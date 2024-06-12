@@ -24,7 +24,10 @@
   display: flex;
   flex-wrap: wrap;
 
-  gap: var(--space-xlg);
+  row-gap: var(--space-xlg);
+
+  margin-inline-start: calc(-1 * var(--space-xlg));
+  width: calc(100% + var(--space-xlg));
 }
 
 .col {
@@ -37,6 +40,8 @@
   flex-grow: 1;
   flex-shrink: 1;
   flex-basis: 0;
+
+  padding-inline-start: var(--space-xlg);
 }
 
 .col.col--size-1 {

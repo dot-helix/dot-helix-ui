@@ -4,7 +4,7 @@ import * as React from "react";
 import { generateClassesWithBreakpoints } from "../internals";
 import type { CommonProps, PropWithBreakpoints } from "../types";
 import { combineClasses as cls } from "../utils";
-import classes from "./FlexLayout.module.css";
+import classes from "./Layout.module.css";
 import * as Slots from "./slots";
 
 type OwnProps = Pick<CommonProps, "className" | "children"> & {
@@ -20,7 +20,7 @@ type OwnProps = Pick<CommonProps, "className" | "children"> & {
 
 export type Props = MergeElementProps<"div", OwnProps>;
 
-const FlexLayoutBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
+const LayoutBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
   const { className, children, noPadding, fluid, ...otherProps } = props;
 
   return (
@@ -45,9 +45,6 @@ const FlexLayoutBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
   );
 };
 
-const FlexLayout = componentWithForwardedRef(
-  FlexLayoutBase,
-  "FlexLayout.Container",
-);
+const Layout = componentWithForwardedRef(LayoutBase, "Layout.Container");
 
-export default FlexLayout;
+export default Layout;
