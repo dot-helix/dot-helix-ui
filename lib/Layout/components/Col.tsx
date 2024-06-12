@@ -4,7 +4,7 @@ import * as React from "react";
 import { generateClassesWithBreakpoints } from "../../internals";
 import type { CommonProps, PropWithBreakpoints } from "../../types";
 import { combineClasses as cls } from "../../utils";
-import classes from "../FlexLayout.module.css";
+import classes from "../Layout.module.css";
 import * as Slots from "../slots";
 
 type OwnProps = Pick<CommonProps, "className" | "children"> & {
@@ -47,6 +47,6 @@ const ColBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
   );
 };
 
-const Col = componentWithForwardedRef(ColBase, "FlexLayout.Col");
+const Col = componentWithForwardedRef(ColBase, "Layout.Col");
 
 export default Col;

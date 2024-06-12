@@ -3,7 +3,7 @@ import { componentWithForwardedRef } from "@styleless-ui/react/utils";
 import * as React from "react";
 import type { CommonProps } from "../../types";
 import { combineClasses as cls } from "../../utils";
-import classes from "../FlexLayout.module.css";
+import classes from "../Layout.module.css";
 import * as Slots from "../slots";
 
 type OwnProps = Pick<CommonProps, "className" | "children">;
@@ -25,6 +25,6 @@ const ColGroupBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
   );
 };
 
-const ColGroup = componentWithForwardedRef(ColGroupBase, "FlexLayout.ColGroup");
+const ColGroup = componentWithForwardedRef(ColGroupBase, "Layout.ColGroup");
 
 export default ColGroup;

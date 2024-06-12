@@ -29,12 +29,6 @@ export type {
   ContainerProps as FlexContainerProps,
   ItemProps as FlexItemProps,
 } from "./Flex";
-export * as FlexLayout from "./FlexLayout";
-export type {
-  ColGroupProps as FlexLayoutColGroupProps,
-  ColProps as FlexLayoutColProps,
-  ContainerProps as FlexLayoutContainerProps,
-} from "./FlexLayout";
 export * from "./Icon";
 export { default as Icon } from "./Icon";
 export * from "./IconButton";
@@ -43,6 +37,12 @@ export * from "./InlineAlert";
 export { default as InlineAlert } from "./InlineAlert";
 export * from "./InputSlider";
 export { default as InputSlider } from "./InputSlider";
+export * as Layout from "./Layout";
+export type {
+  ColGroupProps as LayoutColGroupProps,
+  ColProps as LayoutColProps,
+  ContainerProps as LayoutContainerProps,
+} from "./Layout";
 export * from "./LoadingIndicator";
 export { default as LoadingIndicator } from "./LoadingIndicator";
 export * from "./Menu";
