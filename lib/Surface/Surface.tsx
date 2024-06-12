@@ -1,4 +1,7 @@
-import type { MergeElementProps } from "@styleless-ui/react";
+import type {
+  PolymorphicComponent,
+  PolymorphicProps,
+} from "@styleless-ui/react";
 import * as React from "react";
 import type { CommonProps } from "../types";
 import { combineClasses as cls, componentWithForwardedRef } from "../utils";
@@ -14,24 +17,40 @@ type OwnProps = Pick<CommonProps, "children" | "className"> & {
   level: "low" | "mid" | "high";
 };
 
-export type Props = MergeElementProps<"div", OwnProps>;
+export type Props<E extends React.ElementType = "div"> = PolymorphicProps<
+  E,
+  OwnProps
+>;
 
-const SurfaceBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
-  const { className, children, level = "mid", ...otherProps } = props;
+const SurfaceBase = <
+  E extends React.ElementType = "div",
+  R extends HTMLElement = HTMLDivElement,
+>(
+  props: Props<E>,
+  ref: React.Ref<R>,
+) => {
+  const {
+    className,
+    children,
+    as: RootNode = "div",
+    level = "mid",
+    ...otherProps
+  } = props as Props<"div">;
 
   return (
-    <div
+    <RootNode
       {...otherProps}
-      ref={ref}
+      ref={ref as React.Ref<HTMLDivElement>}
       data-slot={Slots.Root}
       data-level={level}
       className={cls(className, classes.root, classes[`root--${level}`])}
     >
       {children}
-    </div>
+    </RootNode>
   );
 };
 
-const Surface = componentWithForwardedRef(SurfaceBase, "Surface");
+const Surface: PolymorphicComponent<"div", OwnProps> =
+  componentWithForwardedRef(SurfaceBase, "Surface");
 
 export default Surface;
