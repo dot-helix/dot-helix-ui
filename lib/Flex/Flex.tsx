@@ -1,4 +1,7 @@
-import type { MergeElementProps } from "@styleless-ui/react";
+import type {
+  PolymorphicComponent,
+  PolymorphicProps,
+} from "@styleless-ui/react";
 import * as React from "react";
 import { generateClassesWithBreakpoints } from "../internals";
 import type { CommonProps, PropWithBreakpoints } from "../types";
@@ -51,26 +54,36 @@ type OwnProps = Pick<CommonProps, "children" | "className"> & {
   >;
 };
 
-export type Props = Omit<MergeElementProps<"div", OwnProps>, "">;
+export type Props<E extends React.ElementType = "div"> = PolymorphicProps<
+  E,
+  OwnProps
+>;
 
-const FlexBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
+const FlexBase = <
+  E extends React.ElementType = "div",
+  R extends HTMLElement = HTMLDivElement,
+>(
+  props: Props<E>,
+  ref: React.Ref<R>,
+) => {
   const {
     className,
     children,
-    variant = "block",
     wrapMode,
     gap,
     direction,
     justifyContent,
     alignItems,
     alignContent,
+    as: RootNode = "div",
+    variant = "block",
     ...otherProps
-  } = props;
+  } = props as Props<"div">;
 
   return (
-    <div
+    <RootNode
       {...otherProps}
-      ref={ref}
+      ref={ref as React.Ref<HTMLDivElement>}
       data-slot={Slots.Root}
       className={cls(
         className,
@@ -95,10 +108,13 @@ const FlexBase = (props: Props, ref: React.Ref<HTMLDivElement>) => {
       )}
     >
       {children}
-    </div>
+    </RootNode>
   );
 };
 
-const Flex = componentWithForwardedRef(FlexBase, "Flex.Container");
+const Flex: PolymorphicComponent<"div", OwnProps> = componentWithForwardedRef(
+  FlexBase,
+  "Flex.Container",
+);
 
 export default Flex;
