@@ -93,16 +93,6 @@ const createMainPackage = async () => {
               default: "./index.js",
             },
           },
-          "./utils": {
-            import: {
-              types: "./esm/utils/index.d.ts",
-              default: "./esm/utils/index.js",
-            },
-            require: {
-              types: "./utils/index.d.ts",
-              default: "./utils/index.js",
-            },
-          },
         },
         sideEffects: false,
         types: "./index.d.ts",
